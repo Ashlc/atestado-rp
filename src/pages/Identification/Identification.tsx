@@ -8,11 +8,11 @@ import {
   TextField,
 } from '@mui/material';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { cbo } from '../../services/cbo';
 import { handleCep } from '../../services/viacep';
+import { handleAge } from '../../utils/handleAge';
 
 type Props = {
   index: number;
@@ -20,26 +20,20 @@ type Props = {
 };
 
 const Identification = ({ value, index, ...other }: Props) => {
-  const { register, control, watch, setValue } = useFormContext();
-  const [dateOfBirth, setDateOfBirth] = useState('');
+  const { register, watch, control, setValue } = useFormContext();
   const watchTypeOfDeath = watch('typeOfDeath');
   const watchDateOfDeath = watch('dateOfDeath');
   const watchDateOfBirth = watch('dateOfBirth');
 
   useEffect(() => {
     if (watchTypeOfDeath === 'fetal' && watchDateOfDeath) {
-      setDateOfBirth(watchDateOfDeath);
+      setValue('dateOfBirth', watchDateOfDeath);
     }
-  }, [watchTypeOfDeath, watchDateOfDeath]);
-
-  useEffect(() => {
-    const dateOfBirth = dayjs(watch('dateOfBirth'));
-    const dateOfDeath = dayjs(watch('dateOfDeath'));
-    const age = dateOfDeath.diff(dateOfBirth, 'year');
-    if (age >= 0) {
+    if (watchDateOfBirth && watchDateOfDeath) {
+      const age = handleAge(watchDateOfBirth, watchDateOfDeath);
       setValue('age', age);
     }
-  }, [watchDateOfBirth, watchDateOfDeath]);
+  }, [watchTypeOfDeath, watchDateOfDeath, watchDateOfBirth, setValue]);
 
   return (
     <div
@@ -68,7 +62,7 @@ const Identification = ({ value, index, ...other }: Props) => {
         <Grid2 size={2}>
           <TextField
             type="date"
-            InputLabelProps={{ shrink: true }}
+            slotProps={{ inputLabel: { shrink: true } }}
             label="Data do óbito"
             fullWidth
             {...register('dateOfDeath')}
@@ -89,33 +83,33 @@ const Identification = ({ value, index, ...other }: Props) => {
         </Grid2>
         <Grid2 size={6}>
           <TextField
-            {...register('deceasedName')}
-            InputLabelProps={{ shrink: true }}
+            slotProps={{ inputLabel: { shrink: true } }}
             label="Nome do falecido"
+            {...register('deceasedName')}
             fullWidth
           />
         </Grid2>
         <Grid2 size={6}>
           <TextField
-            {...register('mothersName')}
-            InputLabelProps={{ shrink: true }}
+            slotProps={{ inputLabel: { shrink: true } }}
             label="Nome da mãe"
+            {...register('mothersName')}
             fullWidth
           />
         </Grid2>
         <Grid2 size={6}>
           <TextField
-            {...register('fathersName')}
-            InputLabelProps={{ shrink: true }}
+            slotProps={{ inputLabel: { shrink: true } }}
             label="Nome do pai"
+            {...register('fathersName')}
             fullWidth
           />
         </Grid2>
         <Grid2 size={2}>
           <TextField
-            {...register('naturalness')}
-            InputLabelProps={{ shrink: true }}
+            slotProps={{ inputLabel: { shrink: true } }}
             label="Naturalidade"
+            {...register('naturalness')}
             fullWidth
           />
         </Grid2>
@@ -124,14 +118,10 @@ const Identification = ({ value, index, ...other }: Props) => {
             render={({ field }) => (
               <TextField
                 type="date"
-                InputLabelProps={{ shrink: true }}
+                slotProps={{ inputLabel: { shrink: true } }}
                 label="Data de nascimento"
-                value={dateOfBirth}
                 fullWidth
-                onChange={(e) => {
-                  setDateOfBirth(e.target.value);
-                  field.onChange(e);
-                }}
+                {...field}
               />
             )}
             name="dateOfBirth"
@@ -143,14 +133,12 @@ const Identification = ({ value, index, ...other }: Props) => {
             render={({ field }) => (
               <TextField
                 label="Idade"
-                type="number"
-                fullWidth
                 slotProps={{
-                  input: {
-                    readOnly: true,
-                  },
+                  input: { readOnly: true },
+                  inputLabel: { shrink: true },
                 }}
-                value={field.value}
+                {...field}
+                fullWidth
               />
             )}
             name="age"
@@ -203,9 +191,9 @@ const Identification = ({ value, index, ...other }: Props) => {
         </Grid2>
         <Grid2 size={2}>
           <TextField
-            {...register('susCard')}
-            InputLabelProps={{ shrink: true }}
+            slotProps={{ inputLabel: { shrink: true } }}
             label="Cartão do SUS"
+            {...register('susCard')}
             fullWidth
           />
         </Grid2>
@@ -216,10 +204,10 @@ const Identification = ({ value, index, ...other }: Props) => {
             </InputLabel>
             <Select
               label="Escolaridade"
-              {...register('schooling')}
               notched
               defaultValue={''}
               id="schooling"
+              {...register('schooling')}
             >
               <MenuItem value={0}>Sem escolaridade</MenuItem>
               <MenuItem value={1}>Fundamental I (1ª a 4ª série)</MenuItem>
@@ -233,10 +221,10 @@ const Identification = ({ value, index, ...other }: Props) => {
         </Grid2>
         <Grid2 size={1}>
           <TextField
-            {...register('class')}
             type="number"
-            InputLabelProps={{ shrink: true }}
+            slotProps={{ inputLabel: { shrink: true } }}
             label="Série"
+            {...register('class')}
             fullWidth
           />
         </Grid2>
@@ -249,7 +237,7 @@ const Identification = ({ value, index, ...other }: Props) => {
               <TextField
                 {...params}
                 label="Ocupação"
-                InputLabelProps={{ shrink: true }}
+                slotProps={{ inputLabel: { shrink: true } }}
                 {...register('occupation')}
               />
             )}
@@ -259,70 +247,82 @@ const Identification = ({ value, index, ...other }: Props) => {
           <p>Endereço do falecido</p>
         </Grid2>
         <Grid2 size={2}>
-          <TextField
-            id="deceasedAddress.cep"
-            InputLabelProps={{ shrink: true }}
-            label="CEP"
-            {...register('deathPlace.cep')}
-            onBlur={(e) => {
-              if (e.target.value) {
-                handleCep(e.target.value, 'deceasedAddress');
-              }
-            }}
-            fullWidth
+          <Controller
+            name="deathPlace.zipCode"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                id="deceasedAddress.cep"
+                slotProps={{ inputLabel: { shrink: true } }}
+                label="CEP"
+                fullWidth
+                onBlur={(e) => {
+                  if (e.target.value) {
+                    handleCep(e.target.value, 'deceasedAddress', setValue);
+                  }
+                }}
+              />
+            )}
           />
         </Grid2>
         <Grid2 size={8}>
-          <TextField
-            id="deceasedAddress.street"
-            InputLabelProps={{ shrink: true }}
-            {...register('deathPlace.street')}
-            label="Logradouro"
-            fullWidth
+          <Controller
+            name="deathPlace.street"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                id="deceasedAddress.street"
+                slotProps={{ inputLabel: { shrink: true } }}
+                label="Logradouro"
+                fullWidth
+              />
+            )}
           />
         </Grid2>
         <Grid2 size={2}>
           <TextField
             id="deceasedAddress.number"
-            InputLabelProps={{ shrink: true }}
-            {...register('deathPlace.number')}
+            slotProps={{ inputLabel: { shrink: true } }}
             label="Número"
+            {...register('deathPlace.number')}
             fullWidth
           />
         </Grid2>
         <Grid2 size={6}>
           <TextField
             id="deceasedAddress.neighborhood"
-            InputLabelProps={{ shrink: true }}
-            {...register('deathPlace.neighborhood')}
+            slotProps={{ inputLabel: { shrink: true } }}
             label="Bairro"
+            {...register('deathPlace.neighborhood')}
             fullWidth
           />
         </Grid2>
         <Grid2 size={5}>
           <TextField
             id="deceasedAddress.city"
-            InputLabelProps={{ shrink: true }}
-            {...register('deathPlace.city')}
+            slotProps={{ inputLabel: { shrink: true } }}
             label="Cidade"
+            {...register('deathPlace.city')}
             fullWidth
           />
         </Grid2>
         <Grid2 size={1}>
           <TextField
             id="deceasedAddress.uf"
-            InputLabelProps={{ shrink: true }}
-            {...register('deathPlace.uf')}
+            slotProps={{ inputLabel: { shrink: true } }}
             label="UF"
+            {...register('deathPlace.uf')}
             fullWidth
           />
         </Grid2>
         <Grid2 size={12}>
           <TextField
             id="deceasedAddress.complement"
-            {...register('deathPlace.complement')}
             label="Complemento"
-            InputLabelProps={{ shrink: true }}
+            slotProps={{ inputLabel: { shrink: true } }}
+            {...register('deathPlace.complement')}
             fullWidth
           />
         </Grid2>
