@@ -5,7 +5,6 @@ import { Button, Stack } from '@mui/material';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
-import dayjs from 'dayjs';
 import { SyntheticEvent, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import Conditions from './pages/Conditions/Conditions';
@@ -15,15 +14,15 @@ import Identification from './pages/Identification/Identification';
 import Infant from './pages/Infant/Infant';
 import Locality from './pages/Locality/Locality';
 import Occurence from './pages/Occurence/Occurence';
+import { isInfant } from './utils/handleAge';
 
 function App() {
-  const [activeTab, setActiveTab] = useState(2);
+  const [activeTab, setActiveTab] = useState(3);
   const methods = useForm();
   const [birth, death] = methods.watch(['dateOfBirth', 'dateOfDeath']);
   const typeOfDeath = methods.watch('typeOfDeath');
   const infantDisabled =
-    (typeOfDeath && typeOfDeath === 'fetal') ||
-    (birth && death && dayjs(death).diff(dayjs(birth), 'year') <= 1);
+    !(typeOfDeath && typeOfDeath === 'fetal') && !isInfant(birth, death);
 
   const onSubmit = (data) => console.log(data);
 
@@ -45,7 +44,7 @@ function App() {
 
   return (
     <div className="w-full min-h-screen">
-      <div className="w-10/12 lg:w-2/3 mx-auto flex flex-col items-center gap-6 py-6">
+      <div className="w-10/12 mx-auto flex flex-col items-center gap-6 py-6">
         <FormProvider {...methods}>
           <form
             onSubmit={methods.handleSubmit(onSubmit)}
