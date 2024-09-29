@@ -1,7 +1,7 @@
 import { FileOpen } from '@mui/icons-material';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { Box, Button } from '@mui/material';
+import { Button, Stack } from '@mui/material';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import { SyntheticEvent, useState } from 'react';
@@ -51,33 +51,30 @@ function App() {
             onSubmit={methods.handleSubmit(onSubmit)}
             className="w-full flex flex-col items-center"
           >
-            <Box
+            <Stack
+              direction="row"
               sx={{ borderBottom: 1, borderColor: 'divider' }}
-              className="w-full"
+              className="w-full justify-between"
             >
+              <Button
+                onClick={tabDown}
+                disabled={activeTab === 0}
+                variant="text"
+              >
+                <NavigateBeforeIcon />
+              </Button>
               <Tabs value={activeTab} onChange={handleChange} centered>
-                <Button
-                  onClick={tabDown}
-                  disabled={activeTab === 0}
-                  variant="text"
-                >
-                  <NavigateBeforeIcon />
-                </Button>
                 <Tab label="Identificação" value={0} />
                 <Tab label="Ocorrência" value={1} />
                 <Tab label="Infantil" value={2} disabled={infantDisabled} />
                 <Tab label="Condições e causas" value={3} />
                 <Tab label="Médico" value={4} />
                 <Tab label="Causas externas" value={5} />
-                <Button
-                  onClick={tabUp}
-                  disabled={activeTab === 5}
-                  variant="text"
-                >
-                  <NavigateNextIcon />
-                </Button>
               </Tabs>
-            </Box>
+              <Button onClick={tabUp} disabled={activeTab === 5} variant="text">
+                <NavigateNextIcon />
+              </Button>
+            </Stack>
             <Identification index={0} value={activeTab} />
             <Occurence index={1} value={activeTab} />
             <Infant index={2} value={activeTab} />
