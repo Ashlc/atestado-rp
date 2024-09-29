@@ -40,6 +40,7 @@ const External = ({ value, index, ...other }: Props) => {
               label="Tipo não natural"
               notched
               id="nonNaturalType"
+              defaultValue={''}
               {...register('external.nonNaturalType')}
             >
               <MenuItem value={'Acidente'}>Acidente</MenuItem>
@@ -57,6 +58,7 @@ const External = ({ value, index, ...other }: Props) => {
             </InputLabel>
             <Select
               label="Acidente de trabalho?"
+              defaultValue={''}
               notched
               id="workplaceAccident"
               {...register('external.workplaceAccident')}
@@ -74,6 +76,7 @@ const External = ({ value, index, ...other }: Props) => {
             </InputLabel>
             <Select
               label="Fonte da informação?"
+              defaultValue={''}
               notched
               id="informationSource"
               {...register('external.informationSource')}
@@ -112,6 +115,7 @@ const External = ({ value, index, ...other }: Props) => {
             </InputLabel>
             <Select
               label="Tipo de local de ocorrência"
+              defaultValue={''}
               notched
               id="occurencePlaceType"
               {...register('external.placeType')}
