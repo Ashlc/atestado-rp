@@ -9,6 +9,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import Conditions from './pages/Conditions/Conditions';
 import Doctor from './pages/Doctor/Doctor';
 import External from './pages/External/External';
+import Feedback from './pages/Feedback/Feedback';
 import Identification from './pages/Identification/Identification';
 import Infant from './pages/Infant/Infant';
 import Occurence from './pages/Occurence/Occurence';
@@ -34,7 +35,7 @@ function App() {
   const tabUp = () => {
     if (activeTab + 1 === 2 && infantDisabled)
       return setActiveTab((prev) => prev + 2);
-    return activeTab === 5 ? null : setActiveTab((prev) => prev + 1);
+    return activeTab === 6 ? null : setActiveTab((prev) => prev + 1);
   };
 
   const tabDown = () => {
@@ -70,6 +71,7 @@ function App() {
                 <Tab label="Condições e causas" value={3} />
                 <Tab label="Médico" value={4} />
                 <Tab label="Causas externas" value={5} />
+                <Tab label="Feedback" value={6} />
               </Tabs>
               <Button onClick={tabUp} disabled={activeTab === 5} variant="text">
                 <NavigateNextIcon />
@@ -81,8 +83,9 @@ function App() {
             <Conditions index={3} value={activeTab} />
             <Doctor index={4} value={activeTab} />
             <External index={5} value={activeTab} />
+            <Feedback index={6} value={activeTab} />
           </form>
-          {activeTab === 5 && (
+          {activeTab === 6 && (
             <Button
               type="submit"
               className="mt-4"
