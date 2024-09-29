@@ -8,11 +8,11 @@ import {
   TextField,
 } from '@mui/material';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import { useEffect } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { cbo } from '../../services/cbo';
 import { handleCep } from '../../services/viacep';
 import { handleAge } from '../../utils/handleAge';
+import React, { useEffect } from 'react';
 
 type Props = {
   index: number;
@@ -26,14 +26,10 @@ const Identification = ({ value, index, ...other }: Props) => {
   const watchDateOfBirth = watch('identification.dateOfBirth');
 
   useEffect(() => {
-    if (watchTypeOfDeath === 'fetal' && watchDateOfDeath) {
+    if (watchTypeOfDeath === 'Fetal' && watchDateOfDeath) {
       setValue('identification.dateOfBirth', watchDateOfDeath);
     }
-    if (watchDateOfBirth && watchDateOfDeath) {
-      const age = handleAge(watchDateOfBirth, watchDateOfDeath);
-      setValue('identification.age', age);
-    }
-  }, [watchTypeOfDeath, watchDateOfDeath, watchDateOfBirth, setValue]);
+  }, [watchTypeOfDeath, watchDateOfDeath, setValue]);
 
   return (
     <div
@@ -46,18 +42,24 @@ const Identification = ({ value, index, ...other }: Props) => {
     >
       <Grid2 container spacing={2} width="100%">
         <Grid2 size={2}>
-          <FormControl fullWidth>
-            <InputLabel shrink>Tipo de óbito</InputLabel>
-            <Select
-              label="Tipo de óbito"
-              defaultValue={''}
-              notched
-              {...register('identification.typeOfDeath')}
-            >
-              <MenuItem value={'fetal'}>Fetal</MenuItem>
-              <MenuItem value={'não fetal'}>Não fetal</MenuItem>
-            </Select>
-          </FormControl>
+          <Controller
+            render={({ field }) => (
+              <FormControl fullWidth>
+                <InputLabel shrink>Tipo de óbito</InputLabel>
+                <Select
+                  label="Tipo de óbito"
+                  notched
+                  {...field}
+                  value={field.value || ''}
+                >
+                  <MenuItem value={'Fetal'}>Fetal</MenuItem>
+                  <MenuItem value={'Não fetal'}>Não Fetal</MenuItem>
+                </Select>
+              </FormControl>
+            )}
+            name="identification.typeOfDeath"
+            control={control}
+          />
         </Grid2>
         <Grid2 size={2}>
           <TextField
@@ -122,6 +124,8 @@ const Identification = ({ value, index, ...other }: Props) => {
                 label="Data de nascimento"
                 fullWidth
                 {...field}
+                disabled={watchTypeOfDeath === 'Fetal'}
+                value={watchTypeOfDeath === 'Fetal' ? watchDateOfDeath : ''}
               />
             )}
             name="identification.dateOfBirth"
@@ -138,6 +142,7 @@ const Identification = ({ value, index, ...other }: Props) => {
                   inputLabel: { shrink: true },
                 }}
                 {...field}
+                value={handleAge(watchDateOfBirth, watchDateOfDeath)}
                 fullWidth
               />
             )}

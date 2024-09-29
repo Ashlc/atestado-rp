@@ -24,8 +24,9 @@ const Conditions = ({ value, index, ...other }: Props) => {
     'identification.dateOfBirth',
     'identification.dateOfDeath',
   ]);
+
   useEffect(() => {
-    if ((typeOfDeath && typeOfDeath === 'fetal') || isInfant(birth, death)) {
+    if ((typeOfDeath && typeOfDeath === 'Fetal') || isInfant(birth, death)) {
       setInfantDisabled(true);
     }
   }, [typeOfDeath, birth, death]);

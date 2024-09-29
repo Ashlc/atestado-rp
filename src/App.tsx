@@ -15,7 +15,7 @@ import Occurence from './pages/Occurence/Occurence';
 import { isInfant } from './utils/handleAge';
 
 function App() {
-  const [activeTab, setActiveTab] = useState(5);
+  const [activeTab, setActiveTab] = useState(0);
   const methods = useForm();
   const [birth, death] = methods.watch([
     'identification.dateOfBirth',
@@ -23,7 +23,7 @@ function App() {
   ]);
   const typeOfDeath = methods.watch('identification.typeOfDeath');
   const infantDisabled =
-    !(typeOfDeath && typeOfDeath === 'fetal') && !isInfant(birth, death);
+    !(typeOfDeath && typeOfDeath === 'Fetal') && !isInfant(birth, death);
 
   const onSubmit = (data) => console.log(data);
 
