@@ -1,36 +1,36 @@
 import { z } from 'zod';
 
-const yesNoSchema = z.enum(['Sim', 'Não', 'Não se aplica']);
+const yesNoSchema = z.enum(['Sim', 'Não', 'Indeterminado']);
 
 const addressSchema = z.object({
   cep: z.string(),
   number: z.string(),
-  complement: z.string(),
+  complement: z.string().optional(),
   neighborhood: z.string(),
   city: z.string(),
   uf: z.string(),
   street: z.string(),
 });
 
-const causeOfDeathSchema = z.object({
-  cause: z.string(),
-  time: z.string(),
-  CID: z.string(),
-});
-
-const formSchema = z.object({
-  //Identification
+const identificationSchema = z.object({
   typeOfDeath: z.enum(['Fetal', 'Não fetal']),
   dateOfDeath: z.string(),
   hourOfDeath: z.string(),
   deceasedName: z.string(),
   mothersName: z.string(),
-  fathersName: z.string(),
+  fathersName: z.string().optional(),
   naturalness: z.string(),
   dateOfBirth: z.string(),
   age: z.string(),
   sex: z.enum(['M', 'F', 'I']),
-  race: z.enum(['Branca', 'Preta', 'Amarela', 'Parda', 'Indígena']),
+  race: z.enum([
+    'Branca',
+    'Preta',
+    'Amarela',
+    'Parda',
+    'Indígena',
+    'Indeterminado',
+  ]),
   maritalStatus: z.enum([
     'Solteiro(a)',
     'Casado(a)',
@@ -39,78 +39,111 @@ const formSchema = z.object({
     'Separado(a)',
   ]),
   susCard: z.string(),
-  schooling: z.number().int().min(0).max(9),
+  education: z.enum([
+    'Sem escolaridade',
+    'Fundamental I (1ª a 4ª série)',
+    'Fundamental II (5ª a 8ª série)',
+    'Médio (antigo 2º grau)',
+    'Superior incompleto',
+    'Superior completo',
+    'Indeterminado',
+  ]),
+  class: z.string(),
   occupation: z.string(),
   cbo: z.string(),
   deceasedAddress: addressSchema,
-  // Occurence and Death
-  deathPlace: addressSchema,
-  deathPlaceType: z.string(),
-  medicalAssistance: yesNoSchema,
-  confirmedThrough: z.array(
-    z.enum([
-      'Exame clínico',
-      'Exame laboratorial',
-      'Exame de imagem',
-      'Exame de necropsia',
-    ]),
-  ),
-  // Assorted
-  codeClass: z.string(),
-  local: z.string(),
-  establishment: z.string(),
+});
+
+const occurrenceSchema = z.object({
+  address: addressSchema,
   cnes: z.string(),
+  establishmentName: z.string(),
   hospitalAddress: addressSchema,
-  deathOccurred: z.string(),
-  assistance: z.string(),
-  causes: z.array(causeOfDeathSchema).length(4),
-  extraCauses: z.array(causeOfDeathSchema).length(2),
-  //Infant and Pregnancy
-  motherAge: z.string(),
-  education: z.string(),
-  class: z.string().optional(),
-  bornAlive: z.boolean(),
-  fetalLoss: z.string(),
-  weeksGestation: z.string(),
-  pregnancy: z.string(),
-  birthWeightValue: z.string(),
-  childBirth: z.string(),
-  deathInChildbirth: z.string(),
-  liveCertificate: z.string(),
-  // Hospital and Doctor
-  doctorName: z.string(),
-  CRM: z.string(),
-  assistedDeceased: z.enum([
-    'Sim',
-    'Não',
-    'Substituto',
-    'IML',
-    'SVO',
+  placeType: z.enum([
+    'Hospital',
+    'Outro estabelecimento de saúde',
+    'Via pública',
+    'Domicílio',
     'Outros',
+    'Indeterminado',
   ]),
+});
+
+const infantSchema = z.object({
+  mothersAge: z.string().optional(),
+  mothersEducation: z.string().optional(),
+  mothersClass: z.string().optional(),
+  mothersOccupation: z.string().optional(),
+  bornAlive: z.boolean().optional(),
+  fetalLoss: z.string().optional(),
+  weeksPregnant: z.string().optional(),
+  pregnancyType: z.string().optional(),
+  birthType: z.string().optional(),
+  birthWeight: z.string().optional(),
+  deathRelativeToBirth: z.string().optional(),
+  birthCertificateNumber: z.string().optional(),
+});
+
+const conditionsSchema = z.object({
+  fetileAgeDeath: z.string().optional(),
+  receivedMedicalAssistance: z.string(),
+  necropsy: yesNoSchema,
+  cause1: z.string(),
+  evolutionTime1: z.string(),
+  cid1: z.string(),
+  cause2: z.string().optional(),
+  evolutionTime2: z.string().optional(),
+  cid2: z.string().optional(),
+  cause3: z.string().optional(),
+  evolutionTime3: z.string().optional(),
+  cid3: z.string().optional(),
+  cause4: z.string().optional(),
+  evolutionTime4: z.string().optional(),
+  cid4: z.string().optional(),
+  cause5: z.string().optional(),
+  evolutionTime5: z.string().optional(),
+  cid5: z.string().optional(),
+});
+
+const doctorSchema = z.object({
+  name: z.string(),
+  crm: z.string(),
+  confirmedBy: z.enum(['Assistente', 'Substituto', 'IML', 'SVO', 'Outro']),
+  city: z.string(),
   contact: z.string(),
-  noteDate: z.string(),
-  // External Causes
-  deathFrom: z.enum([
-    'Acidente',
-    'Suicídio',
-    'Homicídio',
-    'Outros',
-    'Não se aplica',
-  ]),
-  workAccident: yesNoSchema,
+  confirmationDate: z.string(),
+});
+
+const externalSchema = z.object({
+  nonNaturalType: z.enum(['Acidente', 'Suicídio', 'Homicídio', 'Outros']),
+  workplaceAccident: yesNoSchema,
   informationSource: z.enum([
     'Boletim de Ocorrência',
     'Hospital',
     'Família',
     'Outros',
-    'Não se aplica',
+    'Indeterminado',
   ]),
-  occurrenceDescription: z.string(),
-  occurrenceAddress: addressSchema,
-  // No doctor
-  declarantName: z.string(),
-  testimony: z.array(z.string()).length(2),
+  placeType: z.enum([
+    'Via pública',
+    'Endereço de residência',
+    'Outro domicílio',
+    'Estabelecimento comercial',
+    'Outros',
+    'Indeterminado',
+  ]),
+  occurrenceNumber: z.string().optional(),
+  occurrenceDescription: z.string().optional(),
+  occurrenceAddress: addressSchema.optional(),
+});
+
+const formSchema = z.object({
+  identification: identificationSchema,
+  occurrence: occurrenceSchema,
+  infant: infantSchema.optional(),
+  conditions: conditionsSchema,
+  doctor: doctorSchema,
+  external: externalSchema,
 });
 
 export default formSchema;

@@ -43,7 +43,7 @@ const Doctor = ({ value, index, ...other }: Props) => {
         </Grid2>
         <Grid2 size={2}>
           <FormControl fullWidth>
-            <InputLabel htmlFor="necropsy" shrink>
+            <InputLabel htmlFor="doctor.confirmedBy" shrink>
               Óbito atestado por médico
             </InputLabel>
             <Select
@@ -53,11 +53,11 @@ const Doctor = ({ value, index, ...other }: Props) => {
               id="doctor.confirmedBy"
               {...register('doctor.confirmedBy')}
             >
-              <MenuItem value={0}>Assistente</MenuItem>
-              <MenuItem value={1}>Substituto</MenuItem>
-              <MenuItem value={2}>IML</MenuItem>
-              <MenuItem value={3}>SVO</MenuItem>
-              <MenuItem value={4}>Outro</MenuItem>
+              <MenuItem value={'Assistente'}>Assistente</MenuItem>
+              <MenuItem value={'Substituto'}>Substituto</MenuItem>
+              <MenuItem value={'IML'}>IML</MenuItem>
+              <MenuItem value={'SVO'}>SVO</MenuItem>
+              <MenuItem value={'Outro'}>Outro</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -92,7 +92,7 @@ const Doctor = ({ value, index, ...other }: Props) => {
                 {...field}
               />
             )}
-            name="confirmationDate"
+            name="doctor.confirmationDate"
             control={control}
           />
         </Grid2>

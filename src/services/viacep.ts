@@ -33,7 +33,7 @@ export const handleCep = async (cep: string, base: string, setValue: UseFormSetV
     return;
   }
   try {
-    const fields = ['street', 'neighborhood', 'city', 'uf'];
+    const fields = ['street', 'neighborhood', 'city', 'state'];
     const dataFields = ['logradouro', 'bairro', 'localidade', 'uf'];
 
     const data = await fetchCep(cep);

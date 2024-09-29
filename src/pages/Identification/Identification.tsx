@@ -21,17 +21,17 @@ type Props = {
 
 const Identification = ({ value, index, ...other }: Props) => {
   const { register, watch, control, setValue } = useFormContext();
-  const watchTypeOfDeath = watch('typeOfDeath');
-  const watchDateOfDeath = watch('dateOfDeath');
-  const watchDateOfBirth = watch('dateOfBirth');
+  const watchTypeOfDeath = watch('identification.typeOfDeath');
+  const watchDateOfDeath = watch('identification.dateOfDeath');
+  const watchDateOfBirth = watch('identification.dateOfBirth');
 
   useEffect(() => {
     if (watchTypeOfDeath === 'fetal' && watchDateOfDeath) {
-      setValue('dateOfBirth', watchDateOfDeath);
+      setValue('identification.dateOfBirth', watchDateOfDeath);
     }
     if (watchDateOfBirth && watchDateOfDeath) {
       const age = handleAge(watchDateOfBirth, watchDateOfDeath);
-      setValue('age', age);
+      setValue('identification.age', age);
     }
   }, [watchTypeOfDeath, watchDateOfDeath, watchDateOfBirth, setValue]);
 
@@ -52,7 +52,7 @@ const Identification = ({ value, index, ...other }: Props) => {
               label="Tipo de óbito"
               defaultValue={''}
               notched
-              {...register('typeOfDeath')}
+              {...register('identification.typeOfDeath')}
             >
               <MenuItem value={'fetal'}>Fetal</MenuItem>
               <MenuItem value={'não fetal'}>Não fetal</MenuItem>
@@ -65,7 +65,7 @@ const Identification = ({ value, index, ...other }: Props) => {
             slotProps={{ inputLabel: { shrink: true } }}
             label="Data do óbito"
             fullWidth
-            {...register('dateOfDeath')}
+            {...register('identification.dateOfDeath')}
           />
         </Grid2>
         <Grid2 size={2}>
@@ -77,7 +77,7 @@ const Identification = ({ value, index, ...other }: Props) => {
                 onChange={field.onChange}
               />
             )}
-            name="hourOfDeath"
+            name="identification.hourOfDeath"
             control={control}
           />
         </Grid2>
@@ -85,7 +85,7 @@ const Identification = ({ value, index, ...other }: Props) => {
           <TextField
             slotProps={{ inputLabel: { shrink: true } }}
             label="Nome do falecido"
-            {...register('deceasedName')}
+            {...register('identification.deceasedName')}
             fullWidth
           />
         </Grid2>
@@ -93,7 +93,7 @@ const Identification = ({ value, index, ...other }: Props) => {
           <TextField
             slotProps={{ inputLabel: { shrink: true } }}
             label="Nome da mãe"
-            {...register('mothersName')}
+            {...register('identification.mothersName')}
             fullWidth
           />
         </Grid2>
@@ -101,7 +101,7 @@ const Identification = ({ value, index, ...other }: Props) => {
           <TextField
             slotProps={{ inputLabel: { shrink: true } }}
             label="Nome do pai"
-            {...register('fathersName')}
+            {...register('identification.fathersName')}
             fullWidth
           />
         </Grid2>
@@ -109,7 +109,7 @@ const Identification = ({ value, index, ...other }: Props) => {
           <TextField
             slotProps={{ inputLabel: { shrink: true } }}
             label="Naturalidade"
-            {...register('naturalness')}
+            {...register('identification.naturalness')}
             fullWidth
           />
         </Grid2>
@@ -124,7 +124,7 @@ const Identification = ({ value, index, ...other }: Props) => {
                 {...field}
               />
             )}
-            name="dateOfBirth"
+            name="identification.dateOfBirth"
             control={control}
           />
         </Grid2>
@@ -148,10 +148,15 @@ const Identification = ({ value, index, ...other }: Props) => {
         <Grid2 size={2}>
           <FormControl fullWidth>
             <InputLabel shrink>Sexo</InputLabel>
-            <Select label="Sexo" notched defaultValue={''} {...register('sex')}>
+            <Select
+              label="Sexo"
+              notched
+              defaultValue={''}
+              {...register('identification.sex')}
+            >
               <MenuItem value={'M'}>Masculino</MenuItem>
               <MenuItem value={'F'}>Feminino</MenuItem>
-              <MenuItem value={'I'}>Indefinido</MenuItem>
+              <MenuItem value={'I'}>Indeterminado</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -162,13 +167,13 @@ const Identification = ({ value, index, ...other }: Props) => {
               label="Raça"
               defaultValue={''}
               notched
-              {...register('race')}
+              {...register('identification.race')}
             >
-              <MenuItem value={'branca'}>Branca</MenuItem>
-              <MenuItem value={'preta'}>Preta</MenuItem>
-              <MenuItem value={'amarela'}>Amarela</MenuItem>
-              <MenuItem value={'parda'}>Parda</MenuItem>
-              <MenuItem value={'indígena'}>Indígena</MenuItem>
+              <MenuItem value={'Branca'}>Branca</MenuItem>
+              <MenuItem value={'Preta'}>Preta</MenuItem>
+              <MenuItem value={'Amarela'}>Amarela</MenuItem>
+              <MenuItem value={'Parda'}>Parda</MenuItem>
+              <MenuItem value={'Indígena'}>Indígena</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -179,13 +184,13 @@ const Identification = ({ value, index, ...other }: Props) => {
               label="Estado civil"
               defaultValue={''}
               notched
-              {...register('maritalStatus')}
+              {...register('identification.maritalStatus')}
             >
-              <MenuItem value={'solteiro(a)'}>Solteiro(a)</MenuItem>
-              <MenuItem value={'casado(a)'}>Casado(a)</MenuItem>
-              <MenuItem value={'divorciado(a)'}>Divorciado(a)</MenuItem>
-              <MenuItem value={'viúvo(a)'}>Viúvo(a)</MenuItem>
-              <MenuItem value={'separado(a)'}>Separado(a)</MenuItem>
+              <MenuItem value={'Solteiro(a)'}>Solteiro(a)</MenuItem>
+              <MenuItem value={'Casado(a)'}>Casado(a)</MenuItem>
+              <MenuItem value={'Divorciado(a)'}>Divorciado(a)</MenuItem>
+              <MenuItem value={'Viúvo(a)'}>Viúvo(a)</MenuItem>
+              <MenuItem value={'Separado(a)'}>Separado(a)</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -193,29 +198,37 @@ const Identification = ({ value, index, ...other }: Props) => {
           <TextField
             slotProps={{ inputLabel: { shrink: true } }}
             label="Cartão do SUS"
-            {...register('susCard')}
+            {...register('identification.susCard')}
             fullWidth
           />
         </Grid2>
         <Grid2 size={3}>
           <FormControl fullWidth>
-            <InputLabel htmlFor="schooling" shrink>
+            <InputLabel htmlFor="education" shrink>
               Escolaridade
             </InputLabel>
             <Select
               label="Escolaridade"
               notched
               defaultValue={''}
-              id="schooling"
-              {...register('schooling')}
+              id="education"
+              {...register('identification.education')}
             >
-              <MenuItem value={0}>Sem escolaridade</MenuItem>
-              <MenuItem value={1}>Fundamental I (1ª a 4ª série)</MenuItem>
-              <MenuItem value={2}>Fundamental II (5ª a 8ª série)</MenuItem>
-              <MenuItem value={3}>Médio (antigo 2º grau)</MenuItem>
-              <MenuItem value={4}>Superior incompleto</MenuItem>
-              <MenuItem value={5}>Superior completo</MenuItem>
-              <MenuItem value={6}>Indefinido</MenuItem>
+              <MenuItem value={'Sem escolaridade'}>Sem escolaridade</MenuItem>
+              <MenuItem value={'Fundamental I (1ª a 4ª série)'}>
+                Fundamental I (1ª a 4ª série)
+              </MenuItem>
+              <MenuItem value={'Fundamental II (5ª a 8ª série)'}>
+                Fundamental II (5ª a 8ª série)
+              </MenuItem>
+              <MenuItem value={'Médio (antigo 2º grau)'}>
+                Médio (antigo 2º grau)
+              </MenuItem>
+              <MenuItem value={'Superior incompleto'}>
+                Superior incompleto
+              </MenuItem>
+              <MenuItem value={'Superior completo'}>Superior completo</MenuItem>
+              <MenuItem value={'Indeterminado'}>Indeterminado</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -224,7 +237,7 @@ const Identification = ({ value, index, ...other }: Props) => {
             type="number"
             slotProps={{ inputLabel: { shrink: true } }}
             label="Série"
-            {...register('class')}
+            {...register('identification.class')}
             fullWidth
           />
         </Grid2>
@@ -238,7 +251,7 @@ const Identification = ({ value, index, ...other }: Props) => {
                 {...params}
                 label="Ocupação"
                 slotProps={{ inputLabel: { shrink: true } }}
-                {...register('occupation')}
+                {...register('identification.occupation')}
               />
             )}
           />
@@ -248,32 +261,35 @@ const Identification = ({ value, index, ...other }: Props) => {
         </Grid2>
         <Grid2 size={2}>
           <Controller
-            name="deathPlace.zipCode"
-            control={control}
             render={({ field }) => (
               <TextField
                 {...field}
-                id="deceasedAddress.cep"
+                id="identification.deceasedAddress.cep"
                 slotProps={{ inputLabel: { shrink: true } }}
                 label="CEP"
                 fullWidth
                 onBlur={(e) => {
                   if (e.target.value) {
-                    handleCep(e.target.value, 'deceasedAddress', setValue);
+                    handleCep(
+                      e.target.value,
+                      'identification.deceasedAddress',
+                      setValue,
+                    );
                   }
                 }}
               />
             )}
+            name="identification.deceasedAddress.zipCode"
+            control={control}
           />
         </Grid2>
         <Grid2 size={8}>
           <Controller
-            name="deathPlace.street"
+            name="identification.deceasedAddress.street"
             control={control}
             render={({ field }) => (
               <TextField
                 {...field}
-                id="deceasedAddress.street"
                 slotProps={{ inputLabel: { shrink: true } }}
                 label="Logradouro"
                 fullWidth
@@ -283,46 +299,41 @@ const Identification = ({ value, index, ...other }: Props) => {
         </Grid2>
         <Grid2 size={2}>
           <TextField
-            id="deceasedAddress.number"
             slotProps={{ inputLabel: { shrink: true } }}
             label="Número"
-            {...register('deathPlace.number')}
+            {...register('identification.deathPlace.number')}
             fullWidth
           />
         </Grid2>
         <Grid2 size={6}>
           <TextField
-            id="deceasedAddress.neighborhood"
             slotProps={{ inputLabel: { shrink: true } }}
             label="Bairro"
-            {...register('deathPlace.neighborhood')}
+            {...register('identification.deceasedAddress.neighborhood')}
             fullWidth
           />
         </Grid2>
         <Grid2 size={5}>
           <TextField
-            id="deceasedAddress.city"
             slotProps={{ inputLabel: { shrink: true } }}
             label="Cidade"
-            {...register('deathPlace.city')}
+            {...register('identification.deceasedAddress.city')}
             fullWidth
           />
         </Grid2>
         <Grid2 size={1}>
           <TextField
-            id="deceasedAddress.uf"
             slotProps={{ inputLabel: { shrink: true } }}
             label="UF"
-            {...register('deathPlace.uf')}
+            {...register('identification.deceasedAddress.state')}
             fullWidth
           />
         </Grid2>
         <Grid2 size={12}>
           <TextField
-            id="deceasedAddress.complement"
             label="Complemento"
             slotProps={{ inputLabel: { shrink: true } }}
-            {...register('deathPlace.complement')}
+            {...register('identification.deceasedAddress.complement')}
             fullWidth
           />
         </Grid2>

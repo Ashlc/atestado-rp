@@ -15,10 +15,13 @@ import Occurence from './pages/Occurence/Occurence';
 import { isInfant } from './utils/handleAge';
 
 function App() {
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(5);
   const methods = useForm();
-  const [birth, death] = methods.watch(['dateOfBirth', 'dateOfDeath']);
-  const typeOfDeath = methods.watch('typeOfDeath');
+  const [birth, death] = methods.watch([
+    'identification.dateOfBirth',
+    'identification.dateOfDeath',
+  ]);
+  const typeOfDeath = methods.watch('identification.typeOfDeath');
   const infantDisabled =
     !(typeOfDeath && typeOfDeath === 'fetal') && !isInfant(birth, death);
 

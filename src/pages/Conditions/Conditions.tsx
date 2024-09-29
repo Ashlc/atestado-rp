@@ -19,20 +19,22 @@ type Props = {
 const Conditions = ({ value, index, ...other }: Props) => {
   const [infantDisabled, setInfantDisabled] = useState(false);
   const { register, control, watch } = useFormContext();
-  const typeOfDeath = watch('typeOfDeath');
-  const [birth, death] = watch(['dateOfBirth', 'dateOfDeath']);
+  const typeOfDeath = watch('identification.typeOfDeath');
+  const [birth, death] = watch([
+    'identification.dateOfBirth',
+    'identification.dateOfDeath',
+  ]);
   useEffect(() => {
-    console.log('typeOfDeath', typeOfDeath);
-    console.log('isInfant', isInfant(birth, death));
     if ((typeOfDeath && typeOfDeath === 'fetal') || isInfant(birth, death)) {
       setInfantDisabled(true);
     }
   }, [typeOfDeath, birth, death]);
 
-  console.log(infantDisabled);
   const renderCauseFields = (withLabel: boolean = true) => {
+    const startingIndex = withLabel ? 2 : 4;
+    const endingIndex = withLabel ? 3 : 5;
     const fields = [];
-    for (let i = 2; i <= 3; i++) {
+    for (let i = startingIndex; i <= endingIndex; i++) {
       fields.push(
         <Grid2
           size={7}
@@ -43,7 +45,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
             aria-label={withLabel ? `Causa associada ${i}` : ''}
             label={withLabel ? `Devido ou como consequência de:` : ''}
             slotProps={{ inputLabel: { shrink: true } }}
-            {...register(`cause${i}`)}
+            {...register(`conditions.cause${i}`)}
           />
         </Grid2>,
         <Grid2
@@ -63,7 +65,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
                 onChange={field.onChange}
               />
             )}
-            name={`evolutionTime${i}`}
+            name={`conditions.evolutionTime${i}`}
             control={control}
           />
         </Grid2>,
@@ -72,7 +74,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
             fullWidth
             aria-label="CID"
             slotProps={{ inputLabel: { shrink: true } }}
-            {...register(`cid${i}`)}
+            {...register(`conditions.cid${i}`)}
           />
         </Grid2>,
       );
@@ -100,25 +102,29 @@ const Conditions = ({ value, index, ...other }: Props) => {
                   label="Em caso de óbito de mulher em idade fértil, a morte ocorreu:"
                   notched
                   id="fertileAgeDeath"
-                  defaultValue={infantDisabled ? '6' : ''}
+                  defaultValue={infantDisabled ? 'Indeterminado' : ''}
                   readOnly={infantDisabled}
                   {...field}
                 >
-                  <MenuItem value={0}>Na gravidez</MenuItem>
-                  <MenuItem value={1}>No parto</MenuItem>
-                  <MenuItem value={2}>No abortamento</MenuItem>
-                  <MenuItem value={3}>
+                  <MenuItem value={'Na gravidez'}>Na gravidez</MenuItem>
+                  <MenuItem value={'No parto'}>No parto</MenuItem>
+                  <MenuItem value={'No abortamento'}>No abortamento</MenuItem>
+                  <MenuItem value={'Até 42 dias após o término da gestação'}>
                     Até 42 dias após o término da gestação
                   </MenuItem>
-                  <MenuItem value={4}>
+                  <MenuItem
+                    value={'De 43 dias até um 1 após o término da gestação'}
+                  >
                     De 43 dias até um 1 após o término da gestação
                   </MenuItem>
-                  <MenuItem value={5}>Não ocorreu nestes períodos</MenuItem>
-                  <MenuItem value={6}>Indefinido</MenuItem>
+                  <MenuItem value={'Não ocorreu nestes períodos'}>
+                    Não ocorreu nestes períodos
+                  </MenuItem>
+                  <MenuItem value={'Indeterminado'}>Indeterminado</MenuItem>
                 </Select>
               </FormControl>
             )}
-            name="fertileAgeDeath"
+            name="conditions.fertileAgeDeath"
             control={control}
           />
         </Grid2>
@@ -133,11 +139,11 @@ const Conditions = ({ value, index, ...other }: Props) => {
               notched
               defaultValue={''}
               id="receivedMedicalAssistance"
-              {...register('receivedMedicalAssistance')}
+              {...register('conditions.receivedMedicalAssistance')}
             >
-              <MenuItem value={0}>Sim</MenuItem>
-              <MenuItem value={1}>Não</MenuItem>
-              <MenuItem value={2}>Indefinido</MenuItem>
+              <MenuItem value="Sim">Sim</MenuItem>
+              <MenuItem value="Não">Não</MenuItem>
+              <MenuItem value="Indeterminado">Indeterminado</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -151,11 +157,11 @@ const Conditions = ({ value, index, ...other }: Props) => {
               notched
               defaultValue={''}
               id="necropsy"
-              {...register('necropsy')}
+              {...register('conditions.necropsy')}
             >
-              <MenuItem value={0}>Sim</MenuItem>
-              <MenuItem value={1}>Não</MenuItem>
-              <MenuItem value={2}>Indefinido</MenuItem>
+              <MenuItem value="Sim">Sim</MenuItem>
+              <MenuItem value="Não">Não</MenuItem>
+              <MenuItem value="Indeterminado">Indeterminado</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -173,7 +179,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
             fullWidth
             label="Causa básica"
             slotProps={{ inputLabel: { shrink: true } }}
-            {...register('cause1')}
+            {...register('conditions.cause1')}
           />
         </Grid2>
         <Grid2 size={2}>
@@ -193,7 +199,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
                 }}
               />
             )}
-            name="evolutionTime1"
+            name="conditions.evolutionTime1"
             control={control}
           />
         </Grid2>
@@ -202,7 +208,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
             fullWidth
             label="CID"
             slotProps={{ inputLabel: { shrink: true } }}
-            {...register('cid1')}
+            {...register('conditions.cid1')}
           />
         </Grid2>
         {renderCauseFields()}

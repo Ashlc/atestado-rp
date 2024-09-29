@@ -33,20 +33,20 @@ const External = ({ value, index, ...other }: Props) => {
         </Grid2>
         <Grid2 size={2}>
           <FormControl fullWidth>
-            <InputLabel htmlFor="fertileAgeDeath" shrink>
+            <InputLabel htmlFor="nonNaturalType" shrink>
               Tipo não natural
             </InputLabel>
             <Select
               label="Tipo não natural"
               notched
               id="nonNaturalType"
-              {...register('nonNaturalType')}
+              {...register('external.nonNaturalType')}
             >
-              <MenuItem value={0}>Acidente</MenuItem>
-              <MenuItem value={1}>Suicídio</MenuItem>
-              <MenuItem value={2}>Homicídio</MenuItem>
-              <MenuItem value={3}>Outros</MenuItem>
-              <MenuItem value={4}>Indeterminado</MenuItem>
+              <MenuItem value={'Acidente'}>Acidente</MenuItem>
+              <MenuItem value={'Suicídio'}>Suicídio</MenuItem>
+              <MenuItem value={'Homicídio'}>Homicídio</MenuItem>
+              <MenuItem value={'Outros'}>Outros</MenuItem>
+              <MenuItem value={'Indeterminado'}>Indeterminado</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -59,11 +59,11 @@ const External = ({ value, index, ...other }: Props) => {
               label="Acidente de trabalho?"
               notched
               id="workplaceAccident"
-              {...register('workplaceAccident')}
+              {...register('external.workplaceAccident')}
             >
-              <MenuItem value={0}>Sim</MenuItem>
-              <MenuItem value={1}>Não</MenuItem>
-              <MenuItem value={2}>Indeterminado</MenuItem>
+              <MenuItem value={'Sim'}>Sim</MenuItem>
+              <MenuItem value={'Não'}>Não</MenuItem>
+              <MenuItem value={'Indeterminado'}>Indeterminado</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -76,13 +76,15 @@ const External = ({ value, index, ...other }: Props) => {
               label="Fonte da informação?"
               notched
               id="informationSource"
-              {...register('informationSource')}
+              {...register('external.informationSource')}
             >
-              <MenuItem value={0}>Ocorrência policial</MenuItem>
-              <MenuItem value={1}>Família</MenuItem>
-              <MenuItem value={2}>Não</MenuItem>
-              <MenuItem value={3}>Outra</MenuItem>
-              <MenuItem value={4}>Indeterminado</MenuItem>
+              <MenuItem value={'Ocorrência policial'}>
+                Ocorrência policial
+              </MenuItem>
+              <MenuItem value={'Família'}>Família</MenuItem>
+              <MenuItem value={'Não'}>Não</MenuItem>
+              <MenuItem value={'Outra'}>Outra</MenuItem>
+              <MenuItem value={'Indetermiando'}>Indeterminado</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -90,9 +92,9 @@ const External = ({ value, index, ...other }: Props) => {
           <TextField
             slotProps={{ inputLabel: { shrink: true } }}
             label="Nº do boletim de ocorrência"
-            disabled={watch('informationSource') !== 0}
+            disabled={watch('external.informationSource') !== 0}
             fullWidth
-            {...register(`occurrenceNumber`)}
+            {...register(`external.occurrenceNumber`)}
           />
         </Grid2>
         <Grid2 size={12}>
@@ -100,7 +102,7 @@ const External = ({ value, index, ...other }: Props) => {
             fullWidth
             slotProps={{ inputLabel: { shrink: true } }}
             label="Descrição sumária do evento"
-            {...register(`eventDescription`)}
+            {...register(`external.occurrenceDescription`)}
           />
         </Grid2>
         <Grid2 size={3}>
@@ -112,14 +114,18 @@ const External = ({ value, index, ...other }: Props) => {
               label="Tipo de local de ocorrência"
               notched
               id="occurencePlaceType"
-              {...register('occurencePlaceType')}
+              {...register('external.placeType')}
             >
-              <MenuItem value={0}>Via pública</MenuItem>
-              <MenuItem value={1}>Estabelecimento de residência</MenuItem>
-              <MenuItem value={2}>Outro domicílio</MenuItem>
-              <MenuItem value={3}>Estabelecimento comercial</MenuItem>
-              <MenuItem value={4}>Outros</MenuItem>
-              <MenuItem value={5}>Indeterminado</MenuItem>
+              <MenuItem value={'Via pública'}>Via pública</MenuItem>
+              <MenuItem value={'Estabelecimento de residência'}>
+                Endereço de residência
+              </MenuItem>
+              <MenuItem value={'Outro domicílio'}>Outro domicílio</MenuItem>
+              <MenuItem value={'Estabelecimento comercial'}>
+                Estabelecimento comercial
+              </MenuItem>
+              <MenuItem value={'Outros'}>Outros</MenuItem>
+              <MenuItem value={'Indeterminado'}>Indeterminado</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -128,9 +134,9 @@ const External = ({ value, index, ...other }: Props) => {
             fullWidth
             slotProps={{ inputLabel: { shrink: true } }}
             label="CEP"
-            {...register(`occurenceAddress.cep`)}
+            {...register(`external.occurenceAddress.cep`)}
             onBlur={(e) =>
-              handleCep(e.target.value, 'occurenceAddress', setValue)
+              handleCep(e.target.value, 'external.occurenceAddress', setValue)
             }
           />
         </Grid2>
@@ -139,7 +145,7 @@ const External = ({ value, index, ...other }: Props) => {
             fullWidth
             slotProps={{ inputLabel: { shrink: true } }}
             label="Logradouro"
-            {...register(`occurenceAddress.street`)}
+            {...register(`external.occurenceAddress.street`)}
           />
         </Grid2>
         <Grid2 size={3}>
@@ -147,7 +153,7 @@ const External = ({ value, index, ...other }: Props) => {
             fullWidth
             slotProps={{ inputLabel: { shrink: true } }}
             label="Bairro"
-            {...register(`occurenceAddress.district`)}
+            {...register(`external.occurenceAddress.district`)}
           />
         </Grid2>
         <Grid2 size={4}>
@@ -155,7 +161,7 @@ const External = ({ value, index, ...other }: Props) => {
             fullWidth
             slotProps={{ inputLabel: { shrink: true } }}
             label="Município"
-            {...register(`occurenceAddress.city`)}
+            {...register(`external.occurenceAddress.city`)}
           />
         </Grid2>
         <Grid2 size={1}>
@@ -163,7 +169,7 @@ const External = ({ value, index, ...other }: Props) => {
             fullWidth
             slotProps={{ inputLabel: { shrink: true } }}
             label="UF"
-            {...register(`occurenceAddress.state`)}
+            {...register(`external.occurenceAddress.state`)}
           />
         </Grid2>
         <Grid2 size={1}>
@@ -171,7 +177,7 @@ const External = ({ value, index, ...other }: Props) => {
             fullWidth
             slotProps={{ inputLabel: { shrink: true } }}
             label="Número"
-            {...register(`occurenceAddress.number`)}
+            {...register(`external.occurenceAddress.number`)}
           />
         </Grid2>
         <Grid2 size={6}>
@@ -179,7 +185,7 @@ const External = ({ value, index, ...other }: Props) => {
             fullWidth
             slotProps={{ inputLabel: { shrink: true } }}
             label="Complemento"
-            {...register(`occurenceAddress.complement`)}
+            {...register(`external.occurenceAddress.complement`)}
           />
         </Grid2>
       </Grid2>
