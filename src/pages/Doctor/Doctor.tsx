@@ -66,6 +66,10 @@ const Doctor = ({ value, index, ...other }: Props) => {
             fullWidth
             slotProps={{ inputLabel: { shrink: true } }}
             label="Município e UF do SVO ou IML"
+            disabled={
+              watch('doctor.confirmedBy') !== 2 &&
+              watch('doctor.confirmedBy') !== 3
+            }
             {...register(`doctor.city`)}
           />
         </Grid2>
