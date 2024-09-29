@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const yesNoSchema = z.enum(['Sim', 'Não', 'Indeterminado']);
+const yesNoSchema = z.enum(['Sim', 'Não', 'Não se aplica']);
 
 const addressSchema = z.object({
   cep: z.string(),
@@ -29,7 +29,7 @@ const identificationSchema = z.object({
     'Amarela',
     'Parda',
     'Indígena',
-    'Indeterminado',
+    'Não se aplica',
   ]),
   maritalStatus: z.enum([
     'Solteiro(a)',
@@ -37,6 +37,7 @@ const identificationSchema = z.object({
     'Divorciado(a)',
     'Viúvo(a)',
     'Separado(a)',
+    'Não se aplica',
   ]),
   susCard: z.string(),
   education: z.enum([
@@ -46,7 +47,7 @@ const identificationSchema = z.object({
     'Médio (antigo 2º grau)',
     'Superior incompleto',
     'Superior completo',
-    'Indeterminado',
+    'Não se aplica',
   ]),
   class: z.string(),
   occupation: z.string(),
@@ -65,7 +66,7 @@ const occurrenceSchema = z.object({
     'Via pública',
     'Domicílio',
     'Outros',
-    'Indeterminado',
+    'Não se aplica',
   ]),
 });
 
@@ -108,21 +109,34 @@ const conditionsSchema = z.object({
 const doctorSchema = z.object({
   name: z.string(),
   crm: z.string(),
-  confirmedBy: z.enum(['Assistente', 'Substituto', 'IML', 'SVO', 'Outro']),
+  confirmedBy: z.enum([
+    'Assistente',
+    'Substituto',
+    'IML',
+    'SVO',
+    'Outro',
+    'Não se aplica',
+  ]),
   city: z.string(),
   contact: z.string(),
   confirmationDate: z.string(),
 });
 
 const externalSchema = z.object({
-  nonNaturalType: z.enum(['Acidente', 'Suicídio', 'Homicídio', 'Outros']),
+  nonNaturalType: z.enum([
+    'Acidente',
+    'Suicídio',
+    'Homicídio',
+    'Outros',
+    'Não se aplica',
+  ]),
   workplaceAccident: yesNoSchema,
   informationSource: z.enum([
     'Boletim de Ocorrência',
     'Hospital',
     'Família',
     'Outros',
-    'Indeterminado',
+    'Não se aplica',
   ]),
   placeType: z.enum([
     'Via pública',
@@ -130,7 +144,7 @@ const externalSchema = z.object({
     'Outro domicílio',
     'Estabelecimento comercial',
     'Outros',
-    'Indeterminado',
+    'Não se aplica',
   ]),
   occurrenceNumber: z.string().optional(),
   occurrenceDescription: z.string().optional(),

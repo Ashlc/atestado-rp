@@ -62,7 +62,7 @@ const Infant = ({ value, index, ...other }: Props) => {
                 Superior incompleto
               </MenuItem>
               <MenuItem value={'Superior completo'}>Superior completo</MenuItem>
-              <MenuItem value={'Indeterminado'}>Indeterminado</MenuItem>
+              <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -127,7 +127,7 @@ const Infant = ({ value, index, ...other }: Props) => {
               <MenuItem value={'Única'}>Única</MenuItem>
               <MenuItem value={'Dupla'}>Dupla</MenuItem>
               <MenuItem value={'Tripla e mais'}>Tripla e mais</MenuItem>
-              <MenuItem value={'Indeterminado'}>Indeterminado</MenuItem>
+              <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -144,7 +144,7 @@ const Infant = ({ value, index, ...other }: Props) => {
             >
               <MenuItem value={'Vaginal'}>Vaginal</MenuItem>
               <MenuItem value={'Cesáreo'}>Cesáreo</MenuItem>
-              <MenuItem value={'Indeterminado'}>Indeterminado</MenuItem>
+              <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -162,7 +162,7 @@ const Infant = ({ value, index, ...other }: Props) => {
               <MenuItem value={'Antes'}>Antes</MenuItem>
               <MenuItem value={'Durante'}>Durante</MenuItem>
               <MenuItem value={'Depois'}>Depois</MenuItem>
-              <MenuItem value={'Indeterminado'}>Indeterminado</MenuItem>
+              <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
             </Select>
           </FormControl>
         </Grid2>

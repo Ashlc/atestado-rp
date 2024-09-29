@@ -8,11 +8,11 @@ import {
   TextField,
 } from '@mui/material';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { useEffect } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { cbo } from '../../services/cbo';
 import { handleCep } from '../../services/viacep';
 import { handleAge } from '../../utils/handleAge';
-import React, { useEffect } from 'react';
 
 type Props = {
   index: number;
@@ -161,7 +161,7 @@ const Identification = ({ value, index, ...other }: Props) => {
             >
               <MenuItem value={'M'}>Masculino</MenuItem>
               <MenuItem value={'F'}>Feminino</MenuItem>
-              <MenuItem value={'I'}>Indeterminado</MenuItem>
+              <MenuItem value={'I'}>Não se aplica</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -233,7 +233,7 @@ const Identification = ({ value, index, ...other }: Props) => {
                 Superior incompleto
               </MenuItem>
               <MenuItem value={'Superior completo'}>Superior completo</MenuItem>
-              <MenuItem value={'Indeterminado'}>Indeterminado</MenuItem>
+              <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
             </Select>
           </FormControl>
         </Grid2>

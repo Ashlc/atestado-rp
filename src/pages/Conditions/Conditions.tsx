@@ -103,7 +103,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
                   label="Em caso de óbito de mulher em idade fértil, a morte ocorreu:"
                   notched
                   id="fertileAgeDeath"
-                  defaultValue={infantDisabled ? 'Indeterminado' : ''}
+                  defaultValue={infantDisabled ? 'Não se aplica' : ''}
                   readOnly={infantDisabled}
                   {...field}
                 >
@@ -121,7 +121,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
                   <MenuItem value={'Não ocorreu nestes períodos'}>
                     Não ocorreu nestes períodos
                   </MenuItem>
-                  <MenuItem value={'Indeterminado'}>Indeterminado</MenuItem>
+                  <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
                 </Select>
               </FormControl>
             )}
@@ -144,7 +144,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
             >
               <MenuItem value="Sim">Sim</MenuItem>
               <MenuItem value="Não">Não</MenuItem>
-              <MenuItem value="Indeterminado">Indeterminado</MenuItem>
+              <MenuItem value="Não se aplica">Não se aplica</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -162,7 +162,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
             >
               <MenuItem value="Sim">Sim</MenuItem>
               <MenuItem value="Não">Não</MenuItem>
-              <MenuItem value="Indeterminado">Indeterminado</MenuItem>
+              <MenuItem value="Não se aplica">Não se aplica</MenuItem>
             </Select>
           </FormControl>
         </Grid2>

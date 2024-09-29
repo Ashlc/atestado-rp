@@ -43,7 +43,7 @@ const Occurence = ({ value, index, ...other }: Props) => {
               <MenuItem value={'Via pública'}>Via pública</MenuItem>
               <MenuItem value={'Domicílio'}>Domicílio</MenuItem>
               <MenuItem value={'Outros'}>Outros</MenuItem>
-              <MenuItem value={'Indeterminado'}>Indeterminado</MenuItem>
+              <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
             </Select>
           </FormControl>
         </Grid2>

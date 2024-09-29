@@ -47,7 +47,7 @@ const External = ({ value, index, ...other }: Props) => {
               <MenuItem value={'Suicídio'}>Suicídio</MenuItem>
               <MenuItem value={'Homicídio'}>Homicídio</MenuItem>
               <MenuItem value={'Outros'}>Outros</MenuItem>
-              <MenuItem value={'Indeterminado'}>Indeterminado</MenuItem>
+              <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -65,7 +65,7 @@ const External = ({ value, index, ...other }: Props) => {
             >
               <MenuItem value={'Sim'}>Sim</MenuItem>
               <MenuItem value={'Não'}>Não</MenuItem>
-              <MenuItem value={'Indeterminado'}>Indeterminado</MenuItem>
+              <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -87,7 +87,7 @@ const External = ({ value, index, ...other }: Props) => {
               <MenuItem value={'Família'}>Família</MenuItem>
               <MenuItem value={'Não'}>Não</MenuItem>
               <MenuItem value={'Outra'}>Outra</MenuItem>
-              <MenuItem value={'Indetermiando'}>Indeterminado</MenuItem>
+              <MenuItem value={'Indetermiando'}>Não se aplica</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -129,7 +129,7 @@ const External = ({ value, index, ...other }: Props) => {
                 Estabelecimento comercial
               </MenuItem>
               <MenuItem value={'Outros'}>Outros</MenuItem>
-              <MenuItem value={'Indeterminado'}>Indeterminado</MenuItem>
+              <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
