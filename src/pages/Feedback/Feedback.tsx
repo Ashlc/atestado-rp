@@ -24,27 +24,30 @@ const Feedback = ({ value, index, ...other }: Props) => {
     <RatingSelector question={question} index={index} />
   );
 
+  console.log(value, index);
+
   return (
-    <Stack
+    <div
       role="tabpanel"
       hidden={value !== index}
       id={`secao-${index}`}
       aria-labelledby={`secao-${index}`}
       {...other}
-      className="w-full flex flex-col items-center p-8 border-b border-x rounded-b-xl min-h-[600px]"
-      spacing={3}
+      className="w-full p-8 border-b border-x rounded-b-xl min-h-[600px]"
     >
-      <p className="w-10/12 sm:w-2/3 xl:w-1/3">
-        Por favor, responda as perguntas abaixo com base na sua experiência com
-        o sistema.
-      </p>
-      <Divider className="w-10/12 sm:w-2/3 xl:w-1/3" />
-      <Stack spacing={5} className="w-10/12 sm:w-2/3 xl:w-1/3">
-        {questions.map((question, index) => (
-          <div key={`feedback_${index}`}>{ratingSlider(question, index)}</div>
-        ))}
+      <Stack spacing={4} alignItems={'center'} className="w-full">
+        <p className="w-10/12 sm:w-2/3 xl:w-1/3">
+          Por favor, responda as perguntas abaixo com base na sua experiência
+          com o sistema.
+        </p>
+        <Divider className="w-10/12 sm:w-2/3 xl:w-1/3" />
+        <Stack spacing={5} className="w-10/12 sm:w-2/3 xl:w-1/3">
+          {questions.map((question, index) => (
+            <div key={`feedback_${index}`}>{ratingSlider(question, index)}</div>
+          ))}
+        </Stack>
       </Stack>
-    </Stack>
+    </div>
   );
 };
 

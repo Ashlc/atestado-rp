@@ -73,7 +73,7 @@ function App() {
                 <Tab label="Causas externas" value={5} />
                 <Tab label="Feedback" value={6} />
               </Tabs>
-              <Button onClick={tabUp} disabled={activeTab === 5} variant="text">
+              <Button onClick={tabUp} disabled={activeTab === 6} variant="text">
                 <NavigateNextIcon />
               </Button>
             </Stack>
