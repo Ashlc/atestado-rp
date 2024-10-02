@@ -15,8 +15,12 @@ import Identification from './pages/Identification/Identification';
 import Infant from './pages/Infant/Infant';
 import Locality from './pages/Locality/Locality';
 import Occurence from './pages/Occurence/Occurence';
+import Certificate from './utils/certificate';
 
 function App() {
+  const cert = new Certificate(null);
+  cert.pdf();
+
   const [activeTab, setActiveTab] = useState(2);
   const methods = useForm();
   const [birth, death] = methods.watch(['dateOfBirth', 'dateOfDeath']);
