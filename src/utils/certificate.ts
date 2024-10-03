@@ -19,14 +19,20 @@ class Certificate {
   }
 
   async loadBasePdf() {
-    const response = await fetch('./assets/basePdf.pdf');
+    'use server';
+
+    const response = await fetch('/basePdf.pdf');
     if (!response.ok) {
       throw new Error('Erro ao carregar o PDF base');
     }
-    return response.arrayBuffer(); // Retorna como ArrayBuffer
+    const data = await response.arrayBuffer();
+
+    return data; // Retorna como ArrayBuffer
   }
 
   async pdf() {
+    'use server';
+
     const basePdfBuffer = await this.loadBasePdf();
     console.log(basePdfBuffer);
 
@@ -39,33 +45,33 @@ class Certificate {
     const plugins = { text, image, qrcode: barcodes.qrcode };
     const inputs = [
       {
-        deceasedName: 'Cartorio',
-        fathersName: 'Cartorio',
-        mothersName: 'Cartorio',
+        deceasedName: 'Teste',
+        fathersName: 'Teste',
+        mothersName: 'Teste',
         typeOfDeathNonFetal: 'x',
-        typeOfDeathFetal: 'x',
+        typeOfDeathFetal: '',
         dateOfDeath: '18012005',
         hourOfDeath: '18:00',
-        naturalness: 'Cartorio',
+        naturalness: 'Brasileiro',
         dateOfBirth: '18012005',
         age: '19',
-        ageIgnored: 'x',
+        ageIgnored: '',
         solteiro: 'x',
-        casado: 'x',
-        viuvo: 'x',
-        maritalStatusIgnored: 'x',
-        separado: 'x',
-        schooling0: 'x',
-        schooling1: 'x',
-        schooling2: 'x',
-        schooling5: 'x',
-        schooling3: 'x',
+        casado: '',
+        viuvo: '',
+        maritalStatusIgnored: '',
+        separado: '',
+        schooling0: '',
+        schooling1: '',
+        schooling2: '',
+        schooling5: '',
+        schooling3: '',
         schooling4: 'x',
-        occupation: 'Cartorio',
+        occupation: 'Ator',
         cbo: '18012',
         sexM: 'x',
-        sexF: 'x',
-        sexI: 'x',
+        sexF: '',
+        sexI: '',
       },
     ];
 

@@ -19,7 +19,6 @@ import Certificate from './utils/certificate';
 
 function App() {
   const cert = new Certificate(null);
-  cert.pdf();
 
   const [activeTab, setActiveTab] = useState(2);
   const methods = useForm();
@@ -29,7 +28,7 @@ function App() {
     (typeOfDeath && typeOfDeath === 'fetal') ||
     (birth && death && dayjs(death).diff(dayjs(birth), 'year') <= 1);
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => cert.pdf();
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setActiveTab(newValue);
