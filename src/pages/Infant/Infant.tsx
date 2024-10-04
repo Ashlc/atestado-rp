@@ -33,28 +33,36 @@ const Infant = ({ value, index, ...other }: Props) => {
             fullWidth
             label="Idade"
             slotProps={{ inputLabel: { shrink: true } }}
-            {...register(`motherAge`)}
+            {...register(`infant.mothersAge`)}
           />
         </Grid2>
         <Grid2 size={3}>
           <FormControl fullWidth>
-            <InputLabel htmlFor="schooling" shrink>
+            <InputLabel htmlFor="mothersEducation" shrink>
               Escolaridade
             </InputLabel>
             <Select
               label="Escolaridade"
               notched
               defaultValue={''}
-              id="motherSchooling"
-              {...register('motherSchooling')}
+              id="motherEducation"
+              {...register('infant.mothersEducation')}
             >
-              <MenuItem value={0}>Sem escolaridade</MenuItem>
-              <MenuItem value={1}>Fundamental I (1ª a 4ª série)</MenuItem>
-              <MenuItem value={2}>Fundamental II (5ª a 8ª série)</MenuItem>
-              <MenuItem value={3}>Médio (antigo 2º grau)</MenuItem>
-              <MenuItem value={4}>Superior incompleto</MenuItem>
-              <MenuItem value={5}>Superior completo</MenuItem>
-              <MenuItem value={6}>Indefinido</MenuItem>
+              <MenuItem value={'Sem escolaridade'}>Sem escolaridade</MenuItem>
+              <MenuItem value={'Fundamental I (1ª a 4ª série)'}>
+                Fundamental I (1ª a 4ª série)
+              </MenuItem>
+              <MenuItem value={'Fundamental II (5ª a 8ª série)'}>
+                Fundamental II (5ª a 8ª série)
+              </MenuItem>
+              <MenuItem value={'Médio (antigo 2º grau)'}>
+                Médio (antigo 2º grau)
+              </MenuItem>
+              <MenuItem value={'Superior incompleto'}>
+                Superior incompleto
+              </MenuItem>
+              <MenuItem value={'Superior completo'}>Superior completo</MenuItem>
+              <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -62,7 +70,7 @@ const Infant = ({ value, index, ...other }: Props) => {
           <TextField
             slotProps={{ inputLabel: { shrink: true } }}
             label="Série"
-            {...register('motherClass')}
+            {...register('infant.mothersClass')}
             fullWidth
           />
         </Grid2>
@@ -76,7 +84,7 @@ const Infant = ({ value, index, ...other }: Props) => {
                 {...params}
                 label="Ocupação"
                 slotProps={{ inputLabel: { shrink: true } }}
-                {...register('motherOccupation')}
+                {...register('infant.mothersOccupation')}
               />
             )}
           />
@@ -86,7 +94,7 @@ const Infant = ({ value, index, ...other }: Props) => {
             fullWidth
             label="Filhos nascidos vivos"
             slotProps={{ inputLabel: { shrink: true } }}
-            {...register(`bornAlive`)}
+            {...register(`infant.bornAlive`)}
           />
         </Grid2>
         <Grid2 size={2}>
@@ -94,7 +102,7 @@ const Infant = ({ value, index, ...other }: Props) => {
             fullWidth
             label="Perdas fetais/abortos"
             slotProps={{ inputLabel: { shrink: true } }}
-            {...register(`bornDead`)}
+            {...register(`infant.fetalLoss`)}
           />
         </Grid2>
         <Grid2 size={3}>
@@ -102,59 +110,59 @@ const Infant = ({ value, index, ...other }: Props) => {
             fullWidth
             label="Nº de semanas de gestação"
             slotProps={{ inputLabel: { shrink: true } }}
-            {...register(`weeksPregnant`)}
+            {...register(`infant.weeksPregnant`)}
           />
         </Grid2>
         <Grid2 size={3}>
           <FormControl fullWidth>
-            <InputLabel htmlFor="schooling" shrink>
+            <InputLabel htmlFor="pregnancyType" shrink>
               Tipo de gravidez
             </InputLabel>
             <Select
               label="Tipo de gravidez"
               notched
               defaultValue={''}
-              {...register('pregnancyType')}
+              {...register('infant.pregnancyType')}
             >
-              <MenuItem value={0}>Única</MenuItem>
-              <MenuItem value={1}>Dupla</MenuItem>
-              <MenuItem value={2}>Tripla e mais</MenuItem>
-              <MenuItem value={3}>Indefinido</MenuItem>
+              <MenuItem value={'Única'}>Única</MenuItem>
+              <MenuItem value={'Dupla'}>Dupla</MenuItem>
+              <MenuItem value={'Tripla e mais'}>Tripla e mais</MenuItem>
+              <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
         <Grid2 size={2}>
           <FormControl fullWidth>
-            <InputLabel htmlFor="schooling" shrink>
+            <InputLabel htmlFor="birthType" shrink>
               Tipo de parto
             </InputLabel>
             <Select
               label="Tipo de parto"
               notched
               defaultValue={''}
-              {...register('birthType')}
+              {...register('infant.birthType')}
             >
-              <MenuItem value={0}>Vaginal</MenuItem>
-              <MenuItem value={1}>Cesáreo</MenuItem>
-              <MenuItem value={2}>Indefinido</MenuItem>
+              <MenuItem value={'Vaginal'}>Vaginal</MenuItem>
+              <MenuItem value={'Cesáreo'}>Cesáreo</MenuItem>
+              <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
         <Grid2 size={2}>
           <FormControl fullWidth>
-            <InputLabel htmlFor="schooling" shrink>
+            <InputLabel htmlFor="deathRelativeToBirth" shrink>
               Morte em relação ao parto
             </InputLabel>
             <Select
               label="Morte em relação ao parto"
               notched
               defaultValue={''}
-              {...register('deathRelativeToBirth')}
+              {...register('infant.deathRelativeToBirth')}
             >
-              <MenuItem value={0}>Antes</MenuItem>
-              <MenuItem value={1}>Durante</MenuItem>
-              <MenuItem value={2}>Depois</MenuItem>
-              <MenuItem value={3}>Indefinido</MenuItem>
+              <MenuItem value={'Antes'}>Antes</MenuItem>
+              <MenuItem value={'Durante'}>Durante</MenuItem>
+              <MenuItem value={'Depois'}>Depois</MenuItem>
+              <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -163,7 +171,7 @@ const Infant = ({ value, index, ...other }: Props) => {
             fullWidth
             label="Peso ao nascer"
             slotProps={{ inputLabel: { shrink: true } }}
-            {...register(`birthWeight`)}
+            {...register(`infant.birthWeight`)}
           />
         </Grid2>
         <Grid2 size={'grow'}>
@@ -171,7 +179,7 @@ const Infant = ({ value, index, ...other }: Props) => {
             fullWidth
             label="Nº da Declaração de Nascido Vivo"
             slotProps={{ inputLabel: { shrink: true } }}
-            {...register(`birthCertificateNumber`)}
+            {...register(`infant.birthCertificateNumber`)}
           />
         </Grid2>
       </Grid2>

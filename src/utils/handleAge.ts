@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 export const handleAge = (dateOfBirth: string, dateOfDeath: string) => {
+  if (!dateOfBirth || !dateOfDeath) return '';
   const birth = dayjs(dateOfBirth);
   const death = dateOfDeath ? dayjs(dateOfDeath) : dayjs();
   const diff = death.diff(birth);
@@ -15,4 +16,8 @@ export const handleAge = (dateOfBirth: string, dateOfDeath: string) => {
   } else {
     return `${days} dias`;
   }
+};
+
+export const isInfant = (birth: string, death: string) => {
+  return birth && death && dayjs(death).diff(dayjs(birth), 'year') <= 1;
 };
