@@ -1,4 +1,4 @@
-import { Divider, Stack } from '@mui/material';
+import { Button, Divider, Stack } from '@mui/material';
 import RatingSelector from '../../components/RatingSelector/RatingSelector';
 
 type Props = {
@@ -24,8 +24,6 @@ const Feedback = ({ value, index, ...other }: Props) => {
     <RatingSelector question={question} index={index} />
   );
 
-  console.log(value, index);
-
   return (
     <div
       role="tabpanel"
@@ -47,6 +45,12 @@ const Feedback = ({ value, index, ...other }: Props) => {
           ))}
         </Stack>
       </Stack>
+      <Button
+        type="submit"
+        className="aspect-square !rounded-full"
+        variant="contained"
+        color="primary"
+      />
     </div>
   );
 };

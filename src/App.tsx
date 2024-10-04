@@ -1,7 +1,7 @@
 import { FileOpen } from '@mui/icons-material';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { Button, Stack } from '@mui/material';
+import { Button, Stack, Tooltip } from '@mui/material';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import { SyntheticEvent, useState } from 'react';
@@ -13,8 +13,8 @@ import Feedback from './pages/Feedback/Feedback';
 import Identification from './pages/Identification/Identification';
 import Infant from './pages/Infant/Infant';
 import Occurence from './pages/Occurence/Occurence';
-import { isInfant } from './utils/handleAge';
 import Certificate from './utils/certificate';
+import { isInfant } from './utils/handleAge';
 
 function App() {
   const cert = new Certificate(null);
@@ -47,7 +47,7 @@ function App() {
   };
 
   return (
-    <div className="w-full min-h-screen">
+    <div className="w-full min-h-screen relative">
       <div className="w-10/12 mx-auto flex flex-col items-center gap-6 py-6">
         <FormProvider {...methods}>
           <form
@@ -86,17 +86,17 @@ function App() {
             <Doctor index={4} value={activeTab} />
             <External index={5} value={activeTab} />
             <Feedback index={6} value={activeTab} />
-            {activeTab === 6 && (
+            <Tooltip title="Gerar D.O." placement="top">
               <Button
                 type="submit"
-                className="mt-4"
+                className="aspect-square !rounded-full"
                 variant="contained"
                 size="large"
-                endIcon={<FileOpen />}
+                sx={{ position: 'absolute', bottom: 64, right: 64 }}
               >
-                Gerar D.O.
+                <FileOpen />
               </Button>
-            )}
+            </Tooltip>
           </form>
         </FormProvider>
       </div>
