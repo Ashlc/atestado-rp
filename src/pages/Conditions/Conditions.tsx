@@ -89,7 +89,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
       id={`secao-${index}`}
       aria-labelledby={`secao-${index}`}
       {...other}
-      className="w-full p-8 border-b border-x rounded-b-xl min-h-[600px]"
+      className="w-full p-8"
     >
       <Grid2 container spacing={2} width="100%">
         <Grid2 size={12}>

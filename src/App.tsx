@@ -1,11 +1,12 @@
 import { FileOpen } from '@mui/icons-material';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { Button, Stack, Tooltip } from '@mui/material';
+import { Box, Button, Stack, Tooltip } from '@mui/material';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import { SyntheticEvent, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import ThemeSwitcher from './components/ThemeSwitcher/ThemeSwitcher';
 import Conditions from './pages/Conditions/Conditions';
 import Doctor from './pages/Doctor/Doctor';
 import External from './pages/External/External';
@@ -47,7 +48,11 @@ function App() {
   };
 
   return (
-    <div className="w-full min-h-screen relative">
+    <Box className="w-full min-h-screen relative">
+      <div className="w-full flex flex-row items-center justify-between p-4 border-b">
+        <h1 className="font-bold text-xl">Gerador de D.O.</h1>
+        <ThemeSwitcher />
+      </div>
       <div className="w-10/12 mx-auto flex flex-col items-center gap-6 py-6">
         <FormProvider {...methods}>
           <form
@@ -57,7 +62,7 @@ function App() {
             <Stack
               direction="row"
               sx={{ borderBottom: 1, borderColor: 'divider' }}
-              className="w-full justify-between"
+              className="w-full justify-between mb-6"
             >
               <Button
                 onClick={tabDown}
@@ -100,7 +105,7 @@ function App() {
           </form>
         </FormProvider>
       </div>
-    </div>
+    </Box>
   );
 }
 

@@ -31,7 +31,7 @@ const Feedback = ({ value, index, ...other }: Props) => {
       id={`secao-${index}`}
       aria-labelledby={`secao-${index}`}
       {...other}
-      className="w-full p-8 border-b border-x rounded-b-xl min-h-[600px]"
+      className="w-full p-8"
     >
       <Stack spacing={4} alignItems={'center'} className="w-full">
         <p className="w-10/12 sm:w-2/3 xl:w-1/3">
