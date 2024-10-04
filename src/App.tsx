@@ -48,7 +48,7 @@ function App() {
   };
 
   return (
-    <Box className="w-full min-h-screen relative">
+    <Box className="w-full min-h-screen">
       <div className="w-full flex flex-row items-center justify-between p-4 border-b">
         <h1 className="font-bold text-xl">Gerador de D.O.</h1>
         <ThemeSwitcher />
@@ -97,7 +97,7 @@ function App() {
                 className="aspect-square !rounded-full"
                 variant="contained"
                 size="large"
-                sx={{ position: 'absolute', bottom: 64, right: 64 }}
+                sx={{ position: 'fixed', bottom: 64, right: 64 }}
               >
                 <FileOpen />
               </Button>

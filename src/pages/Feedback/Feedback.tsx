@@ -44,13 +44,8 @@ const Feedback = ({ value, index, ...other }: Props) => {
             <div key={`feedback_${index}`}>{ratingSlider(question, index)}</div>
           ))}
         </Stack>
+        <Button>Enviar feedback</Button>
       </Stack>
-      <Button
-        type="submit"
-        className="aspect-square !rounded-full"
-        variant="contained"
-        color="primary"
-      />
     </div>
   );
 };
