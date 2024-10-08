@@ -7,12 +7,14 @@ import {
   Select,
   TextField,
 } from '@mui/material';
+import { DatePicker } from '@mui/x-date-pickers';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { useEffect } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { cbo } from '../../services/cbo';
 import { handleCep } from '../../services/viacep';
 import { handleAge } from '../../utils/handleAge';
+import { disabledFields, educationClasses } from './utils';
 
 type Props = {
   index: number;
@@ -20,14 +22,20 @@ type Props = {
 };
 
 const Identification = ({ value, index, ...other }: Props) => {
-  const { register, watch, control, setValue } = useFormContext();
+  const { register, watch, control, setValue, resetField } = useFormContext();
   const watchTypeOfDeath = watch('identification.typeOfDeath');
   const watchDateOfDeath = watch('identification.dateOfDeath');
   const watchDateOfBirth = watch('identification.dateOfBirth');
+  const watchEducation = watch('identification.education');
 
   useEffect(() => {
-    if (watchTypeOfDeath === 'Fetal' && watchDateOfDeath) {
-      setValue('identification.dateOfBirth', watchDateOfDeath);
+    if (watchTypeOfDeath === 'Fetal') {
+      disabledFields.forEach((field) => {
+        resetField(field);
+      });
+      if (watchDateOfDeath) {
+        setValue('identification.dateOfBirth', watchDateOfDeath);
+      }
     }
   }, [watchTypeOfDeath, watchDateOfDeath, setValue]);
 
@@ -38,7 +46,7 @@ const Identification = ({ value, index, ...other }: Props) => {
       id={`secao-${index}`}
       aria-labelledby={`secao-${index}`}
       {...other}
-      className="w-full p-8 border-b border-x rounded-b-xl"
+      className="w-full p-8"
     >
       <Grid2 container spacing={2} width="100%">
         <Grid2 size={2}>
@@ -62,12 +70,24 @@ const Identification = ({ value, index, ...other }: Props) => {
           />
         </Grid2>
         <Grid2 size={2}>
-          <TextField
-            type="date"
-            slotProps={{ inputLabel: { shrink: true } }}
-            label="Data do óbito"
-            fullWidth
-            {...register('identification.dateOfDeath')}
+          <Controller
+            name="identification.dateOfDeath"
+            control={control}
+            render={({ field }) => (
+              <DatePicker
+                slotProps={{
+                  textField: {
+                    InputLabelProps: {
+                      shrink: true,
+                    },
+                    fullWidth: true,
+                  },
+                }}
+                label="Data do óbito"
+                value={field.value}
+                onChange={(date) => field.onChange(date)}
+              />
+            )}
           />
         </Grid2>
         <Grid2 size={2}>
@@ -77,6 +97,14 @@ const Identification = ({ value, index, ...other }: Props) => {
                 label="Hora do óbito"
                 value={field.value}
                 onChange={field.onChange}
+                slotProps={{
+                  textField: {
+                    InputLabelProps: {
+                      shrink: true,
+                    },
+                    fullWidth: true,
+                  },
+                }}
               />
             )}
             name="identification.hourOfDeath"
@@ -118,14 +146,19 @@ const Identification = ({ value, index, ...other }: Props) => {
         <Grid2 size={2}>
           <Controller
             render={({ field }) => (
-              <TextField
-                type="date"
-                slotProps={{ inputLabel: { shrink: true } }}
+              <DatePicker
+                slotProps={{
+                  textField: {
+                    InputLabelProps: {
+                      shrink: true,
+                    },
+                    fullWidth: true,
+                  },
+                }}
                 label="Data de nascimento"
-                fullWidth
-                {...field}
+                value={watchTypeOfDeath === 'Fetal' ? watchDateOfDeath : null}
+                onChange={(date) => field.onChange(date)}
                 disabled={watchTypeOfDeath === 'Fetal'}
-                value={watchTypeOfDeath === 'Fetal' ? watchDateOfDeath : ''}
               />
             )}
             name="identification.dateOfBirth"
@@ -189,6 +222,7 @@ const Identification = ({ value, index, ...other }: Props) => {
               label="Estado civil"
               defaultValue={''}
               notched
+              disabled={watchTypeOfDeath === 'Fetal'}
               {...register('identification.maritalStatus')}
             >
               <MenuItem value={'Solteiro(a)'}>Solteiro(a)</MenuItem>
@@ -203,53 +237,102 @@ const Identification = ({ value, index, ...other }: Props) => {
           <TextField
             slotProps={{ inputLabel: { shrink: true } }}
             label="Cartão do SUS"
+            disabled={watchTypeOfDeath === 'Fetal'}
             {...register('identification.susCard')}
             fullWidth
           />
         </Grid2>
-        <Grid2 size={3}>
-          <FormControl fullWidth>
-            <InputLabel htmlFor="education" shrink>
-              Escolaridade
-            </InputLabel>
-            <Select
-              label="Escolaridade"
-              notched
-              defaultValue={''}
-              id="education"
-              {...register('identification.education')}
-            >
-              <MenuItem value={'Sem escolaridade'}>Sem escolaridade</MenuItem>
-              <MenuItem value={'Fundamental I (1ª a 4ª série)'}>
-                Fundamental I (1ª a 4ª série)
-              </MenuItem>
-              <MenuItem value={'Fundamental II (5ª a 8ª série)'}>
-                Fundamental II (5ª a 8ª série)
-              </MenuItem>
-              <MenuItem value={'Médio (antigo 2º grau)'}>
-                Médio (antigo 2º grau)
-              </MenuItem>
-              <MenuItem value={'Superior incompleto'}>
-                Superior incompleto
-              </MenuItem>
-              <MenuItem value={'Superior completo'}>Superior completo</MenuItem>
-              <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
-            </Select>
-          </FormControl>
+        <Grid2 size={2}>
+          <Controller
+            name="identification.education"
+            control={control}
+            render={({ field }) => (
+              <FormControl fullWidth>
+                <InputLabel htmlFor="education" shrink>
+                  Escolaridade
+                </InputLabel>
+                <Select
+                  label="Escolaridade"
+                  notched
+                  id="education"
+                  disabled={watchTypeOfDeath === 'Fetal'}
+                  {...field}
+                  value={field.value || ''}
+                  onChange={(e) => {
+                    field.onChange(e.target.value);
+                    resetField('identification.class', { defaultValue: '' });
+                  }}
+                >
+                  <MenuItem value={'Sem escolaridade'}>
+                    Sem escolaridade
+                  </MenuItem>
+                  <MenuItem value={'Fundamental I (1ª a 4ª série)'}>
+                    Fundamental I (1ª a 4ª série)
+                  </MenuItem>
+                  <MenuItem value={'Fundamental II (5ª a 8ª série)'}>
+                    Fundamental II (5ª a 8ª série)
+                  </MenuItem>
+                  <MenuItem value={'Médio (antigo 2º grau)'}>
+                    Médio (antigo 2º grau)
+                  </MenuItem>
+                  <MenuItem value={'Superior incompleto'}>
+                    Superior incompleto
+                  </MenuItem>
+                  <MenuItem value={'Superior completo'}>
+                    Superior completo
+                  </MenuItem>
+                  <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
+                </Select>
+              </FormControl>
+            )}
+          />
         </Grid2>
-        <Grid2 size={1}>
-          <TextField
-            type="number"
-            slotProps={{ inputLabel: { shrink: true } }}
-            label="Série"
-            {...register('identification.class')}
-            fullWidth
+        <Grid2 size={2}>
+          <Controller
+            name="identification.class"
+            render={({ field }) =>
+              watchEducation ? (
+                <FormControl fullWidth>
+                  <InputLabel shrink>Série</InputLabel>
+                  <Select
+                    defaultValue={''}
+                    label="Série"
+                    notched
+                    disabled={
+                      watchTypeOfDeath === 'Fetal' ||
+                      educationClasses[watchEducation].length === 0
+                    }
+                    {...field}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      console.log(educationClasses[watchEducation]);
+                      field.onChange(e.target.value);
+                    }}
+                  >
+                    {educationClasses[watchEducation].map((item) => (
+                      <MenuItem key={item} value={item}>
+                        {item}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              ) : (
+                <TextField
+                  slotProps={{ inputLabel: { shrink: true } }}
+                  label="Série"
+                  fullWidth
+                  disabled
+                />
+              )
+            }
+            control={control}
           />
         </Grid2>
         <Grid2 size={'grow'}>
           <Autocomplete
             disablePortal
             options={cbo}
+            disabled={watchTypeOfDeath === 'Fetal'}
             getOptionKey={(option) => option.value}
             renderInput={(params) => (
               <TextField

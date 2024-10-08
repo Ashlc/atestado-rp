@@ -24,7 +24,7 @@ const Infant = ({ value, index, ...other }: Props) => {
       id={`secao-${index}`}
       aria-labelledby={`secao-${index}`}
       {...other}
-      className="w-full p-8 border-b border-x rounded-b-xl"
+      className="w-full p-8"
     >
       <p className="mb-6">Informações da mãe</p>
       <Grid2 container spacing={2} width="100%">

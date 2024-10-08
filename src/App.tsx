@@ -1,11 +1,12 @@
 import { FileOpen } from '@mui/icons-material';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { Button, Stack } from '@mui/material';
+import { Box, Button, Stack, Tooltip } from '@mui/material';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import { SyntheticEvent, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import ThemeSwitcher from './components/ThemeSwitcher/ThemeSwitcher';
 import Conditions from './pages/Conditions/Conditions';
 import Doctor from './pages/Doctor/Doctor';
 import External from './pages/External/External';
@@ -13,9 +14,11 @@ import Feedback from './pages/Feedback/Feedback';
 import Identification from './pages/Identification/Identification';
 import Infant from './pages/Infant/Infant';
 import Occurence from './pages/Occurence/Occurence';
+import Certificate from './utils/certificate';
 import { isInfant } from './utils/handleAge';
 
 function App() {
+  const cert = new Certificate(null);
   const [activeTab, setActiveTab] = useState(0);
   const methods = useForm();
   const [birth, death] = methods.watch([
@@ -26,7 +29,7 @@ function App() {
   const infantDisabled =
     !(typeOfDeath && typeOfDeath === 'Fetal') && !isInfant(birth, death);
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => cert.pdf();
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setActiveTab(newValue);
@@ -45,7 +48,11 @@ function App() {
   };
 
   return (
-    <div className="w-full min-h-screen">
+    <Box className="w-full min-h-screen">
+      <div className="w-full flex flex-row items-center justify-between p-4 border-b">
+        <h1 className="font-bold text-xl">Gerador de D.O.</h1>
+        <ThemeSwitcher />
+      </div>
       <div className="w-10/12 mx-auto flex flex-col items-center gap-6 py-6">
         <FormProvider {...methods}>
           <form
@@ -55,7 +62,7 @@ function App() {
             <Stack
               direction="row"
               sx={{ borderBottom: 1, borderColor: 'divider' }}
-              className="w-full justify-between"
+              className="w-full justify-between mb-6"
             >
               <Button
                 onClick={tabDown}
@@ -84,21 +91,21 @@ function App() {
             <Doctor index={4} value={activeTab} />
             <External index={5} value={activeTab} />
             <Feedback index={6} value={activeTab} />
+            <Tooltip title="Gerar D.O." placement="top">
+              <Button
+                type="submit"
+                className="aspect-square !rounded-full"
+                variant="contained"
+                size="large"
+                sx={{ position: 'fixed', bottom: 64, right: 64 }}
+              >
+                <FileOpen />
+              </Button>
+            </Tooltip>
           </form>
-          {activeTab === 6 && (
-            <Button
-              type="submit"
-              className="mt-4"
-              variant="contained"
-              size="large"
-              endIcon={<FileOpen />}
-            >
-              Gerar D.O.
-            </Button>
-          )}
         </FormProvider>
       </div>
-    </div>
+    </Box>
   );
 }
 
