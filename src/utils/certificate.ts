@@ -1,17 +1,20 @@
+import { Font } from '@pdfme/common';
 import { generate } from '@pdfme/generator';
 import { barcodes, image, text } from '@pdfme/schemas';
-import { z } from 'zod';
-import { mockInput } from './certificateInputExample';
-
-import formSchema from '../schemas/Sections';
+import CourierPrime from '../assets/fonts/CourierPrime.ttf';
 import templateSchema from './templateSchemas.json';
 
-type formType = z.infer<typeof formSchema>;
+const font: Font = {
+  courier: {
+    data: await fetch(CourierPrime).then((res) => res.arrayBuffer()),
+    fallback: true,
+  },
+};
 
 class Certificate {
-  formData: formType | null;
+  formData: Record<string, unknown> | null;
 
-  constructor(formData: formType | null) {
+  constructor(formData: Record<string, unknown> | null) {
     this.formData = formData;
   }
 
@@ -31,11 +34,10 @@ class Certificate {
     return data;
   }
 
-  async pdf() {
+  async pdf(input: Record<string, unknown>) {
     'use server';
 
     const basePdfBuffer = await this.loadBasePdf();
-    console.log(basePdfBuffer);
 
     const template = {
       schemas: templateSchema,
@@ -47,8 +49,9 @@ class Certificate {
 
     const pdf = await generate({
       template,
-      inputs: mockInput,
+      inputs: [input],
       plugins,
+      options: { font },
     });
 
     const blob = new Blob([pdf.buffer], { type: 'application/pdf' });

@@ -3,17 +3,16 @@
     {
       "name": "identification.typeOfDeath",
       "type": "text",
-      "content": "Fetal",
       "position": {
-        "x": 22.49,
+        "x": 22,
         "y": 26
       },
-      "width": 15.88,
+      "width": 20,
       "height": 3.92,
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -23,12 +22,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.dateOfDeath",
       "type": "text",
-      "content": "dd/mm/yyyy",
       "position": {
         "x": 41.8,
         "y": 26
@@ -38,7 +36,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -48,12 +46,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.hourOfDeath",
       "type": "text",
-      "content": "hh:mm",
       "position": {
         "x": 71.38,
         "y": 26
@@ -63,7 +60,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -73,12 +70,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.susCard",
       "type": "text",
-      "content": "123456789",
       "position": {
         "x": 92.22,
         "y": 26
@@ -88,7 +84,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -98,22 +94,21 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.naturalness",
       "type": "text",
-      "content": "Maceió/AL",
       "position": {
         "x": 143.76,
-        "y": 24.47
+        "y": 25
       },
       "width": 48.17,
       "height": 4.96,
       "rotate": 0,
-      "alignment": "center",
+      "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -123,12 +118,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.deceasedName",
       "type": "text",
-      "content": "123456789",
       "position": {
         "x": 22.85,
         "y": 33.5
@@ -138,7 +132,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -148,22 +142,21 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.fathersName",
       "type": "text",
-      "content": "123456789",
       "position": {
         "x": 23.11,
-        "y": 40.5
+        "y": 42
       },
       "width": 84.15,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -173,22 +166,21 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.mothersName",
       "type": "text",
-      "content": "123456789",
       "position": {
         "x": 112.48,
-        "y": 40.5
+        "y": 42
       },
       "width": 78.86,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -198,22 +190,21 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.dateOfBirth",
       "type": "text",
-      "content": "dd/mm/yyyy",
       "position": {
         "x": 22.8,
-        "y": 51
+        "y": 52.5
       },
       "width": 22.24,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -223,22 +214,21 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.age",
       "type": "text",
-      "content": "2 horas",
       "position": {
         "x": 63.23,
-        "y": 51
+        "y": 52.5
       },
       "width": 50.81,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -248,22 +238,21 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.sex",
       "type": "text",
-      "content": "F",
       "position": {
         "x": 116.47,
-        "y": 51
+        "y": 52.5
       },
       "width": 13.24,
       "height": 4.43,
       "rotate": 0,
       "alignment": "center",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -273,22 +262,21 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.race",
       "type": "text",
-      "content": "Preta",
       "position": {
         "x": 132.56,
-        "y": 51
+        "y": 52.5
       },
       "width": 21.7,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -298,22 +286,21 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.maritalStatus",
       "type": "text",
-      "content": "Solteiro",
       "position": {
         "x": 156.5,
-        "y": 51
+        "y": 52.5
       },
       "width": 34.93,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -323,22 +310,21 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.education",
       "type": "text",
-      "content": "Fundamental I",
       "position": {
         "x": 22,
-        "y": 63.5
+        "y": 64
       },
       "width": 52.66,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -348,22 +334,21 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.class",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 76,
-        "y": 63.5
+        "y": 64
       },
       "width": 22.22,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -373,22 +358,21 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.occupation",
       "type": "text",
-      "content": "Varejista",
       "position": {
         "x": 102.14,
-        "y": 63.5
+        "y": 64
       },
       "width": 48.42,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -398,22 +382,21 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.cbo",
       "type": "text",
-      "content": "123456789",
       "position": {
         "x": 152.71,
-        "y": 63.5
+        "y": 64
       },
       "width": 39.42,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -423,12 +406,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.deceasedAddress.street",
       "type": "text",
-      "content": "Rua Nao sei o que",
       "position": {
         "x": 22.48,
         "y": 72.5
@@ -438,7 +420,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -448,12 +430,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.deceasedAddress.number",
       "type": "text",
-      "content": "123",
       "position": {
         "x": 116.19,
         "y": 72.5
@@ -463,7 +444,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -473,12 +454,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.deceasedAddress.complement",
       "type": "text",
-      "content": "Casa",
       "position": {
         "x": 134.65,
         "y": 72.5
@@ -488,7 +468,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -498,12 +478,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.deceasedAddress.zipCode",
       "type": "text",
-      "content": "57000-000",
       "position": {
         "x": 154.7,
         "y": 72.5
@@ -513,7 +492,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -523,22 +502,21 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.deceasedAddress.neighborhood",
       "type": "text",
-      "content": "Tabuleiro dos Martins",
       "position": {
         "x": 23.06,
-        "y": 79.5
+        "y": 80
       },
       "width": 46.3,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -548,22 +526,21 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.deceasedAddress.neighborhoodCode",
       "type": "text",
-      "content": "000",
       "position": {
         "x": 71.69,
-        "y": 79.5
+        "y": 80
       },
       "width": 12.96,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -573,22 +550,21 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.deceasedAddress.city",
       "type": "text",
-      "content": "Maceió",
       "position": {
         "x": 89,
-        "y": 79.5
+        "y": 80
       },
       "width": 56.88,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -598,22 +574,21 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.deceasedAddress.cityCode",
       "type": "text",
-      "content": "456",
       "position": {
         "x": 148.21,
-        "y": 79.5
+        "y": 80
       },
       "width": 32.01,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -623,22 +598,21 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "identification.deceasedAddress.state",
       "type": "text",
-      "content": "AL",
       "position": {
         "x": 183.66,
-        "y": 79.5
+        "y": 80
       },
       "width": 8.18,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -648,12 +622,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "occurrence.placeType",
       "type": "text",
-      "content": "Tabuleiro dos Martins",
       "position": {
         "x": 23.27,
         "y": 91
@@ -663,7 +636,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -673,12 +646,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "occurrence.establishmentName",
       "type": "text",
-      "content": "Tabuleiro dos Martins",
       "position": {
         "x": 80.1,
         "y": 91
@@ -688,7 +660,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -698,12 +670,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "occurrence.cnes",
       "type": "text",
-      "content": "13245678910111",
       "position": {
         "x": 159.7,
         "y": 91
@@ -713,7 +684,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -723,12 +694,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "occurrence.hospitalAddress.street",
       "type": "text",
-      "content": "Rua Nao sei o que",
       "position": {
         "x": 22.43,
         "y": 99.7
@@ -738,7 +708,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -748,12 +718,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "occurrence.hospitalAddress.number",
       "type": "text",
-      "content": "123",
       "position": {
         "x": 116.14,
         "y": 99.7
@@ -763,7 +732,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -773,12 +742,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "occurrence.hospitalAddress.complement",
       "type": "text",
-      "content": "Casa",
       "position": {
         "x": 134.6,
         "y": 99.7
@@ -788,7 +756,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -798,12 +766,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "occurrence.hospitalAddress.zipCode",
       "type": "text",
-      "content": "57000-000",
       "position": {
         "x": 154.03,
         "y": 99.7
@@ -813,7 +780,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -823,12 +790,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "occurrence.hospitalAddress.neighborhood",
       "type": "text",
-      "content": "Tabuleiro dos Martins",
       "position": {
         "x": 23.01,
         "y": 106.7
@@ -838,7 +804,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -848,22 +814,21 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
-      "name": "occurence.hospitalAddress.neighborhoodCode",
+      "name": "occurrence.hospitalAddress.neighborhoodCode",
       "type": "text",
-      "content": "000",
       "position": {
         "x": 71.38,
-        "y": 106.7
+        "y": 107
       },
       "width": 12.7,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -873,22 +838,21 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
-      "name": "occurence.hospitalAddress.city",
+      "name": "occurrence.hospitalAddress.city",
       "type": "text",
-      "content": "Maceió",
       "position": {
         "x": 88.95,
-        "y": 106.7
+        "y": 107
       },
       "width": 56.88,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -898,22 +862,21 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
-      "name": "occurence.hospitalAddress.cityCode",
+      "name": "occurrence.hospitalAddress.cityCode",
       "type": "text",
-      "content": "456",
       "position": {
         "x": 147.37,
-        "y": 106.7
+        "y": 107
       },
       "width": 32.8,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -923,22 +886,21 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
-      "name": "occurence.hospitalAddress.state",
+      "name": "occurrence.hospitalAddress.state",
       "type": "text",
-      "content": "AL",
       "position": {
         "x": 183.1,
-        "y": 106.7
+        "y": 107
       },
       "width": 8.18,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -948,12 +910,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "infant.mothersAge",
       "type": "text",
-      "content": "22",
       "position": {
         "x": 22.17,
         "y": 124
@@ -963,7 +924,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -973,12 +934,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "infant.mothersEducation",
       "type": "text",
-      "content": "Tabuleiro dos Martins",
       "position": {
         "x": 33.48,
         "y": 124
@@ -988,7 +948,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -998,12 +958,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "infant.class",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 88.12,
         "y": 124.3
@@ -1013,7 +972,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1023,12 +982,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "infant.mothersOccupation",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 116.91,
         "y": 124.3
@@ -1038,7 +996,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1048,12 +1006,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "infant.mothersCBO",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 168.08,
         "y": 124.3
@@ -1063,7 +1020,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1073,12 +1030,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "infant.bornAlive",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 22.04,
         "y": 142
@@ -1088,7 +1044,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1098,12 +1054,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "infant.fetalLoss",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 36.27,
         "y": 142
@@ -1113,7 +1068,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1123,12 +1078,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "infant.weeksPregnant",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 50.51,
         "y": 142
@@ -1138,7 +1092,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1148,12 +1102,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "infant.pregnancyType",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 70.31,
         "y": 142
@@ -1163,7 +1116,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1173,12 +1126,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "infant.birthType",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 90.63,
         "y": 142
@@ -1188,7 +1140,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1198,12 +1150,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "infant.deathRelativeToBirth",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 112.54,
         "y": 134.24
@@ -1213,7 +1164,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1223,12 +1174,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "infant.birthWeight",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 112.29,
         "y": 142
@@ -1238,7 +1188,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1248,12 +1198,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "infant.birthCertificateNumber",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 138.69,
         "y": 142
@@ -1263,7 +1212,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1273,12 +1222,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "conditions.fertileAgeDeath",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 22.33,
         "y": 157
@@ -1288,7 +1236,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1298,12 +1246,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "conditions.receivedMedicalAssistance",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 124.73,
         "y": 157
@@ -1313,7 +1260,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1323,12 +1270,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "conditions.necropsy",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 159.34,
         "y": 157
@@ -1338,7 +1284,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1348,12 +1294,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "conditions.cause1",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 67,
         "y": 167
@@ -1363,7 +1308,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1373,14 +1318,13 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "conditions.cid1",
       "type": "text",
-      "content": "123456",
       "position": {
-        "x": 178.5,
+        "x": 178.75,
         "y": 167.75
       },
       "width": 13.13,
@@ -1388,7 +1332,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1398,12 +1342,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "conditions.evolutionTime1",
       "type": "text",
-      "content": "hh:mm",
       "position": {
         "x": 162,
         "y": 167.75
@@ -1413,7 +1356,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1423,12 +1366,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "conditions.cause2",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 67,
         "y": 174.5
@@ -1438,7 +1380,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1448,14 +1390,13 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "conditions.cid2",
       "type": "text",
-      "content": "123456",
       "position": {
-        "x": 178.5,
+        "x": 178.75,
         "y": 174.5
       },
       "width": 13.13,
@@ -1463,7 +1404,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1473,12 +1414,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "conditions.evolutionTime2",
       "type": "text",
-      "content": "hh:mm",
       "position": {
         "x": 162,
         "y": 174.5
@@ -1488,7 +1428,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1498,12 +1438,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "conditions.cause3",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 67,
         "y": 182
@@ -1513,7 +1452,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1523,14 +1462,13 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "conditions.cid3",
       "type": "text",
-      "content": "123456",
       "position": {
-        "x": 178.5,
+        "x": 178.75,
         "y": 182
       },
       "width": 13.13,
@@ -1538,7 +1476,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1548,12 +1486,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "conditions.evolutionTime3",
       "type": "text",
-      "content": "hh:mm",
       "position": {
         "x": 162,
         "y": 182
@@ -1563,7 +1500,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1573,12 +1510,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "conditions.cause4",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 67,
         "y": 190
@@ -1588,7 +1524,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1598,14 +1534,13 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "conditions.cid4",
       "type": "text",
-      "content": "123456",
       "position": {
-        "x": 178.5,
+        "x": 178.75,
         "y": 190
       },
       "width": 13.13,
@@ -1613,7 +1548,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1623,12 +1558,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "conditions.evolutionTime4",
       "type": "text",
-      "content": "hh:mm",
       "position": {
         "x": 162,
         "y": 190
@@ -1638,7 +1572,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1648,12 +1582,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "conditions.cause5",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 67,
         "y": 197.11
@@ -1663,7 +1596,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1673,14 +1606,13 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "conditions.cid5",
       "type": "text",
-      "content": "123456",
       "position": {
-        "x": 178.5,
+        "x": 178.75,
         "y": 197.11
       },
       "width": 13.13,
@@ -1688,7 +1620,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1698,12 +1630,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "conditions.evolutionTime5",
       "type": "text",
-      "content": "hh:mm",
       "position": {
         "x": 162,
         "y": 197.11
@@ -1713,7 +1644,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1723,12 +1654,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "conditions.cause6",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 67,
         "y": 203.5
@@ -1738,7 +1668,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1748,14 +1678,13 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "conditions.cid6",
       "type": "text",
-      "content": "123456",
       "position": {
-        "x": 178.5,
+        "x": 178.75,
         "y": 203
       },
       "width": 13.13,
@@ -1763,7 +1692,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1773,12 +1702,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "conditions.evolutionTime6",
       "type": "text",
-      "content": "hh:mm",
       "position": {
         "x": 162,
         "y": 203
@@ -1788,7 +1716,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1798,12 +1726,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "doctor.name",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 21.7,
         "y": 212.97
@@ -1813,7 +1740,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1823,12 +1750,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "doctor.crm",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 97.85,
         "y": 213.19
@@ -1838,7 +1764,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1848,12 +1774,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "doctor.confirmedBy",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 117.64,
         "y": 213.13
@@ -1863,7 +1788,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1873,12 +1798,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "doctor.city",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 146.16,
         "y": 213.34
@@ -1888,7 +1812,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1898,12 +1822,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "doctor.state",
       "type": "text",
-      "content": "AL",
       "position": {
         "x": 185.47,
         "y": 213.29
@@ -1913,7 +1836,7 @@
       "rotate": 0,
       "alignment": "center",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1923,12 +1846,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "doctor.contact",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 22.02,
         "y": 221.49
@@ -1938,7 +1860,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1948,12 +1870,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "doctor.confirmationDate",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 71.18,
         "y": 221.7
@@ -1963,7 +1884,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1973,12 +1894,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "external.nonNaturalType",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 21.59,
         "y": 234.3
@@ -1988,7 +1908,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -1998,12 +1918,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "external.workplaceAccident",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 100.39,
         "y": 234.51
@@ -2013,7 +1932,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -2023,12 +1942,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "external.informationSource",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 135,
         "y": 234.51
@@ -2038,7 +1956,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -2048,12 +1966,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "external.occurrenceDescription",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 21.8,
         "y": 244.3
@@ -2063,7 +1980,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -2073,12 +1990,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "external.placeType",
       "type": "text",
-      "content": "1º ano",
       "position": {
         "x": 139.61,
         "y": 244.25
@@ -2088,7 +2004,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -2098,12 +2014,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "external.occurrenceAddress.street",
       "type": "text",
-      "content": "Rua Nao sei o que",
       "position": {
         "x": 21.31,
         "y": 253.63
@@ -2113,7 +2028,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -2123,12 +2038,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "external.occurrenceAddress.number",
       "type": "text",
-      "content": "123",
       "position": {
         "x": 106.14,
         "y": 253.84
@@ -2138,7 +2052,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -2148,12 +2062,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "external.occurrenceAddress.neighborhood",
       "type": "text",
-      "content": "ETC",
       "position": {
         "x": 119.95,
         "y": 253.84
@@ -2163,7 +2076,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -2173,12 +2086,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "external.occurrenceAddress.city",
       "type": "text",
-      "content": "ETC",
       "position": {
         "x": 148.54,
         "y": 254.05
@@ -2188,7 +2100,7 @@
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -2198,12 +2110,11 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     },
     {
       "name": "external.occurrenceAddress.state",
       "type": "text",
-      "content": "AL",
       "position": {
         "x": 183.24,
         "y": 253.72
@@ -2213,7 +2124,7 @@
       "rotate": 0,
       "alignment": "center",
       "verticalAlignment": "top",
-      "fontSize": 10,
+      "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
@@ -2223,7 +2134,7 @@
       "underline": false,
       "required": false,
       "readOnly": false,
-      "fontName": "Roboto"
+      "fontName": "courier"
     }
   ]
 ]
