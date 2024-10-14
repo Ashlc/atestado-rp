@@ -1,33 +1,60 @@
 import { FileOpen } from '@mui/icons-material';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { Button, Stack } from '@mui/material';
-import Box from '@mui/material/Box';
+import { Box, Button, Stack, Tooltip } from '@mui/material';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import dayjs from 'dayjs';
 import { SyntheticEvent, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { z } from 'zod';
+import ThemeSwitcher from './components/ThemeSwitcher/ThemeSwitcher';
 import Conditions from './pages/Conditions/Conditions';
 import Doctor from './pages/Doctor/Doctor';
 import External from './pages/External/External';
+import Feedback from './pages/Feedback/Feedback';
 import Identification from './pages/Identification/Identification';
 import Infant from './pages/Infant/Infant';
-import Locality from './pages/Locality/Locality';
 import Occurence from './pages/Occurence/Occurence';
+import formSchema from './schemas/Sections';
+import Certificate from './utils/certificate';
+import { flattenObject } from './utils/flattenObject';
+import { isInfant } from './utils/handleAge';
+
+type FormType = z.infer<typeof formSchema>;
 
 function App() {
-  const [activeTab, setActiveTab] = useState(2);
-  const methods = useForm();
-  const [birth, death] = methods.watch(['dateOfBirth', 'dateOfDeath']);
-  const typeOfDeath = methods.watch('typeOfDeath');
+  const cert = new Certificate(null);
+  const [activeTab, setActiveTab] = useState(0);
+  const methods = useForm<FormType>();
+  const [birth, death] = methods.watch([
+    'identification.dateOfBirth',
+    'identification.dateOfDeath',
+  ]);
+  const typeOfDeath = methods.watch('identification.typeOfDeath');
   const infantDisabled =
-    (typeOfDeath && typeOfDeath === 'fetal') ||
-    (birth && death && dayjs(death).diff(dayjs(birth), 'year') <= 1);
+    !(typeOfDeath && typeOfDeath === 'Fetal') && !isInfant(birth, death);
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data: FormType) => {
+    const formattedData = {
+      ...data,
+      identification: {
+        ...data.identification,
+        dateOfDeath: dayjs(data.identification.dateOfDeath).format(
+          'DD/MM/YYYY',
+        ),
+        dateOfBirth: dayjs(data.identification.dateOfBirth).format(
+          'DD/MM/YYYY',
+        ),
+        hourOfDeath: dayjs(data.identification.hourOfDeath).format('HH:mm'),
+      },
+    };
+    const flatObject = flattenObject(formattedData);
+    console.log(flatObject);
+    cert.pdf(flatObject);
+  };
 
-  const handleChange = (event: SyntheticEvent, newValue: number) => {
+  const handleChange = (_event: SyntheticEvent, newValue: number) => {
     setActiveTab(newValue);
   };
 
@@ -44,17 +71,29 @@ function App() {
   };
 
   return (
-    <div className="w-full min-h-screen">
-      <div className="w-10/12 lg:w-2/3 mx-auto flex flex-col items-center gap-6 py-6">
+    <Box className="w-full min-h-screen">
+      <div className="w-full flex flex-row items-center justify-between p-4 border-b">
+        <h1 className="font-bold text-xl">Gerador de D.O.</h1>
+        <ThemeSwitcher />
+      </div>
+      <div className="w-10/12 mx-auto flex flex-col items-center gap-6 py-6">
         <FormProvider {...methods}>
           <form
             onSubmit={methods.handleSubmit(onSubmit)}
             className="w-full flex flex-col items-center"
           >
-            <Box
+            <Stack
+              direction="row"
               sx={{ borderBottom: 1, borderColor: 'divider' }}
-              className="w-full"
+              className="w-full justify-between mb-6"
             >
+              <Button
+                onClick={tabDown}
+                disabled={activeTab === 0}
+                variant="text"
+              >
+                <NavigateBeforeIcon />
+              </Button>
               <Tabs value={activeTab} onChange={handleChange} centered>
                 <Tab label="Identificação" value={0} />
                 <Tab label="Ocorrência" value={1} />
@@ -62,51 +101,34 @@ function App() {
                 <Tab label="Condições e causas" value={3} />
                 <Tab label="Médico" value={4} />
                 <Tab label="Causas externas" value={5} />
-                <Tab label="Localidade s/ Médico" value={6} />
+                <Tab label="Feedback" value={6} />
               </Tabs>
-            </Box>
+              <Button onClick={tabUp} disabled={activeTab === 6} variant="text">
+                <NavigateNextIcon />
+              </Button>
+            </Stack>
             <Identification index={0} value={activeTab} />
             <Occurence index={1} value={activeTab} />
             <Infant index={2} value={activeTab} />
             <Conditions index={3} value={activeTab} />
             <Doctor index={4} value={activeTab} />
             <External index={5} value={activeTab} />
-            <Locality index={6} value={activeTab} />
+            <Feedback index={6} value={activeTab} />
+            <Tooltip title="Gerar D.O." placement="top">
+              <Button
+                type="submit"
+                className="aspect-square !rounded-full"
+                variant="contained"
+                size="large"
+                sx={{ position: 'fixed', bottom: 64, right: 64 }}
+              >
+                <FileOpen />
+              </Button>
+            </Tooltip>
           </form>
-          <Stack
-            direction={'row'}
-            spacing={2}
-            className="w-full justify-between"
-          >
-            <Button
-              onClick={methods.handleSubmit(onSubmit)}
-              variant="contained"
-              startIcon={<FileOpen />}
-            >
-              Gerar D.O.
-            </Button>
-            <Stack direction={'row'} spacing={2}>
-              <Button
-                onClick={tabDown}
-                disabled={activeTab === 0}
-                variant="contained"
-                startIcon={<NavigateBeforeIcon />}
-              >
-                Voltar
-              </Button>
-              <Button
-                onClick={tabUp}
-                disabled={activeTab === 6}
-                variant="contained"
-                endIcon={<NavigateNextIcon />}
-              >
-                Avançar
-              </Button>
-            </Stack>
-          </Stack>
         </FormProvider>
       </div>
-    </div>
+    </Box>
   );
 }
 

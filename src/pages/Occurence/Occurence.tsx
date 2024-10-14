@@ -7,6 +7,7 @@ import {
   TextField,
 } from '@mui/material';
 import { Controller, useFormContext } from 'react-hook-form';
+import { handleCep } from '../../services/viacep';
 
 type Props = {
   index: number;
@@ -14,7 +15,7 @@ type Props = {
 };
 
 const Occurence = ({ value, index, ...other }: Props) => {
-  const { register, control } = useFormContext();
+  const { register, control, setValue } = useFormContext();
 
   return (
     <div
@@ -23,7 +24,7 @@ const Occurence = ({ value, index, ...other }: Props) => {
       id={`secao-${index}`}
       aria-labelledby={`secao-${index}`}
       {...other}
-      className="w-full p-8 border-b border-x rounded-b-xl"
+      className="w-full p-8"
     >
       <Grid2 container spacing={2} width="100%">
         <Grid2 size={3}>
@@ -33,16 +34,16 @@ const Occurence = ({ value, index, ...other }: Props) => {
               label="Local da ocorrência do óbito"
               defaultValue={''}
               notched
-              {...register('placeOfOccurrence')}
+              {...register('occurence.placeType')}
             >
-              <MenuItem value={'hospital'}>Hospital</MenuItem>
-              <MenuItem value={'outro_saude'}>
-                Outros estabelecimentos de saúde
+              <MenuItem value={'Hospital'}>Hospital</MenuItem>
+              <MenuItem value={'Outro estabelecimento de saúde'}>
+                Outro estabelecimentos de saúde
               </MenuItem>
-              <MenuItem value={'domicilio'}>Domicílio</MenuItem>
-              <MenuItem value={'viaPublica'}>Via pública</MenuItem>
-              <MenuItem value={'outro'}>Outros</MenuItem>
-              <MenuItem value={'ignorado'}>Ignorado</MenuItem>
+              <MenuItem value={'Via pública'}>Via pública</MenuItem>
+              <MenuItem value={'Domicílio'}>Domicílio</MenuItem>
+              <MenuItem value={'Outros'}>Outros</MenuItem>
+              <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
             </Select>
           </FormControl>
         </Grid2>
@@ -50,7 +51,7 @@ const Occurence = ({ value, index, ...other }: Props) => {
           <TextField
             label="Código CNES"
             slotProps={{ inputLabel: { shrink: true } }}
-            {...register('cnesCode')}
+            {...register('occurence.cnes')}
             fullWidth
           />
         </Grid2>
@@ -64,21 +65,25 @@ const Occurence = ({ value, index, ...other }: Props) => {
                 fullWidth
               />
             )}
-            name="establishmentName"
+            name="occurence.establishmentName"
             control={control}
           />
         </Grid2>
         <Grid2 size={2}>
           <TextField
             label="CEP"
-            {...register('hospitalAddress.zipCode')}
+            id="occurence.hospitalAddress.zipCode"
+            {...register('occurence.hospitalAddress.zipCode')}
+            onBlur={(e) =>
+              handleCep(e.target.value, 'occurence.hospitalAddress', setValue)
+            }
             slotProps={{ inputLabel: { shrink: true } }}
           />
         </Grid2>
         <Grid2 size={4}>
           <TextField
             label="Logradouro"
-            {...register('hospitalAddress.street')}
+            {...register('occurence.hospitalAddress.street')}
             slotProps={{ inputLabel: { shrink: true } }}
             fullWidth
           />
@@ -86,7 +91,7 @@ const Occurence = ({ value, index, ...other }: Props) => {
         <Grid2 size={3}>
           <TextField
             label="Bairro"
-            {...register('hospitalAddress.neighborhood')}
+            {...register('occurence.hospitalAddress.neighborhood')}
             slotProps={{ inputLabel: { shrink: true } }}
             fullWidth
           />
@@ -94,7 +99,7 @@ const Occurence = ({ value, index, ...other }: Props) => {
         <Grid2 size={3}>
           <TextField
             label="Município"
-            {...register('hospitalAddress.city')}
+            {...register('occurence.hospitalAddress.city')}
             slotProps={{ inputLabel: { shrink: true } }}
             fullWidth
           />
@@ -102,7 +107,7 @@ const Occurence = ({ value, index, ...other }: Props) => {
         <Grid2 size={1}>
           <TextField
             label="UF"
-            {...register('hospitalAddress.state')}
+            {...register('occurence.hospitalAddress.state')}
             slotProps={{ inputLabel: { shrink: true } }}
             fullWidth
           />
@@ -110,7 +115,7 @@ const Occurence = ({ value, index, ...other }: Props) => {
         <Grid2 size={1}>
           <TextField
             label="Número"
-            {...register('hospitalAddress.number')}
+            {...register('occurence.hospitalAddress.number')}
             slotProps={{ inputLabel: { shrink: true } }}
             fullWidth
           />
@@ -118,7 +123,8 @@ const Occurence = ({ value, index, ...other }: Props) => {
         <Grid2 size={12}>
           <TextField
             label="Complemento"
-            {...register('hospitalAddress.complement')}
+            {...register('occurence.hospitalAddress.complement')}
+            id="hospitalAddress.complement"
             slotProps={{ inputLabel: { shrink: true } }}
             fullWidth
           />
