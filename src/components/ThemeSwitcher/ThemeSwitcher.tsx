@@ -10,7 +10,7 @@ export default function ToggleButtons() {
     <ToggleButtonGroup
       value={mode}
       exclusive
-      onChange={(e, newValue) =>
+      onChange={(_event, newValue) =>
         setMode(newValue as 'system' | 'light' | 'dark')
       }
       aria-label="text alignment"

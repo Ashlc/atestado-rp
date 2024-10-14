@@ -4,8 +4,10 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Box, Button, Stack, Tooltip } from '@mui/material';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
+import dayjs from 'dayjs';
 import { SyntheticEvent, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { z } from 'zod';
 import ThemeSwitcher from './components/ThemeSwitcher/ThemeSwitcher';
 import Conditions from './pages/Conditions/Conditions';
 import Doctor from './pages/Doctor/Doctor';
@@ -14,14 +16,17 @@ import Feedback from './pages/Feedback/Feedback';
 import Identification from './pages/Identification/Identification';
 import Infant from './pages/Infant/Infant';
 import Occurence from './pages/Occurence/Occurence';
+import formSchema from './schemas/Sections';
 import Certificate from './utils/certificate';
 import { flattenObject } from './utils/flattenObject';
 import { isInfant } from './utils/handleAge';
 
+type FormType = z.infer<typeof formSchema>;
+
 function App() {
   const cert = new Certificate(null);
   const [activeTab, setActiveTab] = useState(0);
-  const methods = useForm();
+  const methods = useForm<FormType>();
   const [birth, death] = methods.watch([
     'identification.dateOfBirth',
     'identification.dateOfDeath',
@@ -30,13 +35,26 @@ function App() {
   const infantDisabled =
     !(typeOfDeath && typeOfDeath === 'Fetal') && !isInfant(birth, death);
 
-  const onSubmit = (data: Record<string, unknown>) => {
-    const formattedInput = flattenObject(data);
-    console.log(formattedInput);
-    cert.pdf(formattedInput);
+  const onSubmit = (data: FormType) => {
+    const formattedData = {
+      ...data,
+      identification: {
+        ...data.identification,
+        dateOfDeath: dayjs(data.identification.dateOfDeath).format(
+          'DD/MM/YYYY',
+        ),
+        dateOfBirth: dayjs(data.identification.dateOfBirth).format(
+          'DD/MM/YYYY',
+        ),
+        hourOfDeath: dayjs(data.identification.hourOfDeath).format('HH:mm'),
+      },
+    };
+    const flatObject = flattenObject(formattedData);
+    console.log(flatObject);
+    cert.pdf(flatObject);
   };
 
-  const handleChange = (event: SyntheticEvent, newValue: number) => {
+  const handleChange = (_event: SyntheticEvent, newValue: number) => {
     setActiveTab(newValue);
   };
 

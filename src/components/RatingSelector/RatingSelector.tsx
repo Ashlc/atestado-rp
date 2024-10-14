@@ -30,11 +30,11 @@ const RatingSelector = ({ question, index }: Props) => {
           precision={1}
           max={5}
           value={value}
-          onChange={(event, newValue) => {
+          onChange={(_event, newValue) => {
             setValue(newValue);
           }}
           size="large"
-          onChangeActive={(event, newHover) => {
+          onChangeActive={(_event, newHover) => {
             setHover(newHover);
           }}
         />

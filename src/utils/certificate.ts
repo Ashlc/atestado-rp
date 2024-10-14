@@ -6,7 +6,10 @@ import templateSchema from './templateSchemas.json';
 
 const font: Font = {
   courier: {
-    data: await fetch(CourierPrime).then((res) => res.arrayBuffer()),
+    data: await (async () => {
+      const response = await fetch(CourierPrime);
+      return response.arrayBuffer();
+    })(),
     fallback: true,
   },
 };
