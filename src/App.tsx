@@ -15,6 +15,7 @@ import Identification from './pages/Identification/Identification';
 import Infant from './pages/Infant/Infant';
 import Occurence from './pages/Occurence/Occurence';
 import Certificate from './utils/certificate';
+import { flattenObject } from './utils/flattenObject';
 import { isInfant } from './utils/handleAge';
 
 function App() {
@@ -29,7 +30,11 @@ function App() {
   const infantDisabled =
     !(typeOfDeath && typeOfDeath === 'Fetal') && !isInfant(birth, death);
 
-  const onSubmit = (data) => cert.pdf();
+  const onSubmit = (data: Record<string, unknown>) => {
+    const formattedInput = flattenObject(data);
+    console.log(formattedInput);
+    cert.pdf(formattedInput);
+  };
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setActiveTab(newValue);

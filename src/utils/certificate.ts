@@ -1,16 +1,20 @@
-import { z } from 'zod';
-import { text, image, barcodes } from '@pdfme/schemas';
+import { Font } from '@pdfme/common';
 import { generate } from '@pdfme/generator';
-
-import formSchema from '../schemas/Sections';
+import { barcodes, image, text } from '@pdfme/schemas';
+import CourierPrime from '../assets/fonts/CourierPrime.ttf';
 import templateSchema from './templateSchemas.json';
 
-type formType = z.infer<typeof formSchema>;
+const font: Font = {
+  courier: {
+    data: await fetch(CourierPrime).then((res) => res.arrayBuffer()),
+    fallback: true,
+  },
+};
 
 class Certificate {
-  formData: formType | null;
+  formData: Record<string, unknown> | null;
 
-  constructor(formData: formType | null) {
+  constructor(formData: Record<string, unknown> | null) {
     this.formData = formData;
   }
 
@@ -21,20 +25,19 @@ class Certificate {
   async loadBasePdf() {
     'use server';
 
-    const response = await fetch('/basePdf.pdf');
+    const response = await fetch('/template.pdf');
     if (!response.ok) {
       throw new Error('Erro ao carregar o PDF base');
     }
     const data = await response.arrayBuffer();
 
-    return data; // Retorna como ArrayBuffer
+    return data;
   }
 
-  async pdf() {
+  async pdf(input: Record<string, unknown>) {
     'use server';
 
     const basePdfBuffer = await this.loadBasePdf();
-    console.log(basePdfBuffer);
 
     const template = {
       schemas: templateSchema,
@@ -43,39 +46,13 @@ class Certificate {
     };
 
     const plugins = { text, image, qrcode: barcodes.qrcode };
-    const inputs = [
-      {
-        deceasedName: 'Teste',
-        fathersName: 'Teste',
-        mothersName: 'Teste',
-        typeOfDeathNonFetal: 'x',
-        typeOfDeathFetal: '',
-        dateOfDeath: '18012005',
-        hourOfDeath: '18:00',
-        naturalness: 'Brasileiro',
-        dateOfBirth: '18012005',
-        age: '19',
-        ageIgnored: '',
-        solteiro: 'x',
-        casado: '',
-        viuvo: '',
-        maritalStatusIgnored: '',
-        separado: '',
-        schooling0: '',
-        schooling1: '',
-        schooling2: '',
-        schooling5: '',
-        schooling3: '',
-        schooling4: 'x',
-        occupation: 'Ator',
-        cbo: '18012',
-        sexM: 'x',
-        sexF: '',
-        sexI: '',
-      },
-    ];
 
-    const pdf = await generate({ template, plugins, inputs });
+    const pdf = await generate({
+      template,
+      inputs: [input],
+      plugins,
+      options: { font },
+    });
 
     const blob = new Blob([pdf.buffer], { type: 'application/pdf' });
     window.open(URL.createObjectURL(blob));

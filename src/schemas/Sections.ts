@@ -3,12 +3,12 @@ import { z } from 'zod';
 const yesNoSchema = z.enum(['Sim', 'Não', 'Não se aplica']);
 
 const addressSchema = z.object({
-  cep: z.string(),
+  zipCode: z.string(),
   number: z.string(),
   complement: z.string().optional(),
   neighborhood: z.string(),
   city: z.string(),
-  uf: z.string(),
+  state: z.string(),
   street: z.string(),
 });
 
@@ -86,7 +86,7 @@ const infantSchema = z.object({
 });
 
 const conditionsSchema = z.object({
-  fetileAgeDeath: z.string().optional(),
+  fertileAgeDeath: z.string().optional(),
   receivedMedicalAssistance: z.string(),
   necropsy: yesNoSchema,
   cause1: z.string(),
