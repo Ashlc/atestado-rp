@@ -2,12 +2,13 @@ import {
   Autocomplete,
   FormControl,
   Grid2,
+  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
   TextField,
 } from '@mui/material';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 import { cbo } from '../../services/cbo';
 
 type Props = {
@@ -16,7 +17,8 @@ type Props = {
 };
 
 const Infant = ({ value, index, ...other }: Props) => {
-  const { register } = useFormContext();
+  const { register, control, watch } = useFormContext();
+  const watchTypeOfDeath = watch('identification.typeOfDeath');
   return (
     <div
       role="tabpanel"
@@ -149,28 +151,42 @@ const Infant = ({ value, index, ...other }: Props) => {
           </FormControl>
         </Grid2>
         <Grid2 size={2}>
-          <FormControl fullWidth>
-            <InputLabel htmlFor="deathRelativeToBirth" shrink>
-              Morte em relação ao parto
-            </InputLabel>
-            <Select
-              label="Morte em relação ao parto"
-              notched
-              defaultValue={''}
-              {...register('infant.deathRelativeToBirth')}
-            >
-              <MenuItem value={'Antes'}>Antes</MenuItem>
-              <MenuItem value={'Durante'}>Durante</MenuItem>
-              <MenuItem value={'Depois'}>Depois</MenuItem>
-              <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
-            </Select>
-          </FormControl>
+          <Controller
+            name="infant.deathRelativeToBirth"
+            control={control}
+            render={({ field }) => (
+              <FormControl fullWidth>
+                <InputLabel htmlFor="deathRelativeToBirth" shrink>
+                  Morte em relação ao parto
+                </InputLabel>
+                <Select
+                  label="Morte em relação ao parto"
+                  notched
+                  defaultValue={
+                    watchTypeOfDeath === 'Fetal' ? 'Não se aplica' : ''
+                  }
+                  {...field}
+                  disabled={watchTypeOfDeath === 'Fetal'}
+                >
+                  <MenuItem value={'Antes'}>Antes</MenuItem>
+                  <MenuItem value={'Durante'}>Durante</MenuItem>
+                  <MenuItem value={'Depois'}>Depois</MenuItem>
+                  <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
+                </Select>
+              </FormControl>
+            )}
+          />
         </Grid2>
         <Grid2 size={2}>
           <TextField
             fullWidth
             label="Peso ao nascer"
-            slotProps={{ inputLabel: { shrink: true } }}
+            slotProps={{
+              input: {
+                endAdornment: <InputAdornment position="end">g</InputAdornment>,
+              },
+              inputLabel: { shrink: true },
+            }}
             {...register(`infant.birthWeight`)}
           />
         </Grid2>
@@ -178,6 +194,7 @@ const Infant = ({ value, index, ...other }: Props) => {
           <TextField
             fullWidth
             label="Nº da Declaração de Nascido Vivo"
+            disabled={watchTypeOfDeath === 'Fetal'}
             slotProps={{ inputLabel: { shrink: true } }}
             {...register(`infant.birthCertificateNumber`)}
           />

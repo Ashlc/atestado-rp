@@ -36,6 +36,7 @@ function App() {
     !(typeOfDeath && typeOfDeath === 'Fetal') && !isInfant(birth, death);
 
   const onSubmit = (data: FormType) => {
+    console.log(data);
     const formattedData = {
       ...data,
       identification: {
@@ -73,7 +74,7 @@ function App() {
   return (
     <Box className="w-full min-h-screen">
       <div className="w-full flex flex-row items-center justify-between p-4 border-b">
-        <h1 className="font-bold text-xl">Gerador de D.O.</h1>
+        <h1 className="font-bold text-xl">D.O. Eletrônica</h1>
         <ThemeSwitcher />
       </div>
       <div className="w-10/12 mx-auto flex flex-col items-center gap-6 py-6">
@@ -116,11 +117,12 @@ function App() {
             <Feedback index={6} value={activeTab} />
             <Tooltip title="Gerar D.O." placement="top">
               <Button
-                type="submit"
+                type="button"
                 className="aspect-square !rounded-full"
                 variant="contained"
                 size="large"
                 sx={{ position: 'fixed', bottom: 64, right: 64 }}
+                onClick={methods.handleSubmit(onSubmit)}
               >
                 <FileOpen />
               </Button>

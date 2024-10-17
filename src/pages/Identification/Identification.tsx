@@ -9,8 +9,11 @@ import {
 } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import dayjs, { Dayjs } from 'dayjs';
 import { useEffect } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
+import { z } from 'zod';
+import formSchema from '../../schemas/Sections';
 import { cbo } from '../../services/cbo';
 import { handleCep } from '../../services/viacep';
 import { handleAge } from '../../utils/handleAge';
@@ -21,8 +24,11 @@ type Props = {
   value: number;
 };
 
+type FormType = z.infer<typeof formSchema>;
+
 const Identification = ({ value, index, ...other }: Props) => {
-  const { register, watch, control, setValue, resetField } = useFormContext();
+  const { register, watch, control, setValue, resetField } =
+    useFormContext<FormType>();
   const watchTypeOfDeath = watch('identification.typeOfDeath');
   const watchDateOfDeath = watch('identification.dateOfDeath');
   const watchDateOfBirth = watch('identification.dateOfBirth');
@@ -31,13 +37,22 @@ const Identification = ({ value, index, ...other }: Props) => {
   useEffect(() => {
     if (watchTypeOfDeath === 'Fetal') {
       disabledFields.forEach((field) => {
-        resetField(field);
+        resetField(field as 'identification.typeOfDeath');
       });
       if (watchDateOfDeath) {
         setValue('identification.dateOfBirth', watchDateOfDeath);
       }
     }
   }, [watchTypeOfDeath, watchDateOfDeath, setValue]);
+
+  const handleDateOfBirth = (date: Dayjs | null) => {
+    if (date) {
+      setValue(
+        'identification.dateOfBirth',
+        date.format('YYYY-MM-DDTHH:mm:ss.SSSZ'),
+      );
+    }
+  };
 
   return (
     <div
@@ -58,7 +73,7 @@ const Identification = ({ value, index, ...other }: Props) => {
                   label="Tipo de óbito"
                   notched
                   {...field}
-                  value={field.value || ''}
+                  value={field.value ?? ''}
                 >
                   <MenuItem value={'Fetal'}>Fetal</MenuItem>
                   <MenuItem value={'Não fetal'}>Não Fetal</MenuItem>
@@ -84,7 +99,7 @@ const Identification = ({ value, index, ...other }: Props) => {
                   },
                 }}
                 label="Data do óbito"
-                value={field.value}
+                value={field.value ? dayjs(field.value) : null} // Ensure controlled value
                 onChange={(date) => field.onChange(date)}
               />
             )}
@@ -156,8 +171,8 @@ const Identification = ({ value, index, ...other }: Props) => {
                   },
                 }}
                 label="Data de nascimento"
-                value={watchTypeOfDeath === 'Fetal' ? watchDateOfDeath : null}
-                onChange={(date) => field.onChange(date)}
+                value={field.value ? dayjs(field.value) : null}
+                onChange={(date) => handleDateOfBirth(date)}
                 disabled={watchTypeOfDeath === 'Fetal'}
               />
             )}
@@ -238,7 +253,12 @@ const Identification = ({ value, index, ...other }: Props) => {
             slotProps={{ inputLabel: { shrink: true } }}
             label="Cartão do SUS"
             disabled={watchTypeOfDeath === 'Fetal'}
-            {...register('identification.susCard')}
+            {...register('identification.susCard', {
+              pattern: {
+                value: /^[0-9]*$/,
+                message: 'Apenas dígitos (0-9) são permitidos',
+              },
+            })}
             fullWidth
           />
         </Grid2>
