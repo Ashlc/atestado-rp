@@ -15,7 +15,7 @@ import External from './pages/External/External';
 import Feedback from './pages/Feedback/Feedback';
 import Identification from './pages/Identification/Identification';
 import Infant from './pages/Infant/Infant';
-import Occurence from './pages/Occurence/Occurence';
+import Occurrence from './pages/Occurrence/Occurrence';
 import formSchema from './schemas/Sections';
 import Certificate from './utils/certificate';
 import { flattenObject } from './utils/flattenObject';
@@ -108,7 +108,7 @@ function App() {
               </Button>
             </Stack>
             <Identification index={0} value={activeTab} />
-            <Occurence index={1} value={activeTab} />
+            <Occurrence index={1} value={activeTab} />
             <Infant index={2} value={activeTab} />
             <Conditions index={3} value={activeTab} />
             <Doctor index={4} value={activeTab} />
