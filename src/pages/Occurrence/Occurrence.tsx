@@ -6,8 +6,9 @@ import {
   Select,
   TextField,
 } from '@mui/material';
-import { Controller, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import { handleCep } from '../../services/viacep';
+import { handleCNES } from '../../services/cnes';
 
 type Props = {
   index: number;
@@ -15,7 +16,7 @@ type Props = {
 };
 
 const Occurence = ({ value, index, ...other }: Props) => {
-  const { register, control, setValue } = useFormContext();
+  const { register, setValue } = useFormContext();
 
   return (
     <div
@@ -53,20 +54,15 @@ const Occurence = ({ value, index, ...other }: Props) => {
             slotProps={{ inputLabel: { shrink: true } }}
             {...register('occurrence.cnes')}
             fullWidth
+            onBlur={(e) => handleCNES(e.target.value, setValue)}
           />
         </Grid2>
         <Grid2 size={5}>
-          <Controller
-            render={({ field }) => (
-              <TextField
-                label="Nome do estabelecimento"
-                slotProps={{ inputLabel: { shrink: true } }}
-                {...field}
-                fullWidth
-              />
-            )}
-            name="occurrence.establishmentName"
-            control={control}
+          <TextField
+            label="Nome do estabelecimento"
+            slotProps={{ inputLabel: { shrink: true } }}
+            {...register('occurrence.establishmentName')}
+            fullWidth
           />
         </Grid2>
         <Grid2 size={2}>
