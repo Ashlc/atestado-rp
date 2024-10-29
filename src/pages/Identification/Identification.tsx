@@ -354,6 +354,12 @@ const Identification = ({ value, index, ...other }: Props) => {
             options={cbo}
             disabled={watchTypeOfDeath === 'Fetal'}
             getOptionKey={(option) => option.value}
+            onChange={(_, selectedOption) => {
+              setValue(
+                'identification.cbo',
+                selectedOption ? String(selectedOption.value) : '',
+              );
+            }}
             renderInput={(params) => (
               <TextField
                 {...params}
