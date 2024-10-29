@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { TimePicker } from '@mui/x-date-pickers';
 import { useEffect, useState } from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { isInfant } from '../../utils/handleAge';
 
 type Props = {
@@ -18,18 +18,26 @@ type Props = {
 };
 const Conditions = ({ value, index, ...other }: Props) => {
   const [infantDisabled, setInfantDisabled] = useState(false);
-  const { register, control, watch } = useFormContext();
-  const typeOfDeath = watch('identification.typeOfDeath');
+  const { register, control, watch, setValue } = useFormContext();
   const [birth, death] = watch([
     'identification.dateOfBirth',
     'identification.dateOfDeath',
   ]);
 
+  const typeOfDeath = useWatch({
+    control,
+    name: 'identification.typeOfDeath',
+  });
+
   useEffect(() => {
     if ((typeOfDeath && typeOfDeath === 'Fetal') || isInfant(birth, death)) {
       setInfantDisabled(true);
+      setValue('conditions.fertileAgeDeath', 'Não se aplica');
+    } else {
+      setInfantDisabled(false);
+      setValue('conditions.fertileAgeDeath', '');
     }
-  }, [typeOfDeath, birth, death]);
+  }, [typeOfDeath, birth, death, setValue]);
 
   const renderCauseFields = (withLabel: boolean = true) => {
     const startingIndex = withLabel ? 2 : 4;
@@ -94,6 +102,9 @@ const Conditions = ({ value, index, ...other }: Props) => {
       <Grid2 container spacing={2} width="100%">
         <Grid2 size={12}>
           <Controller
+            name="conditions.fertileAgeDeath"
+            control={control}
+            defaultValue={''}
             render={({ field }) => (
               <FormControl fullWidth>
                 <InputLabel htmlFor="fertileAgeDeath" shrink>
@@ -103,8 +114,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
                   label="Em caso de óbito de mulher em idade fértil, a morte ocorreu:"
                   notched
                   id="fertileAgeDeath"
-                  defaultValue={infantDisabled ? 'Não se aplica' : ''}
-                  readOnly={infantDisabled}
+                  disabled={infantDisabled}
                   {...field}
                 >
                   <MenuItem value={'Na gravidez'}>Na gravidez</MenuItem>
@@ -125,8 +135,6 @@ const Conditions = ({ value, index, ...other }: Props) => {
                 </Select>
               </FormControl>
             )}
-            name="conditions.fertileAgeDeath"
-            control={control}
           />
         </Grid2>
         <Grid2 size={12}>
