@@ -6,7 +6,8 @@ import {
   Select,
   TextField,
 } from '@mui/material';
-import { Controller, useFormContext } from 'react-hook-form';
+import dayjs from 'dayjs';
+import { Controller, get, useFormContext } from 'react-hook-form';
 
 type Props = {
   index: number;
@@ -14,7 +15,15 @@ type Props = {
 };
 
 const Doctor = ({ value, index, ...other }: Props) => {
-  const { register, control, watch } = useFormContext();
+  const {
+    register,
+    control,
+    watch,
+    formState: { errors },
+  } = useFormContext();
+
+  const dateOfDeath = watch('identification.dateOfDeath');
+
   return (
     <div
       role="tabpanel"
@@ -83,17 +92,27 @@ const Doctor = ({ value, index, ...other }: Props) => {
         </Grid2>
         <Grid2 size={2}>
           <Controller
+            name="doctor.confirmationDate"
+            control={control}
+            defaultValue={''}
+            rules={{
+              validate: {
+                dateReference: (v) =>
+                  dayjs(v).diff(dateOfDeath, 'day') >= 0 ||
+                  `A data de atestado não pode ser anterior à data de óbito.`,
+              },
+            }}
             render={({ field }) => (
               <TextField
                 type="date"
                 slotProps={{ inputLabel: { shrink: true } }}
                 label="Data de atestado"
                 fullWidth
+                error={!!get(errors, 'doctor.confirmationDate')}
+                helperText={get(errors, 'doctor.confirmationDate')?.message}
                 {...field}
               />
             )}
-            name="doctor.confirmationDate"
-            control={control}
           />
         </Grid2>
       </Grid2>
