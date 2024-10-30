@@ -20,6 +20,8 @@ import formSchema from './schemas/Sections';
 import Certificate from './utils/certificate';
 import { flattenObject } from './utils/flattenObject';
 import { isInfant } from './utils/handleAge';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 type FormType = z.infer<typeof formSchema>;
 
@@ -55,6 +57,12 @@ function App() {
     cert.pdf(flatObject);
   };
 
+  const onError = () => {
+    toast.error(
+      'Há erros no formulário! Verifique os campos e tente novamente.',
+    );
+  };
+
   const handleChange = (_event: SyntheticEvent, newValue: number) => {
     setActiveTab(newValue);
   };
@@ -73,6 +81,7 @@ function App() {
 
   return (
     <Box className="w-full min-h-screen">
+      <ToastContainer />
       <div className="w-full flex flex-row items-center justify-between p-4 border-b">
         <h1 className="font-bold text-xl">D.O. Eletrônica</h1>
         <ThemeSwitcher />
@@ -122,7 +131,7 @@ function App() {
                 variant="contained"
                 size="large"
                 sx={{ position: 'fixed', bottom: 64, right: 64 }}
-                onClick={methods.handleSubmit(onSubmit)}
+                onClick={methods.handleSubmit(onSubmit, onError)}
               >
                 <FileOpen />
               </Button>
