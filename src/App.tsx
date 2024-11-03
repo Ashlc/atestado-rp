@@ -131,7 +131,9 @@ function App() {
                 <Tab label="Condições e causas" value={3} />
                 <Tab label="Médico" value={4} />
                 <Tab label="Causas externas" value={5} />
-                <Tab label="Feedback" value={6} />
+                {
+                  //<Tab label="Feedback" value={6} />
+                }
               </Tabs>
               <Button onClick={tabUp} disabled={activeTab === 6} variant="text">
                 <NavigateNextIcon />
