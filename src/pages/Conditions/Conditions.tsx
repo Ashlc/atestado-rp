@@ -7,7 +7,6 @@ import {
   Select,
   TextField,
 } from '@mui/material';
-import { TimePicker } from '@mui/x-date-pickers';
 import { useEffect, useState } from 'react';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { isInfant } from '../../utils/handleAge';
@@ -16,9 +15,10 @@ type Props = {
   index: number;
   value: number;
 };
+
 const Conditions = ({ value, index, ...other }: Props) => {
   const [infantDisabled, setInfantDisabled] = useState(false);
-  const { register, control, watch, setValue } = useFormContext();
+  const { register, control, watch, setValue, formState } = useFormContext();
   const [birth, death] = watch([
     'identification.dateOfBirth',
     'identification.dateOfDeath',
@@ -46,7 +46,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
     for (let i = startingIndex; i <= endingIndex; i++) {
       fields.push(
         <Grid2
-          size={7}
+          size={5}
           key={`${i}_cause_${withLabel ? 'primary' : 'secondary'}`}
         >
           <TextField
@@ -58,27 +58,39 @@ const Conditions = ({ value, index, ...other }: Props) => {
           />
         </Grid2>,
         <Grid2
-          size={2}
+          size={3}
           key={`${i}_time_${withLabel ? 'primary' : 'secondary'}`}
         >
-          <Controller
-            render={({ field }) => (
-              <TimePicker
-                value={field.value}
-                aria-label="Tempo de evolução"
-                slotProps={{
-                  textField: {
-                    fullWidth: true,
-                  },
-                }}
-                onChange={field.onChange}
-              />
-            )}
-            name={`conditions.evolutionTime${i}`}
-            control={control}
+          <TextField
+            fullWidth
+            aria-label={`Tempo de evolução ${i}`}
+            slotProps={{ inputLabel: { shrink: true } }}
+            {...register(`conditions.evolutionTime${i}`, {
+              required: true,
+              pattern: {
+                value: /^([0-9]*|[0-9]{2}:[0-9]{2})$/,
+                message:
+                  'Campo deve conter apenas números ou notação de tempo.',
+              },
+            })}
           />
         </Grid2>,
-        <Grid2 size={3} key={`${i}_cid_${withLabel ? 'primary' : 'secondary'}`}>
+        <Grid2 size={2}>
+          <FormControl fullWidth>
+            <Select
+              aria-label={`Unidade de tempo ${i}`}
+              {...register(`timeUnit${i}`)}
+              notched
+              defaultValue={''}
+            >
+              <MenuItem value="horas">Horas</MenuItem>
+              <MenuItem value="dias">Dias</MenuItem>
+              <MenuItem value="meses">Meses</MenuItem>
+              <MenuItem value="anos">Anos</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid2>,
+        <Grid2 size={2} key={`${i}_cid_${withLabel ? 'primary' : 'secondary'}`}>
           <TextField
             fullWidth
             aria-label="CID"
@@ -105,14 +117,20 @@ const Conditions = ({ value, index, ...other }: Props) => {
             name="conditions.fertileAgeDeath"
             control={control}
             defaultValue={''}
+            rules={{ required: true }}
             render={({ field }) => (
               <FormControl fullWidth>
-                <InputLabel htmlFor="fertileAgeDeath" shrink>
+                <InputLabel
+                  htmlFor="fertileAgeDeath"
+                  shrink
+                  error={!!formState.errors.conditions?.fertileAgeDeath}
+                >
                   Em caso de óbito de mulher em idade fértil, a morte ocorreu:
                 </InputLabel>
                 <Select
                   label="Em caso de óbito de mulher em idade fértil, a morte ocorreu:"
                   notched
+                  error={!!formState.errors.conditions?.fertileAgeDeath}
                   id="fertileAgeDeath"
                   disabled={infantDisabled}
                   {...field}
@@ -139,7 +157,11 @@ const Conditions = ({ value, index, ...other }: Props) => {
         </Grid2>
         <Grid2 size={12}>
           <FormControl fullWidth>
-            <InputLabel htmlFor="receivedMedicalAssistance" shrink>
+            <InputLabel
+              htmlFor="receivedMedicalAssistance"
+              shrink
+              error={!!formState.errors.conditions?.receivedMedicalAssistance}
+            >
               Recebeu assistência médica durantre a doença que ocasionou a
               morte?
             </InputLabel>
@@ -148,7 +170,10 @@ const Conditions = ({ value, index, ...other }: Props) => {
               notched
               defaultValue={''}
               id="receivedMedicalAssistance"
-              {...register('conditions.receivedMedicalAssistance')}
+              error={!!formState.errors.conditions?.receivedMedicalAssistance}
+              {...register('conditions.receivedMedicalAssistance', {
+                required: true,
+              })}
             >
               <MenuItem value="Sim">Sim</MenuItem>
               <MenuItem value="Não">Não</MenuItem>
@@ -158,7 +183,11 @@ const Conditions = ({ value, index, ...other }: Props) => {
         </Grid2>
         <Grid2 size={12}>
           <FormControl fullWidth>
-            <InputLabel htmlFor="necropsy" shrink>
+            <InputLabel
+              htmlFor="necropsy"
+              shrink
+              error={!!formState.errors.conditions?.necropsy}
+            >
               Diagnóstico confirmado por necrópsia?
             </InputLabel>
             <Select
@@ -166,7 +195,8 @@ const Conditions = ({ value, index, ...other }: Props) => {
               notched
               defaultValue={''}
               id="necropsy"
-              {...register('conditions.necropsy')}
+              error={!!formState.errors.conditions?.necropsy}
+              {...register('conditions.necropsy', { required: true })}
             >
               <MenuItem value="Sim">Sim</MenuItem>
               <MenuItem value="Não">Não</MenuItem>
@@ -183,41 +213,63 @@ const Conditions = ({ value, index, ...other }: Props) => {
             Doença ou estado mórbido que causou diretamente a morte:
           </p>
         </Grid2>
-        <Grid2 size={7}>
+        <Grid2 size={5}>
           <TextField
             fullWidth
             label="Causa básica"
             slotProps={{ inputLabel: { shrink: true } }}
-            {...register('conditions.cause1')}
-          />
-        </Grid2>
-        <Grid2 size={2}>
-          <Controller
-            render={({ field }) => (
-              <TimePicker
-                label="Tempo de evolução"
-                value={field.value}
-                onChange={field.onChange}
-                slotProps={{
-                  textField: {
-                    InputLabelProps: {
-                      shrink: true,
-                    },
-                    fullWidth: true,
-                  },
-                }}
-              />
-            )}
-            name="conditions.evolutionTime1"
-            control={control}
+            error={!!formState.errors.conditions?.cause1}
+            {...register('conditions.cause1', { required: true })}
           />
         </Grid2>
         <Grid2 size={3}>
           <TextField
             fullWidth
-            label="CID"
+            aria-label="Tempo de evolução 1"
+            label="Tempo de evolução"
+            error={!!formState.errors.conditions?.evolutionTime1}
+            helperText={formState.errors.conditions?.evolutionTime1?.message}
             slotProps={{ inputLabel: { shrink: true } }}
-            {...register('conditions.cid1')}
+            {...register(`conditions.evolutionTime1`, {
+              required: true,
+              pattern: {
+                value: /^([0-9]*|[0-9]{2}:[0-9]{2})$/,
+                message:
+                  'Campo deve conter apenas números ou notação de tempo.',
+              },
+            })}
+          />
+        </Grid2>
+        <Grid2 size={2}>
+          <FormControl fullWidth>
+            <InputLabel
+              htmlFor="timeUnit1"
+              shrink
+              error={!!formState.errors.conditions?.timeUnit1}
+            >
+              Unidade de tempo
+            </InputLabel>
+            <Select
+              label="Unidade de tempo"
+              {...register('conditions.timeUnit1', { required: true })}
+              required
+              error={!!formState.errors.conditions?.timeUnit1}
+              notched
+            >
+              <MenuItem value="horas">Horas</MenuItem>
+              <MenuItem value="dias">Dias</MenuItem>
+              <MenuItem value="meses">Meses</MenuItem>
+              <MenuItem value="anos">Anos</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid2>
+        <Grid2 size={2}>
+          <TextField
+            fullWidth
+            label="CID"
+            error={!!formState.errors.conditions?.cid1}
+            slotProps={{ inputLabel: { shrink: true } }}
+            {...register('conditions.cid1', { required: true })}
           />
         </Grid2>
         {renderCauseFields()}
