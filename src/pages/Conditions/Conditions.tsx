@@ -1,6 +1,7 @@
 import {
   Divider,
   FormControl,
+  FormHelperText,
   Grid2,
   InputLabel,
   MenuItem,
@@ -9,7 +10,7 @@ import {
 } from '@mui/material';
 import { TimePicker } from '@mui/x-date-pickers';
 import { useEffect, useState } from 'react';
-import { Controller, useFormContext, useWatch } from 'react-hook-form';
+import { Controller, get, useFormContext, useWatch } from 'react-hook-form';
 import { isInfant } from '../../utils/handleAge';
 
 type Props = {
@@ -18,7 +19,13 @@ type Props = {
 };
 const Conditions = ({ value, index, ...other }: Props) => {
   const [infantDisabled, setInfantDisabled] = useState(false);
-  const { register, control, watch, setValue } = useFormContext();
+  const {
+    register,
+    control,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useFormContext();
   const [birth, death] = watch([
     'identification.dateOfBirth',
     'identification.dateOfDeath',
@@ -104,9 +111,14 @@ const Conditions = ({ value, index, ...other }: Props) => {
           <Controller
             name="conditions.fertileAgeDeath"
             control={control}
+            rules={{ required: infantDisabled ? false : 'Campo obrigatório' }}
             defaultValue={''}
             render={({ field }) => (
-              <FormControl fullWidth>
+              <FormControl
+                fullWidth
+                error={!!get(errors, 'conditions.fertileAgeDeath')}
+                required={!infantDisabled}
+              >
                 <InputLabel htmlFor="fertileAgeDeath" shrink>
                   Em caso de óbito de mulher em idade fértil, a morte ocorreu:
                 </InputLabel>
@@ -133,6 +145,9 @@ const Conditions = ({ value, index, ...other }: Props) => {
                   </MenuItem>
                   <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
                 </Select>
+                <FormHelperText>
+                  {get(errors, 'conditions.fertileAgeDeath')?.message}
+                </FormHelperText>
               </FormControl>
             )}
           />
