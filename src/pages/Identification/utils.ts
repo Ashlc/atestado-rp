@@ -20,9 +20,9 @@ export const disabledFields = [
   'identification.education', // Disabled in Identification component
   'identification.class', // Disabled in Identification component
   'doctor.city', // Disabled in Doctor component
-  'external.occurenceAddress.number', // Disabled in External component
-  'external.occurenceAddress.street', // Disabled in External component
-  'external.occurenceAddress.neighborhood', // Disabled in External component
-  'external.occurenceAddress.city', // Disabled in External component
-  'external.occurenceAddress.state', // Disabled in External component
+  'external.occurrenceAddress.number', // Disabled in External component
+  'external.occurrenceAddress.street', // Disabled in External component
+  'external.occurrenceAddress.neighborhood', // Disabled in External component
+  'external.occurrenceAddress.city', // Disabled in External component
+  'external.occurrenceAddress.state', // Disabled in External component
 ];

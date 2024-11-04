@@ -1,12 +1,14 @@
 import {
   FormControl,
+  FormHelperText,
   Grid2,
   InputLabel,
   MenuItem,
   Select,
   TextField,
 } from '@mui/material';
-import { Controller, useFormContext } from 'react-hook-form';
+import dayjs from 'dayjs';
+import { Controller, get, useFormContext } from 'react-hook-form';
 
 type Props = {
   index: number;
@@ -14,7 +16,26 @@ type Props = {
 };
 
 const Doctor = ({ value, index, ...other }: Props) => {
-  const { register, control, watch } = useFormContext();
+  const {
+    register,
+    control,
+    watch,
+    formState: { errors },
+  } = useFormContext();
+
+  const dateOfDeath = watch('identification.dateOfDeath');
+
+  const validateCRM = (value: string) => {
+    if (!value) {
+      return 'CRM é obrigatório';
+    }
+    const crmRegex = /^CRM\/[A-Z]{2}\s\d{4,6}$/;
+    return (
+      crmRegex.test(value) ||
+      'Formato de CRM inválido. Exemplo correto: CRM/SP 123456'
+    );
+  };
+
   return (
     <div
       role="tabpanel"
@@ -30,7 +51,10 @@ const Doctor = ({ value, index, ...other }: Props) => {
             fullWidth
             slotProps={{ inputLabel: { shrink: true } }}
             label="Nome do médico"
-            {...register(`doctor.name`)}
+            error={get(errors, 'doctor.name')}
+            helperText={get(errors, 'doctor.name')?.message}
+            required
+            {...register(`doctor.name`, { required: 'Campo obrigatório' })}
           />
         </Grid2>
         <Grid2 size={2}>
@@ -38,11 +62,17 @@ const Doctor = ({ value, index, ...other }: Props) => {
             fullWidth
             slotProps={{ inputLabel: { shrink: true } }}
             label="CRM"
-            {...register(`doctor.crm`)}
+            error={get(errors, 'doctor.crm')}
+            helperText={get(errors, 'doctor.crm')?.message}
+            required
+            {...register(`doctor.crm`, {
+              required: 'Campo obrigatório',
+              validate: validateCRM,
+            })}
           />
         </Grid2>
         <Grid2 size={2}>
-          <FormControl fullWidth>
+          <FormControl fullWidth error={!!get(errors, 'doctor.confirmedBy')}>
             <InputLabel htmlFor="doctor.confirmedBy" shrink>
               Óbito atestado por médico
             </InputLabel>
@@ -51,7 +81,9 @@ const Doctor = ({ value, index, ...other }: Props) => {
               notched
               defaultValue={''}
               id="doctor.confirmedBy"
-              {...register('doctor.confirmedBy')}
+              {...register('doctor.confirmedBy', {
+                required: 'Campo obrigatório',
+              })}
             >
               <MenuItem value={'Assistente'}>Assistente</MenuItem>
               <MenuItem value={'Substituto'}>Substituto</MenuItem>
@@ -59,6 +91,9 @@ const Doctor = ({ value, index, ...other }: Props) => {
               <MenuItem value={'SVO'}>SVO</MenuItem>
               <MenuItem value={'Outro'}>Outro</MenuItem>
             </Select>
+            <FormHelperText>
+              {get(errors, 'doctor.confirmedBy')?.message}
+            </FormHelperText>
           </FormControl>
         </Grid2>
         <Grid2 size={6}>
@@ -78,22 +113,35 @@ const Doctor = ({ value, index, ...other }: Props) => {
             fullWidth
             slotProps={{ inputLabel: { shrink: true } }}
             label="Meio de comunicação (telefone, e-mail, etc)"
-            {...register(`doctor.contact`)}
+            error={get(errors, 'doctor.contact')}
+            helperText={get(errors, 'doctor.contact')?.message}
+            required
+            {...register(`doctor.contact`, { required: 'Campo obrigatório' })}
           />
         </Grid2>
         <Grid2 size={2}>
           <Controller
+            name="doctor.confirmationDate"
+            control={control}
+            defaultValue={''}
+            rules={{
+              validate: {
+                dateReference: (v) =>
+                  dayjs(v).diff(dateOfDeath, 'day') >= 0 ||
+                  `A data de atestado não pode ser anterior à data de óbito.`,
+              },
+            }}
             render={({ field }) => (
               <TextField
                 type="date"
                 slotProps={{ inputLabel: { shrink: true } }}
                 label="Data de atestado"
                 fullWidth
+                error={!!get(errors, 'doctor.confirmationDate')}
+                helperText={get(errors, 'doctor.confirmationDate')?.message}
                 {...field}
               />
             )}
-            name="doctor.confirmationDate"
-            control={control}
           />
         </Grid2>
       </Grid2>

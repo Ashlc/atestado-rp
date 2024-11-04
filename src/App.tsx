@@ -7,6 +7,8 @@ import Tabs from '@mui/material/Tabs';
 import dayjs from 'dayjs';
 import { SyntheticEvent, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { z } from 'zod';
 import ThemeSwitcher from './components/ThemeSwitcher/ThemeSwitcher';
 import Conditions from './pages/Conditions/Conditions';
@@ -15,7 +17,7 @@ import External from './pages/External/External';
 import Feedback from './pages/Feedback/Feedback';
 import Identification from './pages/Identification/Identification';
 import Infant from './pages/Infant/Infant';
-import Occurence from './pages/Occurence/Occurence';
+import Occurrence from './pages/Occurrence/Occurrence';
 import formSchema from './schemas/Sections';
 import Certificate from './utils/certificate';
 import { flattenObject } from './utils/flattenObject';
@@ -36,6 +38,7 @@ function App() {
     !(typeOfDeath && typeOfDeath === 'Fetal') && !isInfant(birth, death);
 
   const onSubmit = (data: FormType) => {
+    console.log(data);
     const formattedData = {
       ...data,
       identification: {
@@ -48,10 +51,36 @@ function App() {
         ),
         hourOfDeath: dayjs(data.identification.hourOfDeath).format('HH:mm'),
       },
+      conditions: {
+        ...data.conditions,
+        evolutionTime1: `${data.conditions.evolutionTime1} ${data.conditions.timeUnit1.toLowerCase()}`,
+        evolutionTime2:
+          data.conditions.evolutionTime2 && data.conditions.timeUnit2
+            ? `${data.conditions.evolutionTime2} ${data.conditions.timeUnit2.toLowerCase()}`
+            : undefined,
+        evolutionTime3:
+          data.conditions.evolutionTime3 && data.conditions.timeUnit3
+            ? `${data.conditions.evolutionTime3} ${data.conditions.timeUnit3.toLowerCase()}`
+            : undefined,
+        evolutionTime4:
+          data.conditions.evolutionTime4 && data.conditions.timeUnit4
+            ? `${data.conditions.evolutionTime4} ${data.conditions.timeUnit4.toLowerCase()}`
+            : undefined,
+        evolutionTime5:
+          data.conditions.evolutionTime5 && data.conditions.timeUnit5
+            ? `${data.conditions.evolutionTime5} ${data.conditions.timeUnit5.toLowerCase()}`
+            : undefined,
+      },
     };
     const flatObject = flattenObject(formattedData);
     console.log(flatObject);
     cert.pdf(flatObject);
+  };
+
+  const onError = () => {
+    toast.error(
+      'Há erros no formulário! Verifique os campos e tente novamente.',
+    );
   };
 
   const handleChange = (_event: SyntheticEvent, newValue: number) => {
@@ -72,8 +101,9 @@ function App() {
 
   return (
     <Box className="w-full min-h-screen">
+      <ToastContainer />
       <div className="w-full flex flex-row items-center justify-between p-4 border-b">
-        <h1 className="font-bold text-xl">Gerador de D.O.</h1>
+        <h1 className="font-bold text-xl">D.O. Eletrônica</h1>
         <ThemeSwitcher />
       </div>
       <div className="w-10/12 mx-auto flex flex-col items-center gap-6 py-6">
@@ -101,14 +131,16 @@ function App() {
                 <Tab label="Condições e causas" value={3} />
                 <Tab label="Médico" value={4} />
                 <Tab label="Causas externas" value={5} />
-                <Tab label="Feedback" value={6} />
+                {
+                  //<Tab label="Feedback" value={6} />
+                }
               </Tabs>
               <Button onClick={tabUp} disabled={activeTab === 6} variant="text">
                 <NavigateNextIcon />
               </Button>
             </Stack>
             <Identification index={0} value={activeTab} />
-            <Occurence index={1} value={activeTab} />
+            <Occurrence index={1} value={activeTab} />
             <Infant index={2} value={activeTab} />
             <Conditions index={3} value={activeTab} />
             <Doctor index={4} value={activeTab} />
@@ -116,11 +148,12 @@ function App() {
             <Feedback index={6} value={activeTab} />
             <Tooltip title="Gerar D.O." placement="top">
               <Button
-                type="submit"
+                type="button"
                 className="aspect-square !rounded-full"
                 variant="contained"
                 size="large"
                 sx={{ position: 'fixed', bottom: 64, right: 64 }}
+                onClick={methods.handleSubmit(onSubmit, onError)}
               >
                 <FileOpen />
               </Button>

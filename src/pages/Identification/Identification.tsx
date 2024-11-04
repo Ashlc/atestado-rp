@@ -1,6 +1,7 @@
 import {
   Autocomplete,
   FormControl,
+  FormHelperText,
   Grid2,
   InputLabel,
   MenuItem,
@@ -9,8 +10,11 @@ import {
 } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import dayjs, { Dayjs } from 'dayjs';
 import { useEffect } from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, get, useFormContext } from 'react-hook-form';
+import { z } from 'zod';
+import formSchema from '../../schemas/Sections';
 import { cbo } from '../../services/cbo';
 import { handleCep } from '../../services/viacep';
 import { handleAge } from '../../utils/handleAge';
@@ -21,8 +25,17 @@ type Props = {
   value: number;
 };
 
+type FormType = z.infer<typeof formSchema>;
+
 const Identification = ({ value, index, ...other }: Props) => {
-  const { register, watch, control, setValue, resetField } = useFormContext();
+  const {
+    register,
+    watch,
+    control,
+    setValue,
+    resetField,
+    formState: { errors },
+  } = useFormContext<FormType>();
   const watchTypeOfDeath = watch('identification.typeOfDeath');
   const watchDateOfDeath = watch('identification.dateOfDeath');
   const watchDateOfBirth = watch('identification.dateOfBirth');
@@ -31,13 +44,22 @@ const Identification = ({ value, index, ...other }: Props) => {
   useEffect(() => {
     if (watchTypeOfDeath === 'Fetal') {
       disabledFields.forEach((field) => {
-        resetField(field);
+        resetField(field as 'identification.typeOfDeath');
       });
       if (watchDateOfDeath) {
         setValue('identification.dateOfBirth', watchDateOfDeath);
       }
     }
   }, [watchTypeOfDeath, watchDateOfDeath, setValue]);
+
+  const handleDateOfBirth = (date: Dayjs | null) => {
+    if (date) {
+      setValue(
+        'identification.dateOfBirth',
+        date.format('YYYY-MM-DDTHH:mm:ss.SSSZ'),
+      );
+    }
+  };
 
   return (
     <div
@@ -52,27 +74,36 @@ const Identification = ({ value, index, ...other }: Props) => {
         <Grid2 size={2}>
           <Controller
             render={({ field }) => (
-              <FormControl fullWidth>
+              <FormControl
+                fullWidth
+                required
+                error={!!get(errors, 'identification.typeOfDeath')}
+              >
                 <InputLabel shrink>Tipo de óbito</InputLabel>
                 <Select
                   label="Tipo de óbito"
                   notched
                   {...field}
-                  value={field.value || ''}
+                  value={field.value ?? ''}
                 >
                   <MenuItem value={'Fetal'}>Fetal</MenuItem>
                   <MenuItem value={'Não fetal'}>Não Fetal</MenuItem>
                 </Select>
+                <FormHelperText>
+                  {get(errors, 'identification.typeOfDeath')?.message}
+                </FormHelperText>
               </FormControl>
             )}
             name="identification.typeOfDeath"
             control={control}
+            rules={{ required: 'Campo obrigatório' }}
           />
         </Grid2>
         <Grid2 size={2}>
           <Controller
             name="identification.dateOfDeath"
             control={control}
+            rules={{ required: 'Campo obrigatório' }}
             render={({ field }) => (
               <DatePicker
                 slotProps={{
@@ -80,11 +111,15 @@ const Identification = ({ value, index, ...other }: Props) => {
                     InputLabelProps: {
                       shrink: true,
                     },
+                    helperText: get(errors, 'identification.dateOfDeath')
+                      ?.message,
+                    error: !!get(errors, 'identification.dateOfDeath'),
                     fullWidth: true,
+                    required: true,
                   },
                 }}
                 label="Data do óbito"
-                value={field.value}
+                value={field.value ? dayjs(field.value) : null} // Ensure controlled value
                 onChange={(date) => field.onChange(date)}
               />
             )}
@@ -102,29 +137,44 @@ const Identification = ({ value, index, ...other }: Props) => {
                     InputLabelProps: {
                       shrink: true,
                     },
+                    helperText: get(errors, 'identification.hourOfDeath')
+                      ?.message,
+                    error: !!get(errors, 'identification.hourOfDeath'),
                     fullWidth: true,
+                    required: true,
                   },
                 }}
               />
             )}
             name="identification.hourOfDeath"
             control={control}
+            rules={{ required: 'Campo obrigatório' }}
           />
         </Grid2>
         <Grid2 size={6}>
           <TextField
             slotProps={{ inputLabel: { shrink: true } }}
             label="Nome do falecido"
-            {...register('identification.deceasedName')}
+            {...register('identification.deceasedName', {
+              required: 'Campo obrigatório',
+            })}
+            error={get(errors, 'identification.deceasedName')}
+            helperText={get(errors, 'identification.deceasedName')?.message}
             fullWidth
+            required
           />
         </Grid2>
         <Grid2 size={6}>
           <TextField
             slotProps={{ inputLabel: { shrink: true } }}
             label="Nome da mãe"
-            {...register('identification.mothersName')}
+            {...register('identification.mothersName', {
+              required: 'Campo obrigatório',
+            })}
             fullWidth
+            error={get(errors, 'identification.mothersName')}
+            helperText={get(errors, 'identification.mothersName')?.message}
+            required
           />
         </Grid2>
         <Grid2 size={6}>
@@ -139,8 +189,13 @@ const Identification = ({ value, index, ...other }: Props) => {
           <TextField
             slotProps={{ inputLabel: { shrink: true } }}
             label="Naturalidade"
-            {...register('identification.naturalness')}
+            {...register('identification.naturalness', {
+              required: 'Campo obrigatório ',
+            })}
             fullWidth
+            error={get(errors, 'identification.naturalness')}
+            helperText={get(errors, 'identification.naturalness')?.message}
+            required
           />
         </Grid2>
         <Grid2 size={2}>
@@ -153,16 +208,26 @@ const Identification = ({ value, index, ...other }: Props) => {
                       shrink: true,
                     },
                     fullWidth: true,
+                    helperText: get(errors, 'identification.dateOfBirth')
+                      ?.message,
+                    error: !!get(errors, 'identification.dateOfBirth'),
+                    required: !watchTypeOfDeath || watchTypeOfDeath !== 'Fetal',
                   },
                 }}
                 label="Data de nascimento"
-                value={watchTypeOfDeath === 'Fetal' ? watchDateOfDeath : null}
-                onChange={(date) => field.onChange(date)}
+                value={field.value ? dayjs(field.value) : null}
+                onChange={(date) => handleDateOfBirth(date)}
                 disabled={watchTypeOfDeath === 'Fetal'}
               />
             )}
             name="identification.dateOfBirth"
             control={control}
+            rules={{
+              required:
+                !watchTypeOfDeath || watchTypeOfDeath !== 'Fetal'
+                  ? 'Campo obrigatório'
+                  : false,
+            }}
           />
         </Grid2>
         <Grid2 size={2}>
@@ -184,28 +249,35 @@ const Identification = ({ value, index, ...other }: Props) => {
           />
         </Grid2>
         <Grid2 size={2}>
-          <FormControl fullWidth>
+          <FormControl fullWidth error={get(errors, 'identification.sex')}>
             <InputLabel shrink>Sexo</InputLabel>
             <Select
               label="Sexo"
               notched
               defaultValue={''}
-              {...register('identification.sex')}
+              {...register('identification.sex', {
+                required: 'Campo obrigatório',
+              })}
             >
               <MenuItem value={'M'}>Masculino</MenuItem>
               <MenuItem value={'F'}>Feminino</MenuItem>
               <MenuItem value={'I'}>Não se aplica</MenuItem>
             </Select>
+            <FormHelperText>
+              {get(errors, 'identification.sex')?.message}
+            </FormHelperText>
           </FormControl>
         </Grid2>
         <Grid2 size={2}>
-          <FormControl fullWidth>
+          <FormControl fullWidth error={get(errors, 'identification.race')}>
             <InputLabel shrink>Raça</InputLabel>
             <Select
               label="Raça"
               defaultValue={''}
               notched
-              {...register('identification.race')}
+              {...register('identification.race', {
+                required: 'Campo obrigatório',
+              })}
             >
               <MenuItem value={'Branca'}>Branca</MenuItem>
               <MenuItem value={'Preta'}>Preta</MenuItem>
@@ -213,6 +285,9 @@ const Identification = ({ value, index, ...other }: Props) => {
               <MenuItem value={'Parda'}>Parda</MenuItem>
               <MenuItem value={'Indígena'}>Indígena</MenuItem>
             </Select>
+            <FormHelperText>
+              {get(errors, 'identification.race')?.message}
+            </FormHelperText>
           </FormControl>
         </Grid2>
         <Grid2 size={2}>
@@ -238,7 +313,21 @@ const Identification = ({ value, index, ...other }: Props) => {
             slotProps={{ inputLabel: { shrink: true } }}
             label="Cartão do SUS"
             disabled={watchTypeOfDeath === 'Fetal'}
-            {...register('identification.susCard')}
+            error={get(errors, 'identification.susCard')}
+            helperText={get(errors, 'identification.susCard')?.message}
+            {...register('identification.susCard', {
+              pattern: {
+                value: /^[0-9]*$/,
+                message: 'Apenas dígitos (0-9) são permitidos',
+              },
+              validate: (value) => {
+                if (!value) return true; // Permite campo vazio
+                const numbers = value.replace(/\D/g, '');
+                return (
+                  numbers.length === 15 || 'O cartão do SUS deve ter 15 números'
+                );
+              },
+            })}
             fullWidth
           />
         </Grid2>
@@ -334,6 +423,12 @@ const Identification = ({ value, index, ...other }: Props) => {
             options={cbo}
             disabled={watchTypeOfDeath === 'Fetal'}
             getOptionKey={(option) => option.value}
+            onChange={(_, selectedOption) => {
+              setValue(
+                'identification.cbo',
+                selectedOption ? String(selectedOption.value) : '',
+              );
+            }}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -356,6 +451,10 @@ const Identification = ({ value, index, ...other }: Props) => {
                 slotProps={{ inputLabel: { shrink: true } }}
                 label="CEP"
                 fullWidth
+                error={get(errors, 'identification.deceasedAddress.zipCode')}
+                helperText={
+                  get(errors, 'identification.deceasedAddress.zipCode')?.message
+                }
                 onBlur={(e) => {
                   if (e.target.value) {
                     handleCep(
@@ -369,6 +468,13 @@ const Identification = ({ value, index, ...other }: Props) => {
             )}
             name="identification.deceasedAddress.zipCode"
             control={control}
+            rules={{
+              validate: (value) => {
+                if (!value) return true;
+                const cep = value.replace(/\D/g, '');
+                return cep.length === 8 || 'O CEP deve conter 8 dígitos';
+              },
+            }}
           />
         </Grid2>
         <Grid2 size={8}>
@@ -389,7 +495,7 @@ const Identification = ({ value, index, ...other }: Props) => {
           <TextField
             slotProps={{ inputLabel: { shrink: true } }}
             label="Número"
-            {...register('identification.deathPlace.number')}
+            {...register('identification.deceasedAddress.number')}
             fullWidth
           />
         </Grid2>
