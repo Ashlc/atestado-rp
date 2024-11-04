@@ -28,8 +28,14 @@ type Props = {
 type FormType = z.infer<typeof formSchema>;
 
 const Identification = ({ value, index, ...other }: Props) => {
-  const { register, watch, control, setValue, resetField, formState: { errors } } =
-    useFormContext<FormType>();
+  const {
+    register,
+    watch,
+    control,
+    setValue,
+    resetField,
+    formState: { errors },
+  } = useFormContext<FormType>();
   const watchTypeOfDeath = watch('identification.typeOfDeath');
   const watchDateOfDeath = watch('identification.dateOfDeath');
   const watchDateOfBirth = watch('identification.dateOfBirth');
@@ -68,7 +74,11 @@ const Identification = ({ value, index, ...other }: Props) => {
         <Grid2 size={2}>
           <Controller
             render={({ field }) => (
-              <FormControl fullWidth required error={!!get(errors, "identification.typeOfDeath")}>
+              <FormControl
+                fullWidth
+                required
+                error={!!get(errors, 'identification.typeOfDeath')}
+              >
                 <InputLabel shrink>Tipo de óbito</InputLabel>
                 <Select
                   label="Tipo de óbito"
@@ -79,9 +89,10 @@ const Identification = ({ value, index, ...other }: Props) => {
                   <MenuItem value={'Fetal'}>Fetal</MenuItem>
                   <MenuItem value={'Não fetal'}>Não Fetal</MenuItem>
                 </Select>
-                <FormHelperText>{get(errors, "identification.typeOfDeath")?.message}</FormHelperText>  
+                <FormHelperText>
+                  {get(errors, 'identification.typeOfDeath')?.message}
+                </FormHelperText>
               </FormControl>
-              
             )}
             name="identification.typeOfDeath"
             control={control}
@@ -93,7 +104,6 @@ const Identification = ({ value, index, ...other }: Props) => {
             name="identification.dateOfDeath"
             control={control}
             rules={{ required: 'Campo obrigatório' }}
-            
             render={({ field }) => (
               <DatePicker
                 slotProps={{
@@ -101,8 +111,9 @@ const Identification = ({ value, index, ...other }: Props) => {
                     InputLabelProps: {
                       shrink: true,
                     },
-                    helperText: get(errors, "identification.dateOfDeath")?.message,
-                    error: !!get(errors, "identification.dateOfDeath"),
+                    helperText: get(errors, 'identification.dateOfDeath')
+                      ?.message,
+                    error: !!get(errors, 'identification.dateOfDeath'),
                     fullWidth: true,
                     required: true,
                   },
@@ -126,8 +137,9 @@ const Identification = ({ value, index, ...other }: Props) => {
                     InputLabelProps: {
                       shrink: true,
                     },
-                    helperText: get(errors, "identification.hourOfDeath")?.message,
-                    error: !!get(errors, "identification.hourOfDeath"),
+                    helperText: get(errors, 'identification.hourOfDeath')
+                      ?.message,
+                    error: !!get(errors, 'identification.hourOfDeath'),
                     fullWidth: true,
                     required: true,
                   },
@@ -143,9 +155,11 @@ const Identification = ({ value, index, ...other }: Props) => {
           <TextField
             slotProps={{ inputLabel: { shrink: true } }}
             label="Nome do falecido"
-            {...register('identification.deceasedName',  { required: 'Campo obrigatório' })}
-            error={get(errors, "identification.deceasedName")}
-            helperText={get(errors, "identification.deceasedName")?.message}
+            {...register('identification.deceasedName', {
+              required: 'Campo obrigatório',
+            })}
+            error={get(errors, 'identification.deceasedName')}
+            helperText={get(errors, 'identification.deceasedName')?.message}
             fullWidth
             required
           />
@@ -154,10 +168,12 @@ const Identification = ({ value, index, ...other }: Props) => {
           <TextField
             slotProps={{ inputLabel: { shrink: true } }}
             label="Nome da mãe"
-            {...register('identification.mothersName', { required: 'Campo obrigatório' })}
+            {...register('identification.mothersName', {
+              required: 'Campo obrigatório',
+            })}
             fullWidth
-            error={get(errors, "identification.mothersName")}
-            helperText={get(errors, "identification.mothersName")?.message}
+            error={get(errors, 'identification.mothersName')}
+            helperText={get(errors, 'identification.mothersName')?.message}
             required
           />
         </Grid2>
@@ -173,10 +189,12 @@ const Identification = ({ value, index, ...other }: Props) => {
           <TextField
             slotProps={{ inputLabel: { shrink: true } }}
             label="Naturalidade"
-            {...register('identification.naturalness', { required: 'Campo obrigatório '})}
+            {...register('identification.naturalness', {
+              required: 'Campo obrigatório ',
+            })}
             fullWidth
-            error={get(errors, "identification.naturalness")}
-            helperText={get(errors, "identification.naturalness")?.message}
+            error={get(errors, 'identification.naturalness')}
+            helperText={get(errors, 'identification.naturalness')?.message}
             required
           />
         </Grid2>
@@ -190,8 +208,9 @@ const Identification = ({ value, index, ...other }: Props) => {
                       shrink: true,
                     },
                     fullWidth: true,
-                    helperText: get(errors, "identification.dateOfBirth")?.message,
-                    error: !!get(errors, "identification.dateOfBirth"),
+                    helperText: get(errors, 'identification.dateOfBirth')
+                      ?.message,
+                    error: !!get(errors, 'identification.dateOfBirth'),
                     required: !watchTypeOfDeath || watchTypeOfDeath !== 'Fetal',
                   },
                 }}
@@ -203,7 +222,12 @@ const Identification = ({ value, index, ...other }: Props) => {
             )}
             name="identification.dateOfBirth"
             control={control}
-            rules={{ required: !watchTypeOfDeath || watchTypeOfDeath !== 'Fetal' ? 'Campo obrigatório' : false }}
+            rules={{
+              required:
+                !watchTypeOfDeath || watchTypeOfDeath !== 'Fetal'
+                  ? 'Campo obrigatório'
+                  : false,
+            }}
           />
         </Grid2>
         <Grid2 size={2}>
@@ -225,29 +249,35 @@ const Identification = ({ value, index, ...other }: Props) => {
           />
         </Grid2>
         <Grid2 size={2}>
-          <FormControl fullWidth error={get(errors, "identification.sex")}>
+          <FormControl fullWidth error={get(errors, 'identification.sex')}>
             <InputLabel shrink>Sexo</InputLabel>
             <Select
               label="Sexo"
               notched
               defaultValue={''}
-              {...register('identification.sex', { required: 'Campo obrigatório' })}
+              {...register('identification.sex', {
+                required: 'Campo obrigatório',
+              })}
             >
               <MenuItem value={'M'}>Masculino</MenuItem>
               <MenuItem value={'F'}>Feminino</MenuItem>
               <MenuItem value={'I'}>Não se aplica</MenuItem>
             </Select>
-            <FormHelperText>{get(errors, "identification.sex")?.message}</FormHelperText>
+            <FormHelperText>
+              {get(errors, 'identification.sex')?.message}
+            </FormHelperText>
           </FormControl>
         </Grid2>
         <Grid2 size={2}>
-          <FormControl fullWidth error={get(errors, "identification.race")}>
+          <FormControl fullWidth error={get(errors, 'identification.race')}>
             <InputLabel shrink>Raça</InputLabel>
             <Select
               label="Raça"
               defaultValue={''}
               notched
-              {...register('identification.race', { required: 'Campo obrigatório' })}
+              {...register('identification.race', {
+                required: 'Campo obrigatório',
+              })}
             >
               <MenuItem value={'Branca'}>Branca</MenuItem>
               <MenuItem value={'Preta'}>Preta</MenuItem>
@@ -255,7 +285,9 @@ const Identification = ({ value, index, ...other }: Props) => {
               <MenuItem value={'Parda'}>Parda</MenuItem>
               <MenuItem value={'Indígena'}>Indígena</MenuItem>
             </Select>
-            <FormHelperText>{get(errors, "identification.race")?.message}</FormHelperText>
+            <FormHelperText>
+              {get(errors, 'identification.race')?.message}
+            </FormHelperText>
           </FormControl>
         </Grid2>
         <Grid2 size={2}>
@@ -281,8 +313,8 @@ const Identification = ({ value, index, ...other }: Props) => {
             slotProps={{ inputLabel: { shrink: true } }}
             label="Cartão do SUS"
             disabled={watchTypeOfDeath === 'Fetal'}
-            error={get(errors, "identification.susCard")}
-            helperText={get(errors, "identification.susCard")?.message}
+            error={get(errors, 'identification.susCard')}
+            helperText={get(errors, 'identification.susCard')?.message}
             {...register('identification.susCard', {
               pattern: {
                 value: /^[0-9]*$/,
@@ -291,8 +323,10 @@ const Identification = ({ value, index, ...other }: Props) => {
               validate: (value) => {
                 if (!value) return true; // Permite campo vazio
                 const numbers = value.replace(/\D/g, '');
-                return numbers.length === 15 || 'O cartão do SUS deve ter 15 números';
-              }
+                return (
+                  numbers.length === 15 || 'O cartão do SUS deve ter 15 números'
+                );
+              },
             })}
             fullWidth
           />
@@ -417,8 +451,10 @@ const Identification = ({ value, index, ...other }: Props) => {
                 slotProps={{ inputLabel: { shrink: true } }}
                 label="CEP"
                 fullWidth
-                error={get(errors, "identification.deceasedAddress.zipCode")}
-                helperText={get(errors, "identification.deceasedAddress.zipCode")?.message}
+                error={get(errors, 'identification.deceasedAddress.zipCode')}
+                helperText={
+                  get(errors, 'identification.deceasedAddress.zipCode')?.message
+                }
                 onBlur={(e) => {
                   if (e.target.value) {
                     handleCep(
@@ -437,7 +473,7 @@ const Identification = ({ value, index, ...other }: Props) => {
                 if (!value) return true;
                 const cep = value.replace(/\D/g, '');
                 return cep.length === 8 || 'O CEP deve conter 8 dígitos';
-              }
+              },
             }}
           />
         </Grid2>
@@ -459,7 +495,7 @@ const Identification = ({ value, index, ...other }: Props) => {
           <TextField
             slotProps={{ inputLabel: { shrink: true } }}
             label="Número"
-            {...register('identification.deathPlace.number')}
+            {...register('identification.deceasedAddress.number')}
             fullWidth
           />
         </Grid2>

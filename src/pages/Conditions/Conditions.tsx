@@ -125,7 +125,6 @@ const Conditions = ({ value, index, ...other }: Props) => {
             control={control}
             rules={{ required: infantDisabled ? false : 'Campo obrigatório' }}
             defaultValue={''}
-            rules={{ required: true }}
             render={({ field }) => (
               <FormControl
                 fullWidth
@@ -138,7 +137,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
                 <Select
                   label="Em caso de óbito de mulher em idade fértil, a morte ocorreu:"
                   notched
-                  error={!!errors.conditions?.fertileAgeDeath}
+                  error={!!get(errors, 'conditions.fertileAgeDeath')}
                   id="fertileAgeDeath"
                   disabled={infantDisabled}
                   {...field}
@@ -171,7 +170,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
             <InputLabel
               htmlFor="receivedMedicalAssistance"
               shrink
-              error={!!errors.conditions?.receivedMedicalAssistance}
+              error={!!get(errors, 'conditions.receivedMedicalAssistance')}
             >
               Recebeu assistência médica durantre a doença que ocasionou a
               morte?
@@ -181,7 +180,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
               notched
               defaultValue={''}
               id="receivedMedicalAssistance"
-              error={!!errors.conditions?.receivedMedicalAssistance}
+              error={!!get(errors, 'conditions.receivedMedicalAssistance')}
               {...register('conditions.receivedMedicalAssistance', {
                 required: true,
               })}
@@ -197,16 +196,16 @@ const Conditions = ({ value, index, ...other }: Props) => {
             <InputLabel
               htmlFor="necropsy"
               shrink
-              error={!!errors.conditions?.necropsy}
+              error={!!get(errors, 'conditions.necropsy')}
             >
               Diagnóstico confirmado por necrópsia?
             </InputLabel>
             <Select
               label="Diagnóstico confirmado por necrópsia?"
               notched
-              defaultValue={''}
+              defaultValue=""
               id="necropsy"
-              error={!!errors.conditions?.necropsy}
+              error={!!get(errors, 'conditions.necropsy')}
               {...register('conditions.necropsy', { required: true })}
             >
               <MenuItem value="Sim">Sim</MenuItem>
@@ -229,7 +228,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
             fullWidth
             label="Causa básica"
             slotProps={{ inputLabel: { shrink: true } }}
-            error={!!errors.conditions?.cause1}
+            error={!!get(errors, 'conditions.cause1')}
             {...register('conditions.cause1', { required: true })}
           />
         </Grid2>
@@ -238,8 +237,8 @@ const Conditions = ({ value, index, ...other }: Props) => {
             fullWidth
             aria-label="Tempo de evolução 1"
             label="Tempo de evolução"
-            error={!!errors.conditions?.evolutionTime1}
-            helperText={errors.conditions?.evolutionTime1?.message}
+            error={!!get(errors, 'conditions.evolutionTime1')}
+            helperText={get(errors, 'conditions.evolutionTime1')?.message}
             slotProps={{ inputLabel: { shrink: true } }}
             {...register(`conditions.evolutionTime1`, {
               required: true,
@@ -256,7 +255,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
             <InputLabel
               htmlFor="timeUnit1"
               shrink
-              error={!!errors.conditions?.timeUnit1}
+              error={!!get(errors, 'conditions.timeUnit1')}
             >
               Unidade de tempo
             </InputLabel>
@@ -264,7 +263,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
               label="Unidade de tempo"
               {...register('conditions.timeUnit1', { required: true })}
               required
-              error={!!errors.conditions?.timeUnit1}
+              error={!!get(errors, 'conditions.timeUnit1')}
               notched
             >
               <MenuItem value="horas">Horas</MenuItem>
@@ -278,7 +277,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
           <TextField
             fullWidth
             label="CID"
-            error={!!errors.conditions?.cid1}
+            error={!!get(errors, 'conditions.cid1')}
             slotProps={{ inputLabel: { shrink: true } }}
             {...register('conditions.cid1', { required: true })}
           />
