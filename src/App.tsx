@@ -7,6 +7,8 @@ import Tabs from '@mui/material/Tabs';
 import dayjs from 'dayjs';
 import { SyntheticEvent, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { z } from 'zod';
 import ThemeSwitcher from './components/ThemeSwitcher/ThemeSwitcher';
 import Conditions from './pages/Conditions/Conditions';
@@ -20,8 +22,6 @@ import formSchema from './schemas/Sections';
 import Certificate from './utils/certificate';
 import { flattenObject } from './utils/flattenObject';
 import { isInfant } from './utils/handleAge';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 type FormType = z.infer<typeof formSchema>;
 
@@ -50,6 +50,26 @@ function App() {
           'DD/MM/YYYY',
         ),
         hourOfDeath: dayjs(data.identification.hourOfDeath).format('HH:mm'),
+      },
+      conditions: {
+        ...data.conditions,
+        evolutionTime1: `${data.conditions.evolutionTime1} ${data.conditions.timeUnit1.toLowerCase()}`,
+        evolutionTime2:
+          data.conditions.evolutionTime2 && data.conditions.timeUnit2
+            ? `${data.conditions.evolutionTime2} ${data.conditions.timeUnit2.toLowerCase()}`
+            : undefined,
+        evolutionTime3:
+          data.conditions.evolutionTime3 && data.conditions.timeUnit3
+            ? `${data.conditions.evolutionTime3} ${data.conditions.timeUnit3.toLowerCase()}`
+            : undefined,
+        evolutionTime4:
+          data.conditions.evolutionTime4 && data.conditions.timeUnit4
+            ? `${data.conditions.evolutionTime4} ${data.conditions.timeUnit4.toLowerCase()}`
+            : undefined,
+        evolutionTime5:
+          data.conditions.evolutionTime5 && data.conditions.timeUnit5
+            ? `${data.conditions.evolutionTime5} ${data.conditions.timeUnit5.toLowerCase()}`
+            : undefined,
       },
     };
     const flatObject = flattenObject(formattedData);
@@ -111,7 +131,9 @@ function App() {
                 <Tab label="Condições e causas" value={3} />
                 <Tab label="Médico" value={4} />
                 <Tab label="Causas externas" value={5} />
-                <Tab label="Feedback" value={6} />
+                {
+                  //<Tab label="Feedback" value={6} />
+                }
               </Tabs>
               <Button onClick={tabUp} disabled={activeTab === 6} variant="text">
                 <NavigateNextIcon />
