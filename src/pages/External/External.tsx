@@ -1,12 +1,13 @@
 import {
   FormControl,
+  FormHelperText,
   Grid2,
   InputLabel,
   MenuItem,
   Select,
   TextField,
 } from '@mui/material';
-import { useFormContext } from 'react-hook-form';
+import { get, useFormContext } from 'react-hook-form';
 import { handleCep } from '../../services/viacep';
 
 type Props = {
@@ -14,7 +15,20 @@ type Props = {
   value: number;
 };
 const External = ({ value, index, ...other }: Props) => {
-  const { register, watch, setValue } = useFormContext();
+  const {
+    register,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useFormContext();
+
+  const validateCep = (value: string) => {
+    if (value && value.length !== 8) {
+      return 'O CEP deve ter 8 dígitos';
+    }
+    return true;
+  };
+
   return (
     <div
       role="tabpanel"
@@ -32,7 +46,11 @@ const External = ({ value, index, ...other }: Props) => {
           </p>
         </Grid2>
         <Grid2 size={2}>
-          <FormControl fullWidth>
+          <FormControl
+            fullWidth
+            required
+            error={!!get(errors, 'external.nonNaturalType')}
+          >
             <InputLabel htmlFor="nonNaturalType" shrink>
               Tipo não natural
             </InputLabel>
@@ -41,7 +59,9 @@ const External = ({ value, index, ...other }: Props) => {
               notched
               id="nonNaturalType"
               defaultValue={''}
-              {...register('external.nonNaturalType')}
+              {...register('external.nonNaturalType', {
+                required: 'Campo obrigatório',
+              })}
             >
               <MenuItem value={'Acidente'}>Acidente</MenuItem>
               <MenuItem value={'Suicídio'}>Suicídio</MenuItem>
@@ -49,10 +69,17 @@ const External = ({ value, index, ...other }: Props) => {
               <MenuItem value={'Outros'}>Outros</MenuItem>
               <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
             </Select>
+            <FormHelperText>
+              {get(errors, 'external.nonNaturalType')?.message}
+            </FormHelperText>
           </FormControl>
         </Grid2>
         <Grid2 size={2}>
-          <FormControl fullWidth>
+          <FormControl
+            fullWidth
+            required
+            error={!!get(errors, 'external.workplaceAccident')}
+          >
             <InputLabel htmlFor="workplaceAccident" shrink>
               Acidente de trabalho?
             </InputLabel>
@@ -61,16 +88,25 @@ const External = ({ value, index, ...other }: Props) => {
               defaultValue={''}
               notched
               id="workplaceAccident"
-              {...register('external.workplaceAccident')}
+              {...register('external.workplaceAccident', {
+                required: 'Campo obrigatório',
+              })}
             >
               <MenuItem value={'Sim'}>Sim</MenuItem>
               <MenuItem value={'Não'}>Não</MenuItem>
               <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
             </Select>
+            <FormHelperText>
+              {get(errors, 'external.workplaceAccident')?.message}
+            </FormHelperText>
           </FormControl>
         </Grid2>
         <Grid2 size={3}>
-          <FormControl fullWidth>
+          <FormControl
+            fullWidth
+            required
+            error={!!get(errors, 'external.informationSource')}
+          >
             <InputLabel htmlFor="informationSource" shrink>
               Fonte da informação?
             </InputLabel>
@@ -79,7 +115,9 @@ const External = ({ value, index, ...other }: Props) => {
               defaultValue={''}
               notched
               id="informationSource"
-              {...register('external.informationSource')}
+              {...register('external.informationSource', {
+                required: 'Campo obrigatório',
+              })}
             >
               <MenuItem value={'Ocorrência policial'}>
                 Ocorrência policial
@@ -89,15 +127,30 @@ const External = ({ value, index, ...other }: Props) => {
               <MenuItem value={'Outra'}>Outra</MenuItem>
               <MenuItem value={'Indetermiando'}>Não se aplica</MenuItem>
             </Select>
+            <FormHelperText>
+              {get(errors, 'external.informationSource')?.message}
+            </FormHelperText>
           </FormControl>
         </Grid2>
         <Grid2 size={5}>
           <TextField
             slotProps={{ inputLabel: { shrink: true } }}
             label="Nº do boletim de ocorrência"
-            disabled={watch('external.informationSource') !== 0}
+            disabled={
+              watch('external.informationSource') !== 'Ocorrência policial'
+            }
+            required={
+              watch('external.informationSource') === 'Ocorrência policial'
+            }
+            error={!!get(errors, 'external.occurrenceNumber')}
+            helperText={get(errors, 'external.occurrenceNumber')?.message}
             fullWidth
-            {...register(`external.occurrenceNumber`)}
+            {...register(`external.occurrenceNumber`, {
+              required:
+                watch('external.informationSource') === 'Ocorrência policial'
+                  ? 'Campo obrigatório'
+                  : false,
+            })}
           />
         </Grid2>
         <Grid2 size={12}>
@@ -109,7 +162,11 @@ const External = ({ value, index, ...other }: Props) => {
           />
         </Grid2>
         <Grid2 size={3}>
-          <FormControl fullWidth>
+          <FormControl
+            fullWidth
+            required
+            error={!!get(errors, 'external.placeType')}
+          >
             <InputLabel htmlFor="occurrencePlaceType" shrink>
               Tipo de local de ocorrência
             </InputLabel>
@@ -118,7 +175,9 @@ const External = ({ value, index, ...other }: Props) => {
               defaultValue={''}
               notched
               id="occurrencePlaceType"
-              {...register('external.placeType')}
+              {...register('external.placeType', {
+                required: 'Campo obrigatório',
+              })}
             >
               <MenuItem value={'Via pública'}>Via pública</MenuItem>
               <MenuItem value={'Estabelecimento de residência'}>
@@ -131,6 +190,9 @@ const External = ({ value, index, ...other }: Props) => {
               <MenuItem value={'Outros'}>Outros</MenuItem>
               <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
             </Select>
+            <FormHelperText>
+              {get(errors, 'external.placeType')?.message}
+            </FormHelperText>
           </FormControl>
         </Grid2>
         <Grid2 size={2}>
@@ -138,7 +200,11 @@ const External = ({ value, index, ...other }: Props) => {
             fullWidth
             slotProps={{ inputLabel: { shrink: true } }}
             label="CEP"
-            {...register(`external.occurrenceAddress.cep`)}
+            error={!!get(errors, 'external.occurrenceAddress.cep')}
+            helperText={get(errors, 'external.occurrenceAddress.cep')?.message}
+            {...register(`external.occurrenceAddress.cep`, {
+              validate: validateCep,
+            })}
             onBlur={(e) =>
               handleCep(e.target.value, 'external.occurrenceAddress', setValue)
             }
@@ -157,7 +223,7 @@ const External = ({ value, index, ...other }: Props) => {
             fullWidth
             slotProps={{ inputLabel: { shrink: true } }}
             label="Bairro"
-            {...register(`external.occurrenceAddress.district`)}
+            {...register(`external.occurrenceAddress.neighborhood`)}
           />
         </Grid2>
         <Grid2 size={4}>
