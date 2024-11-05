@@ -7,10 +7,10 @@ import {
   Select,
   TextField,
 } from '@mui/material';
-import { get, useFormContext } from 'react-hook-form';
-import { handleCep } from '../../services/viacep';
-import { handleCNES } from '../../services/cnes';
 import { useEffect } from 'react';
+import { get, useFormContext } from 'react-hook-form';
+import { handleCNES } from '../../services/cnes';
+import { handleCep } from '../../services/viacep';
 
 type Props = {
   index: number;
@@ -37,7 +37,7 @@ const Occurence = ({ value, index, ...other }: Props) => {
       'occurrence.hospitalAddress.complement',
     ];
     fields.forEach((field) => {
-      register(field as keyof FormValues, {
+      return register(field, {
         required: 'Este campo é obrigatório',
       });
     });
