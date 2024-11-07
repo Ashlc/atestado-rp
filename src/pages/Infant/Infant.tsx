@@ -248,14 +248,7 @@ const Infant = ({ value, index, isEnabled, ...other }: Props) => {
             }}
             error={!!get(errors, 'infant.birthWeight')}
             helperText={get(errors, 'infant.birthWeight')?.message}
-            disabled={watchTypeOfDeath === 'Fetal'}
-            required={watchTypeOfDeath !== 'Fetal' && isEnabled}
-            {...register(`infant.birthWeight`, {
-              required:
-                watchTypeOfDeath !== 'Fetal' && isEnabled
-                  ? 'Campo obrigatório'
-                  : false,
-            })}
+            {...register(`infant.birthWeight`)}
           />
         </Grid2>
         <Grid2 size={'grow'}>
