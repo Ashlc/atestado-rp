@@ -91,6 +91,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
             >
               <MenuItem value="horas">Horas</MenuItem>
               <MenuItem value="dias">Dias</MenuItem>
+              <MenuItem value="semanas">Semanas</MenuItem>
               <MenuItem value="meses">Meses</MenuItem>
               <MenuItem value="anos">Anos</MenuItem>
             </Select>
