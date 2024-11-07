@@ -15,9 +15,10 @@ import { cbo } from '../../services/cbo';
 type Props = {
   index: number;
   value: number;
+  isEnabled: boolean;
 };
 
-const Infant = ({ value, index, ...other }: Props) => {
+const Infant = ({ value, index, isEnabled, ...other }: Props) => {
   const {
     register,
     control,
@@ -42,11 +43,11 @@ const Infant = ({ value, index, ...other }: Props) => {
             label="Idade"
             slotProps={{ inputLabel: { shrink: true } }}
             {...register(`infant.mothersAge`, {
-              required: 'Este campo é obrigatório',
+              required: isEnabled ? 'Este campo é obrigatório' : false,
             })}
             error={get(errors, 'infant.mothersAge')}
             helperText={get(errors, 'infant.mothersAge')?.message}
-            required
+            required={isEnabled}
           />
         </Grid2>
         <Grid2 size={3}>
@@ -109,9 +110,9 @@ const Infant = ({ value, index, ...other }: Props) => {
             slotProps={{ inputLabel: { shrink: true } }}
             error={get(errors, 'infant.bornAlive')}
             helperText={get(errors, 'infant.bornAlive')?.message}
-            required
+            required={isEnabled}
             {...register(`infant.bornAlive`, {
-              required: 'Este campo é obrigatório',
+              required: isEnabled ? 'Este campo é obrigatório' : false,
             })}
           />
         </Grid2>
@@ -122,9 +123,9 @@ const Infant = ({ value, index, ...other }: Props) => {
             slotProps={{ inputLabel: { shrink: true } }}
             error={get(errors, 'infant.fetalLoss')}
             helperText={get(errors, 'infant.fetalLoss')?.message}
-            required
+            required={isEnabled}
             {...register(`infant.fetalLoss`, {
-              required: 'Este campo é obrigatório',
+              required: isEnabled ? 'Este campo é obrigatório' : false,
             })}
           />
         </Grid2>
@@ -135,16 +136,16 @@ const Infant = ({ value, index, ...other }: Props) => {
             slotProps={{ inputLabel: { shrink: true } }}
             error={get(errors, 'infant.weeksPregnant')}
             helperText={get(errors, 'infant.weeksPregnant')?.message}
-            required
+            required={isEnabled}
             {...register(`infant.weeksPregnant`, {
-              required: 'Este campo é obrigatório',
+              required: isEnabled ? 'Este campo é obrigatório' : false,
             })}
           />
         </Grid2>
         <Grid2 size={3}>
           <FormControl
             fullWidth
-            required
+            required={isEnabled}
             error={get(errors, 'infant.pregnancyType')}
           >
             <InputLabel htmlFor="pregnancyType" shrink>
@@ -155,7 +156,7 @@ const Infant = ({ value, index, ...other }: Props) => {
               notched
               defaultValue={''}
               {...register('infant.pregnancyType', {
-                required: 'Este campo é obrigatório',
+                required: isEnabled ? 'Este campo é obrigatório' : false,
               })}
             >
               <MenuItem value={'Única'}>Única</MenuItem>
@@ -171,7 +172,7 @@ const Infant = ({ value, index, ...other }: Props) => {
         <Grid2 size={2}>
           <FormControl
             fullWidth
-            required
+            required={isEnabled}
             error={!!get(errors, 'infant.birthType')}
           >
             <InputLabel htmlFor="birthType" shrink>
@@ -182,7 +183,7 @@ const Infant = ({ value, index, ...other }: Props) => {
               notched
               defaultValue={''}
               {...register('infant.birthType', {
-                required: 'Este campo é obrigatório',
+                required: isEnabled ? 'Este campo é obrigatório' : false,
               })}
             >
               <MenuItem value={'Vaginal'}>Vaginal</MenuItem>
@@ -200,7 +201,9 @@ const Infant = ({ value, index, ...other }: Props) => {
             control={control}
             rules={{
               required:
-                watchTypeOfDeath === 'Fetal' ? false : 'Campo obrigatório',
+                watchTypeOfDeath !== 'Fetal' && isEnabled
+                  ? 'Campo obrigatório'
+                  : false,
             }}
             defaultValue={watchTypeOfDeath === 'Fetal' ? 'Não se aplica' : ''}
             render={({ field }) => (
@@ -210,7 +213,7 @@ const Infant = ({ value, index, ...other }: Props) => {
               >
                 <InputLabel
                   htmlFor="deathRelativeToBirth"
-                  required={watchTypeOfDeath !== 'Fetal'}
+                  required={watchTypeOfDeath !== 'Fetal' && isEnabled}
                   shrink
                 >
                   Morte em relação ao parto
@@ -246,10 +249,12 @@ const Infant = ({ value, index, ...other }: Props) => {
             error={!!get(errors, 'infant.birthWeight')}
             helperText={get(errors, 'infant.birthWeight')?.message}
             disabled={watchTypeOfDeath === 'Fetal'}
-            required={watchTypeOfDeath !== 'Fetal'}
+            required={watchTypeOfDeath !== 'Fetal' && isEnabled}
             {...register(`infant.birthWeight`, {
               required:
-                watchTypeOfDeath === 'Fetal' ? false : 'Campo obrigatório',
+                watchTypeOfDeath !== 'Fetal' && isEnabled
+                  ? 'Campo obrigatório'
+                  : false,
             })}
           />
         </Grid2>
@@ -260,11 +265,13 @@ const Infant = ({ value, index, ...other }: Props) => {
             error={!!get(errors, 'infant.birthCertificateNumber')}
             helperText={get(errors, 'infant.birthCertificateNumber')?.message}
             disabled={watchTypeOfDeath === 'Fetal'}
-            required={watchTypeOfDeath !== 'Fetal'}
+            required={watchTypeOfDeath !== 'Fetal' && isEnabled}
             slotProps={{ inputLabel: { shrink: true } }}
             {...register(`infant.birthCertificateNumber`, {
               required:
-                watchTypeOfDeath === 'Fetal' ? false : 'Campo obrigatório',
+                watchTypeOfDeath !== 'Fetal' && isEnabled
+                  ? 'Campo obrigatório'
+                  : false,
             })}
           />
         </Grid2>

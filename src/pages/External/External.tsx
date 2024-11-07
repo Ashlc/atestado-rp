@@ -48,7 +48,6 @@ const External = ({ value, index, ...other }: Props) => {
         <Grid2 size={2}>
           <FormControl
             fullWidth
-            required
             error={!!get(errors, 'external.nonNaturalType')}
           >
             <InputLabel htmlFor="nonNaturalType" shrink>
@@ -59,9 +58,7 @@ const External = ({ value, index, ...other }: Props) => {
               notched
               id="nonNaturalType"
               defaultValue={''}
-              {...register('external.nonNaturalType', {
-                required: 'Campo obrigatório',
-              })}
+              {...register('external.nonNaturalType')}
             >
               <MenuItem value={'Acidente'}>Acidente</MenuItem>
               <MenuItem value={'Suicídio'}>Suicídio</MenuItem>
@@ -77,7 +74,6 @@ const External = ({ value, index, ...other }: Props) => {
         <Grid2 size={2}>
           <FormControl
             fullWidth
-            required
             error={!!get(errors, 'external.workplaceAccident')}
           >
             <InputLabel htmlFor="workplaceAccident" shrink>
@@ -88,9 +84,7 @@ const External = ({ value, index, ...other }: Props) => {
               defaultValue={''}
               notched
               id="workplaceAccident"
-              {...register('external.workplaceAccident', {
-                required: 'Campo obrigatório',
-              })}
+              {...register('external.workplaceAccident')}
             >
               <MenuItem value={'Sim'}>Sim</MenuItem>
               <MenuItem value={'Não'}>Não</MenuItem>
@@ -104,7 +98,6 @@ const External = ({ value, index, ...other }: Props) => {
         <Grid2 size={3}>
           <FormControl
             fullWidth
-            required
             error={!!get(errors, 'external.informationSource')}
           >
             <InputLabel htmlFor="informationSource" shrink>
@@ -115,9 +108,7 @@ const External = ({ value, index, ...other }: Props) => {
               defaultValue={''}
               notched
               id="informationSource"
-              {...register('external.informationSource', {
-                required: 'Campo obrigatório',
-              })}
+              {...register('external.informationSource')}
             >
               <MenuItem value={'Ocorrência policial'}>
                 Ocorrência policial
@@ -162,11 +153,7 @@ const External = ({ value, index, ...other }: Props) => {
           />
         </Grid2>
         <Grid2 size={3}>
-          <FormControl
-            fullWidth
-            required
-            error={!!get(errors, 'external.placeType')}
-          >
+          <FormControl fullWidth error={!!get(errors, 'external.placeType')}>
             <InputLabel htmlFor="occurrencePlaceType" shrink>
               Tipo de local de ocorrência
             </InputLabel>
@@ -175,9 +162,7 @@ const External = ({ value, index, ...other }: Props) => {
               defaultValue={''}
               notched
               id="occurrencePlaceType"
-              {...register('external.placeType', {
-                required: 'Campo obrigatório',
-              })}
+              {...register('external.placeType')}
             >
               <MenuItem value={'Via pública'}>Via pública</MenuItem>
               <MenuItem value={'Estabelecimento de residência'}>

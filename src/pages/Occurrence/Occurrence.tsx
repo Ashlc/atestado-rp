@@ -34,7 +34,6 @@ const Occurence = ({ value, index, ...other }: Props) => {
       'occurrence.hospitalAddress.city',
       'occurrence.hospitalAddress.state',
       'occurrence.hospitalAddress.number',
-      'occurrence.hospitalAddress.complement',
     ];
     fields.forEach((field) => {
       return register(field, {

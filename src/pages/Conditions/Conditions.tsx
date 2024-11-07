@@ -73,7 +73,6 @@ const Conditions = ({ value, index, ...other }: Props) => {
             aria-label={`Tempo de evolução ${i}`}
             slotProps={{ inputLabel: { shrink: true } }}
             {...register(`conditions.evolutionTime${i}`, {
-              required: true,
               pattern: {
                 value: /^([0-9]*|[0-9]{2}:[0-9]{2})$/,
                 message:
@@ -279,7 +278,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
             label="CID"
             error={!!get(errors, 'conditions.cid1')}
             slotProps={{ inputLabel: { shrink: true } }}
-            {...register('conditions.cid1', { required: true })}
+            {...register('conditions.cid1')}
           />
         </Grid2>
         {renderCauseFields()}
