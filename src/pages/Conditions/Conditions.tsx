@@ -88,7 +88,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
           <FormControl fullWidth>
             <Select
               aria-label={`Unidade de tempo ${i}`}
-              {...register(`timeUnit${i}`)}
+              {...register(`conditions.timeUnit${i}`)}
               notched
               defaultValue={''}
             >
