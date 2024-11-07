@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { Controller, get, useFormContext } from 'react-hook-form';
 import { cbo } from '../../services/cbo';
+import { educationClasses } from '../Identification/utils';
 
 type Props = {
   index: number;
@@ -22,9 +23,12 @@ const Infant = ({ value, index, ...other }: Props) => {
     register,
     control,
     watch,
+    resetField,
     formState: { errors },
   } = useFormContext();
   const watchTypeOfDeath = watch('identification.typeOfDeath');
+  const watchEducation = watch('infant.mothersEducation');
+
   return (
     <div
       role="tabpanel"
@@ -36,7 +40,7 @@ const Infant = ({ value, index, ...other }: Props) => {
     >
       <p className="mb-6">Informações da mãe</p>
       <Grid2 container spacing={2} width="100%">
-        <Grid2 size={3}>
+        <Grid2 size={1}>
           <TextField
             fullWidth
             label="Idade"
@@ -50,44 +54,88 @@ const Infant = ({ value, index, ...other }: Props) => {
           />
         </Grid2>
         <Grid2 size={3}>
-          <FormControl fullWidth>
-            <InputLabel htmlFor="mothersEducation" shrink>
-              Escolaridade
-            </InputLabel>
-            <Select
-              label="Escolaridade"
-              notched
-              defaultValue={''}
-              id="motherEducation"
-              {...register('infant.mothersEducation')}
-            >
-              <MenuItem value={'Sem escolaridade'}>Sem escolaridade</MenuItem>
-              <MenuItem value={'Fundamental I (1ª a 4ª série)'}>
-                Fundamental I (1ª a 4ª série)
-              </MenuItem>
-              <MenuItem value={'Fundamental II (5ª a 8ª série)'}>
-                Fundamental II (5ª a 8ª série)
-              </MenuItem>
-              <MenuItem value={'Médio (antigo 2º grau)'}>
-                Médio (antigo 2º grau)
-              </MenuItem>
-              <MenuItem value={'Superior incompleto'}>
-                Superior incompleto
-              </MenuItem>
-              <MenuItem value={'Superior completo'}>Superior completo</MenuItem>
-              <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid2>
-        <Grid2 size={1}>
-          <TextField
-            slotProps={{ inputLabel: { shrink: true } }}
-            label="Série"
-            {...register('infant.mothersClass')}
-            fullWidth
+          <Controller
+            name="infant.mothersEducation"
+            control={control}
+            render={({ field }) => (
+              <FormControl fullWidth>
+                <InputLabel htmlFor="infant.mothersEducation" shrink>
+                  Escolaridade
+                </InputLabel>
+                <Select
+                  label="Escolaridade"
+                  notched
+                  id="infant.mothersEducation"
+                  {...field}
+                  value={field.value || ''}
+                  onChange={(e) => {
+                    field.onChange(e.target.value);
+                    resetField('identification.class', { defaultValue: '' });
+                  }}
+                >
+                  <MenuItem value={'Sem escolaridade'}>
+                    Sem escolaridade
+                  </MenuItem>
+                  <MenuItem value={'Fundamental I (1ª a 4ª série)'}>
+                    Fundamental I (1ª a 4ª série)
+                  </MenuItem>
+                  <MenuItem value={'Fundamental II (5ª a 8ª série)'}>
+                    Fundamental II (5ª a 8ª série)
+                  </MenuItem>
+                  <MenuItem value={'Médio (antigo 2º grau)'}>
+                    Médio (antigo 2º grau)
+                  </MenuItem>
+                  <MenuItem value={'Superior incompleto'}>
+                    Superior incompleto
+                  </MenuItem>
+                  <MenuItem value={'Superior completo'}>
+                    Superior completo
+                  </MenuItem>
+                  <MenuItem value={'Não se aplica'}>Não se aplica</MenuItem>
+                </Select>
+              </FormControl>
+            )}
           />
         </Grid2>
-        <Grid2 size={5}>
+        <Grid2 size={2}>
+          <Controller
+            name="infant.mothersClass"
+            render={({ field }) =>
+              watchEducation ? (
+                <FormControl fullWidth>
+                  <InputLabel shrink>Série</InputLabel>
+                  <Select
+                    defaultValue={''}
+                    label="Série"
+                    notched
+                    disabled={educationClasses[watchEducation].length === 0}
+                    {...field}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      console.log(educationClasses[watchEducation]);
+                      field.onChange(e.target.value);
+                    }}
+                  >
+                    {educationClasses[watchEducation].map((item) => (
+                      <MenuItem key={item} value={item}>
+                        {item}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              ) : (
+                <TextField
+                  slotProps={{ inputLabel: { shrink: true } }}
+                  label="Série"
+                  fullWidth
+                  disabled
+                />
+              )
+            }
+            control={control}
+          />
+        </Grid2>
+        <Grid2 size={6}>
           <Autocomplete
             disablePortal
             options={cbo}
