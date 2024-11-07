@@ -81,6 +81,7 @@ function App() {
     toast.error(
       'Há erros no formulário! Verifique os campos e tente novamente.',
     );
+    console.log(methods.formState.errors);
   };
 
   const handleChange = (_event: SyntheticEvent, newValue: number) => {
@@ -141,7 +142,7 @@ function App() {
             </Stack>
             <Identification index={0} value={activeTab} />
             <Occurrence index={1} value={activeTab} />
-            <Infant index={2} value={activeTab} />
+            <Infant index={2} value={activeTab} isEnabled={!infantDisabled} />
             <Conditions index={3} value={activeTab} />
             <Doctor index={4} value={activeTab} />
             <External index={5} value={activeTab} />
