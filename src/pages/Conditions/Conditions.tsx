@@ -81,11 +81,14 @@ const Conditions = ({ value, index, ...other }: Props) => {
             })}
           />
         </Grid2>,
-        <Grid2 size={2}>
+        <Grid2
+          size={2}
+          key={`${i}_timeUnit_${withLabel ? 'primary' : 'secondary'}`}
+        >
           <FormControl fullWidth>
             <Select
               aria-label={`Unidade de tempo ${i}`}
-              {...register(`timeUnit${i}`)}
+              {...register(`conditions.timeUnit${i}`)}
               notched
               defaultValue={''}
             >
