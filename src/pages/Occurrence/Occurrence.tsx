@@ -100,7 +100,6 @@ const Occurence = ({ value, index, ...other }: Props) => {
             error={get(errors, 'occurrence.establishmentName')}
             helperText={get(errors, 'occurrence.establishmentName')?.message}
             required={watchPlaceType === 'Hospital'}
-            disabled={watchPlaceType === 'Hospital'}
             {...register('occurrence.establishmentName')}
             fullWidth
           />
@@ -115,7 +114,6 @@ const Occurence = ({ value, index, ...other }: Props) => {
               get(errors, 'occurrence.hospitalAddress.zipCode')?.message
             }
             required
-            disabled={watchPlaceType === 'Hospital'}
             onBlur={(e) =>
               handleCep(e.target.value, 'occurrence.hospitalAddress', setValue)
             }
@@ -131,7 +129,6 @@ const Occurence = ({ value, index, ...other }: Props) => {
               get(errors, 'occurrence.hospitalAddress.street')?.message
             }
             required
-            disabled={watchPlaceType === 'Hospital'}
             slotProps={{ inputLabel: { shrink: true } }}
             fullWidth
           />
@@ -145,7 +142,6 @@ const Occurence = ({ value, index, ...other }: Props) => {
               get(errors, 'occurrence.hospitalAddress.neighborhood')?.message
             }
             required
-            disabled={watchPlaceType === 'Hospital'}
             slotProps={{ inputLabel: { shrink: true } }}
             fullWidth
           />
@@ -157,7 +153,6 @@ const Occurence = ({ value, index, ...other }: Props) => {
             error={get(errors, 'occurrence.hospitalAddress.city')}
             helperText={get(errors, 'occurrence.hospitalAddress.city')?.message}
             required
-            disabled={watchPlaceType === 'Hospital'}
             slotProps={{ inputLabel: { shrink: true } }}
             fullWidth
           />
@@ -171,7 +166,6 @@ const Occurence = ({ value, index, ...other }: Props) => {
               get(errors, 'occurrence.hospitalAddress.state')?.message
             }
             required
-            disabled={watchPlaceType === 'Hospital'}
             slotProps={{ inputLabel: { shrink: true } }}
             fullWidth
           />
@@ -185,7 +179,6 @@ const Occurence = ({ value, index, ...other }: Props) => {
               get(errors, 'occurrence.hospitalAddress.number')?.message
             }
             required
-            disabled={watchPlaceType === 'Hospital'}
             slotProps={{ inputLabel: { shrink: true } }}
             fullWidth
           />
