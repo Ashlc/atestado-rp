@@ -364,14 +364,14 @@
       "name": "identification.occupation",
       "type": "text",
       "position": {
-        "x": 102.14,
-        "y": 64
+        "x": 101.7,
+        "y": 60.25
       },
-      "width": 48.42,
-      "height": 4.43,
+      "width": 67,
+      "height": 9,
       "rotate": 0,
       "alignment": "left",
-      "verticalAlignment": "top",
+      "verticalAlignment": "bottom",
       "fontSize": 9,
       "lineHeight": 1,
       "characterSpacing": 0,
@@ -388,10 +388,10 @@
       "name": "identification.cbo",
       "type": "text",
       "position": {
-        "x": 152.71,
-        "y": 64
+        "x": 170,
+        "y": 65.5
       },
-      "width": 39.42,
+      "width": 24.86,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
@@ -989,10 +989,10 @@
       "type": "text",
       "position": {
         "x": 116.91,
-        "y": 124.3
+        "y": 120
       },
-      "width": 48.4,
-      "height": 4.43,
+      "width": 55.31,
+      "height": 9.46,
       "rotate": 0,
       "alignment": "left",
       "verticalAlignment": "top",
@@ -1000,7 +1000,7 @@
       "lineHeight": 1,
       "characterSpacing": 0,
       "fontColor": "#000000",
-      "backgroundColor": "",
+      "backgroundColor": "#000",
       "opacity": 1,
       "strikethrough": false,
       "underline": false,
@@ -1012,10 +1012,10 @@
       "name": "infant.mothersCBO",
       "type": "text",
       "position": {
-        "x": 168.08,
+        "x": 172.86,
         "y": 124.3
       },
-      "width": 22.99,
+      "width": 18.79,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
@@ -1301,9 +1301,9 @@
       "type": "text",
       "position": {
         "x": 67,
-        "y": 167
+        "y": 167.5
       },
-      "width": 93.06,
+      "width": 82,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
@@ -1327,7 +1327,7 @@
         "x": 178.75,
         "y": 167.75
       },
-      "width": 13.13,
+      "width": 12.68,
       "height": 4.16,
       "rotate": 0,
       "alignment": "left",
@@ -1348,10 +1348,10 @@
       "name": "conditions.evolutionTime1",
       "type": "text",
       "position": {
-        "x": 162,
+        "x": 150.66,
         "y": 167.75
       },
-      "width": 14.72,
+      "width": 26.71,
       "height": 4.16,
       "rotate": 0,
       "alignment": "left",
@@ -1373,9 +1373,9 @@
       "type": "text",
       "position": {
         "x": 67,
-        "y": 174.5
+        "y": 175
       },
-      "width": 93.06,
+      "width": 82,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
@@ -1397,9 +1397,9 @@
       "type": "text",
       "position": {
         "x": 178.75,
-        "y": 174.5
+        "y": 175
       },
-      "width": 13.13,
+      "width": 12.68,
       "height": 4.16,
       "rotate": 0,
       "alignment": "left",
@@ -1420,10 +1420,10 @@
       "name": "conditions.evolutionTime2",
       "type": "text",
       "position": {
-        "x": 162,
-        "y": 174.5
+        "x": 150.66,
+        "y": 175
       },
-      "width": 14.72,
+      "width": 26.71,
       "height": 4.16,
       "rotate": 0,
       "alignment": "left",
@@ -1445,9 +1445,9 @@
       "type": "text",
       "position": {
         "x": 67,
-        "y": 182
+        "y": 182.5
       },
-      "width": 93.06,
+      "width": 82,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
@@ -1469,9 +1469,9 @@
       "type": "text",
       "position": {
         "x": 178.75,
-        "y": 182
+        "y": 182.5
       },
-      "width": 13.13,
+      "width": 12.68,
       "height": 4.16,
       "rotate": 0,
       "alignment": "left",
@@ -1492,10 +1492,10 @@
       "name": "conditions.evolutionTime3",
       "type": "text",
       "position": {
-        "x": 162,
-        "y": 182
+        "x": 150.66,
+        "y": 182.5
       },
-      "width": 14.72,
+      "width": 26.71,
       "height": 4.16,
       "rotate": 0,
       "alignment": "left",
@@ -1519,7 +1519,7 @@
         "x": 67,
         "y": 190
       },
-      "width": 93.06,
+      "width": 82,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
@@ -1541,9 +1541,9 @@
       "type": "text",
       "position": {
         "x": 178.75,
-        "y": 190
+        "y": 190.5
       },
-      "width": 13.13,
+      "width": 12.68,
       "height": 4.16,
       "rotate": 0,
       "alignment": "left",
@@ -1564,10 +1564,10 @@
       "name": "conditions.evolutionTime4",
       "type": "text",
       "position": {
-        "x": 162,
-        "y": 190
+        "x": 150.66,
+        "y": 190.5
       },
-      "width": 14.72,
+      "width": 26.71,
       "height": 4.16,
       "rotate": 0,
       "alignment": "left",
@@ -1589,9 +1589,9 @@
       "type": "text",
       "position": {
         "x": 67,
-        "y": 197.11
+        "y": 197.61
       },
-      "width": 93.06,
+      "width": 82,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
@@ -1613,9 +1613,9 @@
       "type": "text",
       "position": {
         "x": 178.75,
-        "y": 197.11
+        "y": 197.61
       },
-      "width": 13.13,
+      "width": 12.68,
       "height": 4.16,
       "rotate": 0,
       "alignment": "left",
@@ -1636,10 +1636,10 @@
       "name": "conditions.evolutionTime5",
       "type": "text",
       "position": {
-        "x": 162,
-        "y": 197.11
+        "x": 150.66,
+        "y": 197.61
       },
-      "width": 14.72,
+      "width": 26.71,
       "height": 4.16,
       "rotate": 0,
       "alignment": "left",
@@ -1663,7 +1663,7 @@
         "x": 67,
         "y": 203.5
       },
-      "width": 93.06,
+      "width": 82,
       "height": 4.43,
       "rotate": 0,
       "alignment": "left",
@@ -1687,7 +1687,7 @@
         "x": 178.75,
         "y": 203
       },
-      "width": 13.13,
+      "width": 12.68,
       "height": 4.16,
       "rotate": 0,
       "alignment": "left",
@@ -1708,10 +1708,10 @@
       "name": "conditions.evolutionTime6",
       "type": "text",
       "position": {
-        "x": 162,
+        "x": 150.66,
         "y": 203
       },
-      "width": 14.72,
+      "width": 26.71,
       "height": 4.16,
       "rotate": 0,
       "alignment": "left",
