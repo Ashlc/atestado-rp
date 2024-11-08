@@ -25,6 +25,7 @@ const Infant = ({ value, index, isEnabled, ...other }: Props) => {
     control,
     watch,
     resetField,
+    setValue,
     formState: { errors },
   } = useFormContext();
   const watchTypeOfDeath = watch('identification.typeOfDeath');
@@ -141,6 +142,12 @@ const Infant = ({ value, index, isEnabled, ...other }: Props) => {
             disablePortal
             options={cbo}
             getOptionKey={(option) => option.value}
+            onChange={(_, selectedOption) => {
+              setValue(
+                'infant.mothersCBO',
+                selectedOption ? String(selectedOption.value) : '',
+              );
+            }}
             renderInput={(params) => (
               <TextField
                 {...params}
