@@ -47,8 +47,8 @@ const Conditions = ({ value, index, ...other }: Props) => {
   }, [typeOfDeath, birth, death, setValue]);
 
   const renderCauseFields = (withLabel: boolean = true) => {
-    const startingIndex = withLabel ? 2 : 4;
-    const endingIndex = withLabel ? 3 : 5;
+    const startingIndex = withLabel ? 2 : 5;
+    const endingIndex = withLabel ? 4 : 6;
     const fields = [];
     for (let i = startingIndex; i <= endingIndex; i++) {
       fields.push(
@@ -229,7 +229,7 @@ const Conditions = ({ value, index, ...other }: Props) => {
         <Grid2 size={5}>
           <TextField
             fullWidth
-            label="Causa básica"
+            label="Causa imediata"
             slotProps={{ inputLabel: { shrink: true } }}
             error={!!get(errors, 'conditions.cause1')}
             {...register('conditions.cause1', { required: true })}
