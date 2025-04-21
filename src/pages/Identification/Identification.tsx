@@ -313,18 +313,31 @@ const Identification = ({ value, index, ...other }: Props) => {
             slotProps={{ inputLabel: { shrink: true } }}
             label="Cartão do SUS"
             disabled={watchTypeOfDeath === 'Fetal'}
-            error={get(errors, 'identification.susCard')}
+            error={!!get(errors, 'identification.susCard')}
             helperText={get(errors, 'identification.susCard')?.message}
+            inputProps={{
+              inputMode: 'numeric',
+              pattern: '[0-9]*',
+              maxLength: 15,
+            }}
+            onInput={(e) => {
+              const input = e.target as HTMLInputElement;
+              input.value = input.value.replace(/\D/g, '').slice(0, 15);
+            }}
             {...register('identification.susCard', {
               pattern: {
                 value: /^[0-9]*$/,
                 message: 'Apenas dígitos (0-9) são permitidos',
               },
+              maxLength: {
+                value: 15,
+                message: 'O cartão do SUS deve ter no máximo 15 dígitos',
+              },
               validate: (value) => {
-                if (!value) return true; // Permite campo vazio
+                if (!value) return true;
                 const numbers = value.replace(/\D/g, '');
                 return (
-                  numbers.length === 15 || 'O cartão do SUS deve ter 15 números'
+                  numbers.length === 15 || 'O cartão do SUS deve ter exatamente 15 dígitos'
                 );
               },
             })}
